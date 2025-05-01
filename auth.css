@@ -1,0 +1,302 @@
+/* Auth Page Styles */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 400px);
+    padding: 50px 0;
+    background-color: #f5f5f5;
+}
+
+.auth-panel {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+}
+
+.auth-tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 20px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: #777;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.auth-tab.active {
+    color: var(--primary-color);
+}
+
+.auth-tab::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.auth-tab.active::after {
+    transform: scaleX(1);
+}
+
+.auth-forms {
+    padding: 30px;
+    position: relative;
+}
+
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.auth-form h2 {
+    font-size: 28px;
+    margin-bottom: 5px;
+    color: var(--dark-color);
+    text-align: center;
+}
+
+.auth-subtitle {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    color: #aaa;
+    font-size: 16px;
+}
+
+.input-group .toggle-password {
+    left: auto;
+    right: 15px;
+    cursor: pointer;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
+    outline: none;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+}
+
+.remember-me input[type="checkbox"] {
+    margin-right: 8px;
+    accent-color: var(--primary-color);
+}
+
+.forgot-password {
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+.social-login {
+    text-align: center;
+}
+
+.social-login p {
+    font-size: 14px;
+    color: #777;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.social-login p::before,
+.social-login p::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 25%;
+    height: 1px;
+    background-color: #ddd;
+}
+
+.social-login p::before {
+    left: 0;
+}
+
+.social-login p::after {
+    right: 0;
+}
+
+.social-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: none;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.social-btn i {
+    margin-right: 8px;
+}
+
+.social-btn.google:hover {
+    background-color: #f2f2f2;
+    border-color: #f2f2f2;
+}
+
+.social-btn.facebook {
+    background-color: #3b5998;
+    border-color: #3b5998;
+    color: white;
+}
+
+.social-btn.facebook:hover {
+    background-color: #2d4373;
+    border-color: #2d4373;
+}
+
+/* Password Strength Meter */
+.password-strength {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.strength-label {
+    color: #777;
+    margin-right: 10px;
+}
+
+.strength-meter {
+    display: inline-flex;
+    width: 60%;
+    gap: 5px;
+    margin-right: 10px;
+}
+
+.strength-segment {
+    height: 5px;
+    flex: 1;
+    background-color: #e0e0e0;
+    border-radius: 2px;
+}
+
+.strength-segment.active {
+    background-color: #ff6b6b;
+}
+
+.strength-segment.active.medium {
+    background-color: #ffbb55;
+}
+
+.strength-segment.active.strong {
+    background-color: #2ecc71;
+}
+
+.strength-text {
+    font-weight: 600;
+    color: #ff6b6b;
+}
+
+/* Responsive styles */
+@media (max-width: 576px) {
+    .auth-container {
+        padding: 20px;
+    }
+    
+    .auth-forms {
+        padding: 20px;
+    }
+    
+    .social-buttons {
+        flex-direction: column;
+    }
+    
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
