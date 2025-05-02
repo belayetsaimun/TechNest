@@ -27,8 +27,8 @@
                 <i class="fas fa-times" id="closeMenu"></i>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#featured">Products</a></li>
-                    <li><a href="index.html#categories">Categories</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="categories.html">Categories</a></li>
                     <li><a href="index.html#new-arrivals">New Arrivals</a></li>
                     <li><a href="index.html#deals">Deals</a></li>
                 </ul>
@@ -165,26 +165,26 @@
                         </div>
 
                         <div class="form-section">
-                            <h3>Shipping Method</h3>
+                            <h3>Delivery Location</h3>
                             <div class="shipping-methods">
                                 <div class="shipping-method">
-                                    <input type="radio" id="standard" name="shipping" value="standard" checked>
-                                    <label for="standard">
+                                    <input type="radio" id="inside-dhaka" name="delivery-location" value="inside-dhaka" checked>
+                                    <label for="inside-dhaka">
                                         <div class="method-info">
-                                            <div class="method-title">Standard Shipping</div>
-                                            <div class="method-description">Delivers in 3-5 business days</div>
+                                            <div class="method-title">Inside Dhaka</div>
+                                            <div class="method-description">Delivers in 2-3 business days</div>
                                         </div>
-                                        <div class="method-price">Free</div>
+                                        <div class="method-price">৳60</div>
                                     </label>
                                 </div>
                                 <div class="shipping-method">
-                                    <input type="radio" id="express" name="shipping" value="express">
-                                    <label for="express">
+                                    <input type="radio" id="outside-dhaka" name="delivery-location" value="outside-dhaka">
+                                    <label for="outside-dhaka">
                                         <div class="method-info">
-                                            <div class="method-title">Express Shipping</div>
-                                            <div class="method-description">Delivers in 1-2 business days</div>
+                                            <div class="method-title">Outside Dhaka</div>
+                                            <div class="method-description">Delivers in 3-5 business days</div>
                                         </div>
-                                        <div class="method-price">$15</div>
+                                        <div class="method-price">৳150</div>
                                     </label>
                                 </div>
                             </div>
@@ -233,19 +233,15 @@
                         <div class="order-totals">
                             <div class="total-row">
                                 <span>Subtotal</span>
-                                <span id="checkout-subtotal">$0.00</span>
+                                <span id="checkout-subtotal">৳0.00</span>
                             </div>
                             <div class="total-row">
-                                <span>Shipping</span>
-                                <span id="checkout-shipping">Free</span>
-                            </div>
-                            <div class="total-row">
-                                <span>Taxes (estimated)</span>
-                                <span id="checkout-tax">$0.00</span>
+                                <span>Delivery Fee</span>
+                                <span id="checkout-delivery">৳60.00</span>
                             </div>
                             <div class="total-row final-total">
                                 <span>Total</span>
-                                <span id="checkout-total">$0.00</span>
+                                <span id="checkout-total">৳60.00</span>
                             </div>
                         </div>
                     </div>
@@ -271,7 +267,7 @@
         </div>
     </section>
 
-    <!-- Payment Modal -->
+    <!-- Payment Model -->
     <div class="modal" id="paymentModal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
@@ -396,7 +392,7 @@
                 </div>
                 <div class="detail-row">
                     <span>Order Total:</span>
-                    <span id="success-order-total">$0.00</span>
+                    <span id="success-order-total">৳0.00</span>
                 </div>
             </div>
             
@@ -449,7 +445,7 @@
         <div class="cart-summary">
             <div class="cart-total">
                 <span>Total:</span>
-                <span id="sidebar-cart-total">$0.00</span>
+                <span id="sidebar-cart-total">৳0.00</span>
             </div>
             <a href="checkout.html" class="btn primary-btn checkout-btn">Proceed to Checkout</a>
             <button class="btn secondary-btn continue-shopping">Continue Shopping</button>

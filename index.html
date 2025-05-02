@@ -6,25 +6,32 @@
     <title>TechNest - Premium Tech Gadgets</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+    <script src="currency.js" defer></script>
 </head>
 <body>
     <!-- Header with Navigation -->
     <header>
         <nav class="navbar">
             <div class="logo">
-                <div class="logo-text">
-                    <div class="bolt-icon"><i class="fas fa-bolt"></i></div>
-                    <span class="tech">Tech</span><span class="nest">Nest</span>
-                </div>
+                <a href="index.html">
+                    <div class="logo-text">
+                        <div class="bolt-icon"><i class="fas fa-bolt"></i></div>
+                        <span class="tech">Tech</span><span class="nest">Nest</span>
+                    </div>
+                </a>
             </div>
             <div class="nav-links" id="navLinks">
                 <i class="fas fa-times" id="closeMenu"></i>
                 <ul>
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#featured">Products</a></li>
-                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="categories.html">Categories</a></li>
                     <li><a href="#new-arrivals">New Arrivals</a></li>
                     <li><a href="#deals">Deals</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
             <div class="nav-actions">
@@ -106,7 +113,7 @@
             </div>
             <div class="feature-content">
                 <h3>Free Shipping</h3>
-                <p>On all orders above $50</p>
+                <p>On all orders above ৳5,000</p>
             </div>
         </div>
         
@@ -149,7 +156,7 @@
         </div>
         <div class="product-grid">
             <!-- Product 1 -->
-            <div class="product-card" data-id="1" data-name="TechNest Iphone 16 Pro Max" data-price="1099" data-image="images/iphone16W.png">
+            <div class="product-card" data-id="1" data-name="TechNest Iphone 16 Pro Max" data-price="219999" data-image="images/iphone16W.png">
                 <div class="product-badge">New</div>
                 <div class="product-image">
                     <img src="images/iphone16W.png" alt="Mobile Phone">
@@ -170,14 +177,14 @@
                         <span>(120)</span>
                     </div>
                     <div class="product-price">
-                        <span class="current-price">$1,099</span>
-                        <span class="old-price">$1,199</span>
+                        <span class="current-price">৳219,999</span>
+                        <span class="old-price">৳225,999</span>
                     </div>
                 </div>
             </div>
 
             <!-- Product 2 -->
-            <div class="product-card" data-id="2" data-name="TechNest AirPods Pro" data-price="89.99" data-image="images/airpods pro.png">
+            <div class="product-card" data-id="2" data-name="TechNest AirPods Pro" data-price="21499" data-image="images/airpods pro.png">
                 <div class="product-badge">New</div>
                 <div class="product-image">
                     <img src="images/airpods pro.png" alt="Wireless Earbuds">
@@ -198,14 +205,14 @@
                         <span>(120)</span>
                     </div>
                     <div class="product-price">
-                        <span class="current-price">$89.99</span>
-                        <span class="old-price">$129.99</span>
+                        <span class="current-price">৳21,499</span>
+                        <span class="old-price">৳22,499</span>
                     </div>
                 </div>
             </div>
 
             <!-- Product 3 -->
-            <div class="product-card" data-id="3" data-name="TechNest Bass Boost 2.0" data-price="149.99" data-image="images/headphone1.png">
+            <div class="product-card" data-id="3" data-name="TechNest Bass Boost 2.0" data-price="68000" data-image="images/headphone1.png">
                 <div class="product-badge bestseller">Bestseller</div>
                 <div class="product-image">
                     <img src="images/headphone1.png" alt="Wireless Headphones">
@@ -226,14 +233,14 @@
                         <span>(245)</span>
                     </div>
                     <div class="product-price">
-                        <span class="current-price">$149.99</span>
-                        <span class="old-price">$199.99</span>
+                        <span class="current-price">৳68,000</span>
+                        <span class="old-price">৳70,000</span>
                     </div>
                 </div>
             </div>
 
             <!-- Product 4 -->
-            <div class="product-card" data-id="4" data-name="TechNest Ipad" data-price="199.99" data-image="images/ipad1.png">
+            <div class="product-card" data-id="4" data-name="TechNest Ipad" data-price="39000" data-image="images/ipad1.png">
                 <div class="product-image">
                     <img src="images/ipad1.png" alt="Ipad">
                     <div class="product-actions">
@@ -253,13 +260,14 @@
                         <span>(89)</span>
                     </div>
                     <div class="product-price">
-                        <span class="current-price">$199.99</span>
+                        <span class="current-price">৳39,000</span>
+                        <span class="old-price">৳42,999</span>
                     </div>
                 </div>
             </div>
 
              <!-- Product 5 -->
-            <div class="product-card" data-id="5" data-name="TechNest MacBook Pro" data-price="1299" data-image="images/macbook.png">
+            <div class="product-card" data-id="5" data-name="TechNest MacBook Pro" data-price="230000" data-image="images/macbook.png">
                 <div class="product-badge bestseller">Bestseller</div>
                 <div class="product-image">
                     <img src="images/macbook.png" alt="Laptop">
@@ -280,15 +288,15 @@
                         <span>(245)</span>
                     </div>
                     <div class="product-price">
-                        <span class="current-price">$1,299</span>
-                        <span class="old-price">$1,499</span>
+                        <span class="current-price">৳230,000</span>
+                        <span class="old-price">৳235,000</span>
                     </div>
                 </div>
             </div>
 
 
             <!-- Product 6 -->
-            <div class="product-card" data-id="6" data-name="TechNest SmartFit Pro" data-price="89.99" data-image="images/appwatch.png">
+            <div class="product-card" data-id="6" data-name="TechNest SmartFit Pro" data-price="43499" data-image="images/appwatch.png">
                 <div class="product-badge sale">-30%</div>
                 <div class="product-image">
                     <img src="images/appwatch.png" alt="Smart Watch">
@@ -309,196 +317,82 @@
                         <span>(156)</span>
                     </div>
                     <div class="product-price">
-                        <span class="current-price">$89.99</span>
-                        <span class="old-price">$99.99</span>
+                        <span class="current-price">৳43,499</span>
+                        <span class="old-price">৳45,499</span>
                     </div>
                 </div>
             </div>
         </div>
-        <a href="#" class="btn view-all-btn">View All Products</a>
+        <a href="products.html" class="btn view-all-btn pulse-animation">
+            Explore All Products
+            <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+        </a>
     </section>
-
-    <!-- Categories Section -->
-    <section class="categories" id="categories">
-        <div class="section-header">
-            <h2>Shop By Category</h2>
-            <p>Browse our tech collections</p>
-        </div>
-        <div class="category-grid">
-            <div class="category-card">
-                <img src="images/iphone.png" alt="Iphones">
+<!-- Categories Section -->
+<section class="categories" id="categories">
+    <div class="section-header">
+        <h2>Shop By Category</h2>
+        <p>Browse our tech collections</p>
+    </div>
+    <div class="category-grid">
+        <div class="category-card">
+            <a href="category.html?category=phones">
+                <img src="images/iphone.png" alt="Phones">
                 <div class="category-info">
-                    <h3>Iphones</h3>
-                    <p>16 Products</p>
-                    <a href="#">Shop Now <i class="fas fa-arrow-right"></i></a>
+                    <h3>Phones</h3>
+                    <p><span class="product-count">16 Products</span> <a href="category.html?category=phones">Shop Now <i class="fas fa-arrow-right"></i></a></p>
                 </div>
-            </div>
-            <div class="category-card">
+            </a>
+        </div>
+        <div class="category-card">
+            <a href="category.html?category=headphones">
                 <img src="images/headphones.png" alt="Headphones">
                 <div class="category-info">
                     <h3>Headphones</h3>
-                    <p>23 Products</p>
-                    <a href="#">Shop Now <i class="fas fa-arrow-right"></i></a>
+                    <p><span class="product-count">23 Products</span> <a href="category.html?category=headphones">Shop Now <i class="fas fa-arrow-right"></i></a></p>
                 </div>
-            </div>
+            </a>
+        </div>
 
-            <div class="category-card">
+        <div class="category-card">
+            <a href="category.html?category=laptops">
                 <img src="images/Laptops.png" alt="Laptops">
                 <div class="category-info">
                     <h3>Laptops</h3>
-                    <p>18 Products</p>
-                    <a href="#">Shop Now <i class="fas fa-arrow-right"></i></a>
+                    <p><span class="product-count">18 Products</span> <a href="category.html?category=laptops">Shop Now <i class="fas fa-arrow-right"></i></a></p>
                 </div>
-            </div>
-                
-            <div class="category-card">
+            </a>
+        </div>
+            
+        <div class="category-card">
+            <a href="category.html?category=earbuds">
                 <img src="images/airpodsM.png" alt="Earbuds">
                 <div class="category-info">
                     <h3>Earbuds</h3>
-                    <p>5 Products</p>
-                    <a href="#">Shop Now <i class="fas fa-arrow-right"></i></a>
+                    <p><span class="product-count">5 Products</span> <a href="category.html?category=earbuds">Shop Now <i class="fas fa-arrow-right"></i></a></p>
                 </div>
-            </div>
-            <div class="category-card">
+            </a>
+        </div>
+        <div class="category-card">
+            <a href="category.html?category=tablets">
                 <img src="images/ipads.png" alt="Tablets">
                 <div class="category-info">
                     <h3>Tablets</h3>
-                    <p>15 Products</p>
-                    <a href="#">Shop Now <i class="fas fa-arrow-right"></i></a>
+                    <p><span class="product-count">15 Products</span> <a href="category.html?category=tablets">Shop Now <i class="fas fa-arrow-right"></i></a></p>
                 </div>
-            </div>
-            <div class="category-card">
+            </a>
+        </div>
+        <div class="category-card">
+            <a href="category.html?category=smartwatches">
                 <img src="images/apple-watch.png" alt="Smartwatches">
                 <div class="category-info">
                     <h3>Smartwatches</h3>
-                    <p>12 Products</p>
-                    <a href="#">Shop Now <i class="fas fa-arrow-right"></i></a>
+                    <p><span class="product-count">12 Products</span> <a href="category.html?category=smartwatches">Shop Now <i class="fas fa-arrow-right"></i></a></p>
                 </div>
-            </div>
+            </a>
         </div>
-    </section>
-
-    <!-- New Arrivals -->
-    <section class="new-arrivals" id="new-arrivals">
-        <div class="section-header">
-            <h2>New Arrivals</h2>
-            <p>Check out our latest tech gadgets</p>
-        </div>
-        <div class="product-slider">
-            <!-- Product 1 -->
-            <div class="product-card" data-id="7" data-name="TechNest Macbook Mini" data-price="999.99" data-image="images/laptop.png">
-                <div class="product-badge">New</div>
-                <div class="product-image">
-                    <img src="images/laptop.png" alt="New Laptop">
-                    <div class="product-actions">
-                        <a href="#" class="quick-view"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="add-to-wishlist"><i class="far fa-heart"></i></a>
-                        <a href="#" class="add-to-cart"><i class="fas fa-shopping-cart"></i></a>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <h3>TechNest Macbook Mini</h3>
-                    <div class="product-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <span>(42)</span>
-                    </div>
-                    <div class="product-price">
-                        <span class="current-price">$999.99</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product 2 -->
-            <div class="product-card" data-id="8" data-name="TechNest Edge PS5" data-price="499.99" data-image="images/ps5.png">
-                <div class="product-badge">New</div>
-                <div class="product-image">
-                    <img src="images/ps5.png" alt="PS5 Console">
-                    <div class="product-actions">
-                        <a href="#" class="quick-view"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="add-to-wishlist"><i class="far fa-heart"></i></a>
-                        <a href="#" class="add-to-cart"><i class="fas fa-shopping-cart"></i></a>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <h3>TechNest Edge PS5</h3>
-                    <div class="product-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <span>(42)</span>
-                    </div>
-                    <div class="product-price">
-                        <span class="current-price">$499.99</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product 3 -->
-            <div class="product-card" data-id="9" data-name="TechNest Party Box" data-price="159.99" data-image="images/speaker.jpg">
-                <div class="product-badge">New</div>
-                <div class="product-image">
-                    <img src="images/speaker.jpg" alt="New Bluetooth Speaker">
-                    <div class="product-actions">
-                        <a href="#" class="quick-view"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="add-to-wishlist"><i class="far fa-heart"></i></a>
-                        <a href="#" class="add-to-cart"><i class="fas fa-shopping-cart"></i></a>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <h3>TechNest Party Box</h3>
-                    <div class="product-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                        <span>(28)</span>
-                    </div>
-                    <div class="product-price">
-                        <span class="current-price">$159.99</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product 4 -->
-            <div class="product-card" data-id="10" data-name="TechNest FitTrack Elite" data-price="129.99" data-image="images/newwatch.png">
-                <div class="product-badge">New</div>
-                <div class="product-image">
-                    <img src="images/newwatch.png" alt="New Smart Watch">
-                    <div class="product-actions">
-                        <a href="#" class="quick-view"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="add-to-wishlist"><i class="far fa-heart"></i></a>
-                        <a href="#" class="add-to-cart"><i class="fas fa-shopping-cart"></i></a>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <h3>TechNest FitTrack Elite</h3>
-                    <div class="product-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <span>(15)</span>
-                    </div>
-                    <div class="product-price">
-                        <span class="current-price">$129.99</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="slider-controls">
-            <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
-            <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
-        </div>
-    </section>
-
+    </div>
+</section>
     <!-- Deals Section -->
     <section class="deals" id="deals">
         <div class="deal-banner">
@@ -524,7 +418,7 @@
                         <p>Seconds</p>
                     </div>
                 </div>
-                <a href="#" class="btn primary-btn">Shop the Sale</a>
+                <a href="products.html?sale=true" class="btn primary-btn">Shop the Sale</a>
             </div>
         </div>
     </section>
@@ -670,10 +564,12 @@
         <div class="footer-content">
             <div class="footer-column">
                 <div class="footer-logo">
-                    <div class="logo-text footer-logo-text">
-                        <div class="bolt-icon"><i class="fas fa-bolt"></i></div>
-                        <span class="tech">Tech</span><span class="nest">Nest</span>
-                    </div>
+                    <a href="index.html">
+                        <div class="logo-text footer-logo-text">
+                            <div class="bolt-icon"><i class="fas fa-bolt"></i></div>
+                            <span class="tech">Tech</span><span class="nest">Nest</span>
+                        </div>
+                    </a>
                 </div>
                 <p>Premium tech gadgets at affordable prices. Experience innovation without breaking the bank.</p>
                 <div class="social-icons">
@@ -686,33 +582,33 @@
             <div class="footer-column">
                 <h3>Shop</h3>
                 <ul>
-                    <li><a href="#">MobilePhones</a></li>
-                    <li><a href="#">Headphones</a></li>
-                    <li><a href="#">Earbuds</a></li>
-                    <li><a href="#">Laptops</a></li>
-                    <li><a href="#">Smartwatches</a></li>
-                    <li><a href="#">Tablets</a></li>
-                    <li><a href="#">Accessories</a></li>
+                    <li><a href="category.html?category=phones">Mobile Phones</a></li>
+                    <li><a href="category.html?category=headphones">Headphones</a></li>
+                    <li><a href="category.html?category=earbuds">Earbuds</a></li>
+                    <li><a href="category.html?category=laptops">Laptops</a></li>
+                    <li><a href="category.html?category=smartwatches">Smartwatches</a></li>
+                    <li><a href="category.html?category=tablets">Tablets</a></li>
+                    <li><a href="category.html?category=accessories">Accessories</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h3>Support</h3>
                 <ul>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Shipping & Returns</a></li>
-                    <li><a href="#">Warranty</a></li>
-                    <li><a href="#">Repair Service</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="shipping.html">Shipping & Returns</a></li>
+                    <li><a href="warranty.html">Warranty</a></li>
+                    <li><a href="repair.html">Repair Service</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h3>Company</h3>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Press</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="press.html">Press</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -741,7 +637,7 @@
             <span class="close-modal">&times;</span>
             <div class="product-quick-view">
                 <div class="product-quick-view-image">
-                    <img src="https://via.placeholder.com/400x400" alt="Product">
+                    <img src="images/iphone16W.png" alt="Product">
                 </div>
                 <div class="product-quick-view-info">
                     <h2>TechNest AirPods Pro</h2>
@@ -754,12 +650,12 @@
                         <span>(120 reviews)</span>
                     </div>
                     <div class="product-price">
-                        <span class="current-price">$89.99</span>
-                        <span class="old-price">$129.99</span>
-                        <span class="discount">-30%</span>
+                        <span class="current-price">৳2,03,499</span>
+                        <span class="old-price">৳2,25,999</span>
+                        <span class="discount">-6%</span>
                     </div>
                     <div class="product-description">
-                        <p>Experience crystal-clear sound with TechNest AirPods Pro. These wireless earbuds feature active noise cancellation, transparency mode, and up to 5 hours of listening time.</p>
+                        <p>The iPhone 16 Pro Max offers cutting-edge technology with an exceptional display, advanced camera system, and lightning-fast performance. Packed with the latest A17 Bionic chip, it provides a seamless user experience. The stunning 48MP camera and all-day battery life make it perfect for capturing memories and staying productive.</p>
                     </div>
                     <div class="product-colors">
                         <h4>Colors:</h4>
@@ -781,15 +677,11 @@
                         <button class="btn primary-btn add-to-cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
                         <button class="btn secondary-btn buy-now-btn">Buy Now</button>
                     </div>
-                    <div class="product-meta">
-                        <p><strong>SKU:</strong> TN-AP-001</p>
-                        <p><strong>Category:</strong> Earbuds</p>
-                        <p><strong>Tags:</strong> Wireless, Bluetooth, Noise-Cancelling</p>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Cart Sidebar -->
     <div class="cart-sidebar" id="cartSidebar">
@@ -811,7 +703,7 @@
         <div class="cart-summary">
             <div class="cart-total">
                 <span>Total:</span>
-                <span>$0.00</span>
+                <span>৳0.00</span>
             </div>
             <a href="checkout.html" class="btn primary-btn checkout-btn">Proceed to Checkout</a>
             <button class="btn secondary-btn continue-shopping">Continue Shopping</button>

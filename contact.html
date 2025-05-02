@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechNest - Contact Us</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <div class="logo-text">
+                        <div class="bolt-icon"><i class="fas fa-bolt"></i></div>
+                        <span class="tech">Tech</span><span class="nest">Nest</span>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <i class="fas fa-times" id="closeMenu"></i>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="index.html#new-arrivals">New Arrivals</a></li>
+                    <li><a href="index.html#deals">Deals</a></li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <form class="search-container" id="searchForm">
+                    <input type="text" placeholder="Search products..." class="search-input">
+                    <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                </form>
+               
+                <a href="auth.html" class="account"><i class="fas fa-user"></i></a>
+                <a href="#" class="wishlist" id="wishlistBtn">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-count">0</span>
+                </a>
+                <a href="#" class="cart" id="cartBtn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+            <i class="fas fa-bars" id="menuIcon"></i>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Contact Us</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Contact Banner -->
+    <section class="contact-banner">
+        <div class="container">
+            <div class="banner-content">
+                <h1>Contact Us</h1>
+                <p>We're here to help with your tech needs</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="contact-info-section">
+        <div class="container">
+            <div class="contact-info-grid">
+                <div class="contact-info-card">
+                    <div class="icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Our Location</h3>
+                    <p>SASH, CUET, Raozan-4349<br>Chattogram, Bangladesh</p>
+                </div>
+                
+                <div class="contact-info-card">
+                    <div class="icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Phone Number</h3>
+                    <p>+8801581448561<br>+8801713661234</p>
+                </div>
+                
+                <div class="contact-info-card">
+                    <div class="icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Address</h3>
+                    <p>support@technest.com<br>info@technest.com</p>
+                </div>
+                
+                <div class="contact-info-card">
+                    <div class="icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Working Hours</h3>
+                    <p>Mon - Sat: 9:00 AM - 7:00 PM<br>Sunday: 10:00 AM - 5:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact-form-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-form-container">
+                    <div class="section-header">
+                        <h2>Get In Touch</h2>
+                        <p>Send us a message and we'll get back to you as soon as possible</p>
+                    </div>
+                    
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name <span class="required">*</span></label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject <span class="required">*</span></label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message <span class="required">*</span></label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn primary-btn submit-btn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="contact-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3682.2119604063824!2d91.90969141540359!3d22.641456385133788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3754a65f89aea3b7%3A0x932dd9dcd97b9f7d!2sChittagong%20University%20of%20Engineering%20%26%20Technology!5e0!3m2!1sen!2sbd!4v1651581241303!5m2!1sen!2sbd" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find quick answers to common questions</p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What are your shipping options and costs?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer free standard shipping on all orders over ৳5,000. Standard shipping typically takes 3-5 business days. Express shipping is available for ৳500 and delivers within 1-2 business days. International shipping rates vary depending on the destination.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What is your return policy?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer a 30-day return policy on most items. Products must be in their original condition with all packaging and accessories. Some items like earbuds and custom-configured devices may have different return policies. Please see our Returns page for complete details.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do you offer warranty on your products?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, all our products come with at least a 1-year manufacturer's warranty. Many of our premium products include an extended 2-year TechNest warranty at no extra cost. Additional extended warranty options are available for purchase during checkout.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How can I track my order?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Once your order ships, you'll receive a confirmation email with tracking information. You can also log into your TechNest account and view your order status in the "My Orders" section. Our tracking system updates in real-time to provide you with the most current information.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What payment methods do you accept?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept various payment methods including credit/debit cards (Visa, MasterCard, American Express), mobile banking (bKash, Nagad, Rocket), and cash on delivery. All online payments are securely processed with industry-standard encryption.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-more">
+                <a href="faq.html" class="btn secondary-btn">View All FAQs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <div class="logo-text footer-logo-text">
+                            <div class="bolt-icon"><i class="fas fa-bolt"></i></div>
+                            <span class="tech">Tech</span><span class="nest">Nest</span>
+                        </div>
+                    </a>
+                </div>
+                <p>Premium tech gadgets at affordable prices. Experience innovation without breaking the bank.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="category.html?category=phones">Mobile Phones</a></li>
+                    <li><a href="category.html?category=headphones">Headphones</a></li>
+                    <li><a href="category.html?category=earbuds">Earbuds</a></li>
+                    <li><a href="category.html?category=laptops">Laptops</a></li>
+                    <li><a href="category.html?category=smartwatches">Smartwatches</a></li>
+                    <li><a href="category.html?category=tablets">Tablets</a></li>
+                    <li><a href="category.html?category=accessories">Accessories</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="shipping.html">Shipping & Returns</a></li>
+                    <li><a href="warranty.html">Warranty</a></li>
+                    <li><a href="repair.html">Repair Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="press.html">Press</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> SASH, CUET, Raozan-4349, Chattogram</li>
+                    <li><i class="fas fa-phone"></i> +8801581448561</li>
+                    <li><i class="fas fa-envelope"></i> support@technest.com</li>
+                </ul>
+                <div class="payment-methods">
+                    <span class="payment-icon bkash">bKash</span>
+                    <span class="payment-icon nagad">Nagad</span>
+                    <span class="payment-icon rocket">Rocket</span>
+                    <i class="fab fa-cc-visa"></i>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 TechNest. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <span class="close-cart">&times;</span>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be added dynamically -->
+            <!-- Empty cart message -->
+            <div class="empty-cart">
+                <div class="empty-cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <p>Your cart is empty</p>
+                <a href="products.html" class="btn secondary-btn">Start Shopping</a>
+            </div>
+        </div>
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span>৳0.00</span>
+            </div>
+            <a href="checkout.html" class="btn primary-btn checkout-btn">Proceed to Checkout</a>
+            <button class="btn secondary-btn continue-shopping">Continue Shopping</button>
+        </div>
+    </div>
+    
+    <!-- Wishlist Sidebar -->
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h3>Your Wishlist</h3>
+            <span class="close-wishlist">&times;</span>
+        </div>
+        <div class="wishlist-items">
+            <!-- Wishlist items will be added dynamically -->
+            <!-- Empty wishlist message -->
+            <div class="empty-wishlist">
+                <div class="empty-wishlist-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <p>Your wishlist is empty</p>
+                <a href="products.html" class="btn secondary-btn">Discover Products</a>
+            </div>
+        </div>
+        <div class="wishlist-actions">
+            <button class="btn primary-btn clear-wishlist-btn">Clear Wishlist</button>
+        </div>
+    </div>
+    
+    <!-- Success Message Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="success-message">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Message Sent Successfully!</h2>
+                <p>Thank you for contacting us. We've received your message and will get back to you within 24 hours.</p>
+                <button class="btn primary-btn close-success-btn">Ok, Got It</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <script src="script.js"></script>
+    <script src="contact.js"></script>
+</body>
+</html>

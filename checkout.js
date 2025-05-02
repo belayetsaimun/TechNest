@@ -31,9 +31,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeModalButtons = document.querySelectorAll('.close-modal');
     const overlay = document.getElementById('overlay');
     
+    // Delivery Location Radio Buttons
+    const deliveryLocationRadios = document.querySelectorAll('input[name="delivery-location"]');
+    
     // Initialize Cart and Wishlist from localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    
+    // Set default delivery location and fee
+    let deliveryLocation = 'inside-dhaka';
+    let deliveryFee = 60; // Default: Inside Dhaka
     
     // Update counts based on localStorage
     updateCartCount();
@@ -70,6 +77,20 @@ document.addEventListener('DOMContentLoaded', function() {
             // Show cart sidebar
             cartSidebar.style.right = '0';
             overlay.style.display = 'block';
+        });
+    }
+    
+    // Handle delivery location change
+    if (deliveryLocationRadios.length > 0) {
+        deliveryLocationRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                deliveryLocation = this.value;
+                deliveryFee = deliveryLocation === 'inside-dhaka' ? 60 : 150;
+                
+                // Update checkout summary
+                updateDeliveryFee();
+                updateOrderTotal();
+            });
         });
     }
     
@@ -181,6 +202,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Clear the cart after successful order
                 localStorage.setItem('cart', JSON.stringify([]));
+                cart = [];
+                
+                // Update cart count
+                updateCartCount();
             }
         });
     }
@@ -279,6 +304,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function validatePaymentForm() {
         const selectedPayment = document.querySelector('input[name="payment-method"]:checked');
+        
+        if (!selectedPayment) {
+            alert('Please select a payment method.');
+            return false;
+        }
         
         if (selectedPayment.value === 'card') {
             // Card payment validation
@@ -396,7 +426,7 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             
             // Update cart total
-            cartTotal.textContent = '$0.00';
+            cartTotal.textContent = '৳0.00';
             
         } else {
             // Create cart items
@@ -409,7 +439,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <img src="${item.image}" alt="${item.name}">
                     <div class="cart-item-info">
                         <h4>${item.name}</h4>
-                        <p class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</p>
+                        <p class="cart-item-price">৳${(item.price * item.quantity).toLocaleString('en-IN')}</p>
                         <div class="cart-item-quantity">
                             <button class="quantity-btn minus">-</button>
                             <input type="number" value="${item.quantity}" min="1" max="10">
@@ -452,7 +482,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             
             // Update cart total display
-            cartTotal.textContent = `$${total.toFixed(2)}`;
+            cartTotal.textContent = `৳${total.toLocaleString('en-IN')}`;
         }
     }
     
@@ -491,7 +521,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <img src="${item.image}" alt="${item.name}">
                     <div class="wishlist-item-info">
                         <h4>${item.name}</h4>
-                        <p class="wishlist-item-price">$${item.price.toFixed(2)}</p>
+                        <p class="wishlist-item-price">৳${item.price.toLocaleString('en-IN')}</p>
                     </div>
                     <div class="wishlist-item-actions">
                         <button class="move-to-cart"><i class="fas fa-shopping-cart"></i></button>
@@ -590,7 +620,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (cartItem) {
                 const priceElement = cartItem.querySelector('.cart-item-price');
                 const itemPrice = cart[itemIndex].price * quantity;
-                priceElement.textContent = `$${itemPrice.toFixed(2)}`;
+                priceElement.textContent = `৳${itemPrice.toLocaleString('en-IN')}`;
             }
             
             // Save cart to localStorage
@@ -600,7 +630,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const cartTotal = document.getElementById('sidebar-cart-total');
             if (cartTotal) {
-                cartTotal.textContent = `$${total.toFixed(2)}`;
+                cartTotal.textContent = `৳${total.toLocaleString('en-IN')}`;
             }
             
             // Reload checkout summary if on checkout page
@@ -637,17 +667,39 @@ document.addEventListener('DOMContentLoaded', function() {
         updateWishlistUI();
     }
     
+    // Function to update delivery fee
+    function updateDeliveryFee() {
+        const deliveryFeeElement = document.getElementById('checkout-delivery');
+        if (deliveryFeeElement) {
+            deliveryFeeElement.textContent = `৳${deliveryFee.toLocaleString('en-IN')}`;
+        }
+    }
+    
+    // Function to update order total
+    function updateOrderTotal() {
+        const subtotalElement = document.getElementById('checkout-subtotal');
+        const totalElement = document.getElementById('checkout-total');
+        
+        if (subtotalElement && totalElement) {
+            const subtotalText = subtotalElement.textContent;
+            const subtotal = parseFloat(subtotalText.replace(/[৳,]/g, '')) || 0;
+            const total = subtotal + deliveryFee;
+            
+            totalElement.textContent = `৳${total.toLocaleString('en-IN')}`;
+        }
+    }
+    
     // Function to load cart data and display in checkout summary
     function loadCartToCheckout() {
         // Get order summary elements
         const orderItems = document.getElementById('checkout-order-items');
         const orderCount = document.getElementById('order-count');
         const subtotalElement = document.getElementById('checkout-subtotal');
-        const taxElement = document.getElementById('checkout-tax');
+        const deliveryFeeElement = document.getElementById('checkout-delivery');
         const totalElement = document.getElementById('checkout-total');
         
         // If not on checkout page, exit function
-        if (!orderItems || !orderCount || !subtotalElement || !taxElement || !totalElement) {
+        if (!orderItems || !orderCount || !subtotalElement || !deliveryFeeElement || !totalElement) {
             return;
         }
         
@@ -665,9 +717,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Update counts and totals
             orderCount.textContent = '(0 items)';
-            subtotalElement.textContent = '$0.00';
-            taxElement.textContent = '$0.00';
-            totalElement.textContent = '$0.00';
+            subtotalElement.textContent = '৳0.00';
+            deliveryFeeElement.textContent = `৳${deliveryFee.toLocaleString('en-IN')}`;
+            totalElement.textContent = `৳${deliveryFee.toLocaleString('en-IN')}`;
             
             // Disable proceed button
             const proceedPaymentBtn = document.getElementById('proceed-payment');
@@ -676,10 +728,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 proceedPaymentBtn.classList.add('disabled-btn');
             }
         } else {
-            // Calculate totals
+            // Calculate subtotal
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const tax = subtotal * 0.09; // Assuming 9% tax rate
-            const total = subtotal + tax;
+            
+            // Calculate total (subtotal + delivery fee)
+            const total = subtotal + deliveryFee;
             
             // Update count text
             const itemCount = cart.reduce((count, item) => count + item.quantity, 0);
@@ -698,16 +751,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         <h4>${item.name}</h4>
                         <p class="item-variant">Quantity: ${item.quantity}</p>
                     </div>
-                    <div class="item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                    <div class="item-price">৳${(item.price * item.quantity).toLocaleString('en-IN')}</div>
                 `;
                 
                 orderItems.appendChild(orderItem);
             });
             
             // Update totals
-            subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
-            taxElement.textContent = `$${tax.toFixed(2)}`;
-            totalElement.textContent = `$${total.toFixed(2)}`;
+            subtotalElement.textContent = `৳${subtotal.toLocaleString('en-IN')}`;
+            deliveryFeeElement.textContent = `৳${deliveryFee.toLocaleString('en-IN')}`;
+            totalElement.textContent = `৳${total.toLocaleString('en-IN')}`;
             
             // Enable proceed button
             const proceedPaymentBtn = document.getElementById('proceed-payment');
@@ -757,4 +810,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize page
     // Set default payment method
     updatePaymentForm('card');
+    
+    // Initialize delivery fee in the summary
+    updateDeliveryFee();
+    updateOrderTotal();
+    
+    // Initialize continue shopping button in cart sidebar
+    const continueShoppingBtn = document.querySelector('.continue-shopping');
+    if (continueShoppingBtn && cartSidebar) {
+        continueShoppingBtn.addEventListener('click', () => {
+            cartSidebar.style.right = '-400px';
+            overlay.style.display = 'none';
+        });
+    }
 });

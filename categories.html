@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechNest - Shop By Categories</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="categories.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <div class="logo-text">
+                        <div class="bolt-icon"><i class="fas fa-bolt"></i></div>
+                        <span class="tech">Tech</span><span class="nest">Nest</span>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <i class="fas fa-times" id="closeMenu"></i>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="#" class="active">Categories</a></li>
+                    <li><a href="index.html#new-arrivals">New Arrivals</a></li>
+                    <li><a href="index.html#deals">Deals</a></li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <form class="search-container" id="searchForm">
+                    <input type="text" placeholder="Search products..." class="search-input">
+                    <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                </form>
+               
+                <a href="auth.html" class="account"><i class="fas fa-user"></i></a>
+                <a href="#" class="wishlist" id="wishlistBtn">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-count">0</span>
+                </a>
+                <a href="#" class="cart" id="cartBtn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+            <i class="fas fa-bars" id="menuIcon"></i>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Categories</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Categories Banner -->
+    <section class="categories-banner">
+        <div class="container">
+            <div class="banner-content">
+                <h1>Shop By Categories</h1>
+                <p>Find the perfect tech for your needs</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Categories Section -->
+    <section class="categories-main">
+        <div class="container">
+            <div class="categories-grid">
+                <!-- Category 1: Phones -->
+                <div class="category-box">
+                    <a href="category.html?category=phones">
+                        <div class="category-image">
+                            <img src="images/iphone.png" alt="Phones">
+                            <div class="category-overlay">
+                                <div class="category-content">
+                                    <h2>Phones</h2>
+                                    <p>16 Products</p>
+                                    <span class="category-btn">Shop Now</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Category 2: Headphones -->
+                <div class="category-box">
+                    <a href="category.html?category=headphones">
+                        <div class="category-image">
+                            <img src="images/headphones.png" alt="Headphones">
+                            <div class="category-overlay">
+                                <div class="category-content">
+                                    <h2>Headphones</h2>
+                                    <p>23 Products</p>
+                                    <span class="category-btn">Shop Now</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Category 3: Laptops -->
+                <div class="category-box">
+                    <a href="category.html?category=laptops">
+                        <div class="category-image">
+                            <img src="images/Laptops.png" alt="Laptops">
+                            <div class="category-overlay">
+                                <div class="category-content">
+                                    <h2>Laptops</h2>
+                                    <p>18 Products</p>
+                                    <span class="category-btn">Shop Now</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Category 4: Earbuds -->
+                <div class="category-box">
+                    <a href="category.html?category=earbuds">
+                        <div class="category-image">
+                            <img src="images/airpodsM.png" alt="Earbuds">
+                            <div class="category-overlay">
+                                <div class="category-content">
+                                    <h2>Earbuds</h2>
+                                    <p>5 Products</p>
+                                    <span class="category-btn">Shop Now</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Category 5: Tablets -->
+                <div class="category-box">
+                    <a href="category.html?category=tablets">
+                        <div class="category-image">
+                            <img src="images/ipads.png" alt="Tablets">
+                            <div class="category-overlay">
+                                <div class="category-content">
+                                    <h2>Tablets</h2>
+                                    <p>15 Products</p>
+                                    <span class="category-btn">Shop Now</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Category 6: Smartwatches -->
+                <div class="category-box">
+                    <a href="category.html?category=smartwatches">
+                        <div class="category-image">
+                            <img src="images/apple-watch.png" alt="Smartwatches">
+                            <div class="category-overlay">
+                                <div class="category-content">
+                                    <h2>Smartwatches</h2>
+                                    <p>12 Products</p>
+                                    <span class="category-btn">Shop Now</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Category 7: Gaming -->
+                <div class="category-box">
+                    <a href="category.html?category=gaming">
+                        <div class="category-image">
+                            <img src="images/ps5.png" alt="Gaming">
+                            <div class="category-overlay">
+                                <div class="category-content">
+                                    <h2>Gaming</h2>
+                                    <p>9 Products</p>
+                                    <span class="category-btn">Shop Now</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Category 8: Accessories -->
+                
+    </section>
+
+    <!-- Featured Brands Section -->
+    <section class="brands-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Brands</h2>
+                <p>Shop your favorite tech brands</p>
+            </div>
+            
+            <div class="brands-grid">
+                <div class="brand-box">
+                    <img src="images/brand-apple.png" alt="Apple">
+                    <h3>Apple</h3>
+                </div>
+                <div class="brand-box">
+                    <img src="images/brand-samsung.png" alt="Samsung">
+                    <h3>Samsung</h3>
+                </div>
+                <div class="brand-box">
+                    <img src="images/brand-sony.png" alt="Sony">
+                    <h3>Sony</h3>
+                </div>
+                <div class="brand-box">
+                    <img src="images/brand-jbl.png" alt="JBL">
+                    <h3>JBL</h3>
+                </div>
+                <div class="brand-box">
+                    <img src="images/brand-bose.png" alt="Bose">
+                    <h3>Bose</h3>
+                </div>
+                <div class="brand-box">
+                    <img src="images/brand-dell.png" alt="Dell">
+                    <h3>Dell</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <div class="logo-text footer-logo-text">
+                            <div class="bolt-icon"><i class="fas fa-bolt"></i></div>
+                            <span class="tech">Tech</span><span class="nest">Nest</span>
+                        </div>
+                    </a>
+                </div>
+                <p>Premium tech gadgets at affordable prices. Experience innovation without breaking the bank.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="category.html?category=phones">Mobile Phones</a></li>
+                    <li><a href="category.html?category=headphones">Headphones</a></li>
+                    <li><a href="category.html?category=earbuds">Earbuds</a></li>
+                    <li><a href="category.html?category=laptops">Laptops</a></li>
+                    <li><a href="category.html?category=smartwatches">Smartwatches</a></li>
+                    <li><a href="category.html?category=tablets">Tablets</a></li>
+                    <li><a href="category.html?category=accessories">Accessories</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="shipping.html">Shipping & Returns</a></li>
+                    <li><a href="warranty.html">Warranty</a></li>
+                    <li><a href="repair.html">Repair Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="press.html">Press</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> SASH, CUET, Raozan-4349, Chattogram</li>
+                    <li><i class="fas fa-phone"></i> +8801581448561</li>
+                    <li><i class="fas fa-envelope"></i> support@technest.com</li>
+                </ul>
+                <div class="payment-methods">
+                    <span class="payment-icon bkash">bKash</span>
+                    <span class="payment-icon nagad">Nagad</span>
+                    <span class="payment-icon rocket">Rocket</span>
+                    <i class="fab fa-cc-visa"></i>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 TechNest. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <span class="close-cart">&times;</span>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be added dynamically -->
+            <!-- Empty cart message -->
+            <div class="empty-cart">
+                <div class="empty-cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <p>Your cart is empty</p>
+                <a href="products.html" class="btn secondary-btn">Start Shopping</a>
+            </div>
+        </div>
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span>৳0.00</span>
+            </div>
+            <a href="checkout.html" class="btn primary-btn checkout-btn">Proceed to Checkout</a>
+            <button class="btn secondary-btn continue-shopping">Continue Shopping</button>
+        </div>
+    </div>
+    
+    <!-- Wishlist Sidebar -->
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h3>Your Wishlist</h3>
+            <span class="close-wishlist">&times;</span>
+        </div>
+        <div class="wishlist-items">
+            <!-- Wishlist items will be added dynamically -->
+            <!-- Empty wishlist message -->
+            <div class="empty-wishlist">
+                <div class="empty-wishlist-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <p>Your wishlist is empty</p>
+                <a href="products.html" class="btn secondary-btn">Discover Products</a>
+            </div>
+        </div>
+        <div class="wishlist-actions">
+            <button class="btn primary-btn clear-wishlist-btn">Clear Wishlist</button>
+        </div>
+    </div>
+    
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <script src="script.js"></script>
+    <script src="categories.js"></script>
+</body>
+</html>
