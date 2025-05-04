@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechNest - Special Deals & Offers</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="deals.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <script src="deals.js" defer></script>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <div class="logo-text">
+                        <div class="bolt-icon"><i class="fas fa-bolt"></i></div>
+                        <span class="tech">Tech</span><span class="nest">Nest</span>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <i class="fas fa-times" id="closeMenu"></i>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="index.html#new-arrivals">New Arrivals</a></li>
+                    <li><a href="deals.html" class="active">Deals</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <form class="search-container" id="searchForm">
+                    <input type="text" placeholder="Search products..." class="search-input">
+                    <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                </form>
+               
+                <a href="auth.html" class="account"><i class="fas fa-user"></i></a>
+                <a href="#" class="wishlist" id="wishlistBtn">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-count">0</span>
+                </a>
+                <a href="#" class="cart" id="cartBtn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+            <i class="fas fa-bars" id="menuIcon"></i>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="deals-hero">
+        <div class="deals-hero-container">
+            <div class="deals-hero-content">
+                <h1>Flash Sale</h1>
+                <div class="hero-countdown">
+                    <div class="countdown-title">Hurry! Offers End In:</div>
+                    <div class="countdown">
+                        <div class="countdown-item">
+                            <span id="days">00</span>
+                            <p>Days</p>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="hours">00</span>
+                            <p>Hours</p>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="minutes">00</span>
+                            <p>Minutes</p>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="seconds">00</span>
+                            <p>Seconds</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-deal-info">
+                    <div class="deal-tag"><i class="fas fa-tag"></i> Up to 50% Off</div>
+                    <div class="deal-tag"><i class="fas fa-shipping-fast"></i> Free Shipping</div>
+                    <div class="deal-tag"><i class="fas fa-gift"></i> Free Accessories</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Deals -->
+    <section class="featured-deals">
+        <div class="section-header">
+            <h2>Limited Time Offers</h2>
+            <p>Grab these hot deals before they expire</p>
+        </div>
+
+        <div class="deal-categories">
+            <button class="deal-category active" data-category="all">All Deals</button>
+            <button class="deal-category" data-category="flash-sale">Flash Sale</button>
+            <button class="deal-category" data-category="clearance">Clearance</button>
+            <button class="deal-category" data-category="bundle">Bundle Offers</button>
+            <button class="deal-category" data-category="weekly">Weekly Deals</button>
+        </div>
+
+        <div class="deals-grid">
+            <!-- Deal 1 -->
+            <div class="deal-card" data-category="flash-sale">
+                <div class="deal-badge flash-sale">Flash Sale -30%</div>
+                <div class="deal-image">
+                    <img src="images/iphone16W.png" alt="iPhone 16 Pro">
+                    <div class="deal-overlay">
+                        <div class="deal-timer" data-expires="2025-06-05T23:59:59">
+                            <i class="fas fa-clock"></i> <span class="deal-countdown">5d 23h 59m</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="deal-info">
+                    <h3>iPhone 16 Pro Max</h3>
+                    <div class="deal-prices">
+                        <div class="deal-price">
+                            <span class="current-price">৳189,999</span>
+                            <span class="old-price">৳219,999</span>
+                        </div>
+                        <div class="deal-save">
+                            Save <span>৳30,000</span>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 75%"></div>
+                        <div class="progress-text">75% Claimed</div>
+                    </div>
+                    <button class="btn primary-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Deal 2 -->
+            <div class="deal-card" data-category="weekly">
+                <div class="deal-badge weekly">Weekly Deal -20%</div>
+                <div class="deal-image">
+                    <img src="images/airpods pro.png" alt="AirPods Pro">
+                    <div class="deal-overlay">
+                        <div class="deal-timer" data-expires="2025-05-15T23:59:59">
+                            <i class="fas fa-clock"></i> <span class="deal-countdown">3d 8h 45m</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="deal-info">
+                    <h3>AirPods Pro</h3>
+                    <div class="deal-prices">
+                        <div class="deal-price">
+                            <span class="current-price">৳18,500</span>
+                            <span class="old-price">৳21,499</span>
+                        </div>
+                        <div class="deal-save">
+                            Save <span>৳2,999</span>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 45%"></div>
+                        <div class="progress-text">45% Claimed</div>
+                    </div>
+                    <button class="btn primary-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Deal 3 -->
+            <div class="deal-card" data-category="clearance">
+                <div class="deal-badge clearance">Clearance -40%</div>
+                <div class="deal-image">
+                    <img src="images/headphone1.png" alt="Bass Boost Headphones">
+                    <div class="deal-overlay">
+                        <div class="deal-timer" data-expires="2025-05-10T23:59:59">
+                            <i class="fas fa-clock"></i> <span class="deal-countdown">2d 12h 30m</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="deal-info">
+                    <h3>Bass Boost 2.0 Headphones</h3>
+                    <div class="deal-prices">
+                        <div class="deal-price">
+                            <span class="current-price">৳40,800</span>
+                            <span class="old-price">৳68,000</span>
+                        </div>
+                        <div class="deal-save">
+                            Save <span>৳27,200</span>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 85%"></div>
+                        <div class="progress-text">85% Claimed</div>
+                    </div>
+                    <button class="btn primary-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Deal 4 -->
+            <div class="deal-card" data-category="bundle">
+                <div class="deal-badge bundle">Bundle -25%</div>
+                <div class="deal-image">
+                    <img src="images/macbook.png" alt="MacBook Pro">
+                    <div class="deal-overlay">
+                        <div class="deal-timer" data-expires="2025-05-20T23:59:59">
+                            <i class="fas fa-clock"></i> <span class="deal-countdown">7d 18h 20m</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="deal-info">
+                    <h3>MacBook Pro + AirPods Bundle</h3>
+                    <div class="deal-prices">
+                        <div class="deal-price">
+                            <span class="current-price">৳245,000</span>
+                            <span class="old-price">৳275,000</span>
+                        </div>
+                        <div class="deal-save">
+                            Save <span>৳30,000</span>
+                        </div>
+                    </div>
+                    <div class="bundle-items">
+                        <span>MacBook Pro + AirPods Pro + Apple Care</span>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 60%"></div>
+                        <div class="progress-text">60% Claimed</div>
+                    </div>
+                    <button class="btn primary-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Deal 5 -->
+            <div class="deal-card" data-category="flash-sale">
+                <div class="deal-badge flash-sale">Flash Sale -35%</div>
+                <div class="deal-image">
+                    <img src="images/appwatch.png" alt="Apple Watch">
+                    <div class="deal-overlay">
+                        <div class="deal-timer" data-expires="2025-05-08T23:59:59">
+                            <i class="fas fa-clock"></i> <span class="deal-countdown">1d 5h 15m</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="deal-info">
+                    <h3>SmartFit Pro Watch</h3>
+                    <div class="deal-prices">
+                        <div class="deal-price">
+                            <span class="current-price">৳28,275</span>
+                            <span class="old-price">৳43,499</span>
+                        </div>
+                        <div class="deal-save">
+                            Save <span>৳15,224</span>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 90%"></div>
+                        <div class="progress-text">90% Claimed</div>
+                    </div>
+                    <button class="btn primary-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Deal 6 -->
+            <div class="deal-card" data-category="weekly">
+                <div class="deal-badge weekly">Weekly Deal -15%</div>
+                <div class="deal-image">
+                    <img src="images/ipad1.png" alt="iPad">
+                    <div class="deal-overlay">
+                        <div class="deal-timer" data-expires="2025-05-12T23:59:59">
+                            <i class="fas fa-clock"></i> <span class="deal-countdown">4d 10h 50m</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="deal-info">
+                    <h3>iPad Pro</h3>
+                    <div class="deal-prices">
+                        <div class="deal-price">
+                            <span class="current-price">৳33,150</span>
+                            <span class="old-price">৳39,000</span>
+                        </div>
+                        <div class="deal-save">
+                            Save <span>৳5,850</span>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 65%"></div>
+                        <div class="progress-text">65% Claimed</div>
+                    </div>
+                    <button class="btn primary-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Deal 7 -->
+            <div class="deal-card" data-category="bundle">
+                <div class="deal-badge bundle">Bundle -20%</div>
+                <div class="deal-image">
+                    <img src="images/iphone16W.png" alt="iPhone 16 Bundle">
+                    <div class="deal-overlay">
+                        <div class="deal-timer" data-expires="2025-05-18T23:59:59">
+                            <i class="fas fa-clock"></i> <span class="deal-countdown">6d 9h 30m</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="deal-info">
+                    <h3>iPhone 16 Accessories Bundle</h3>
+                    <div class="deal-prices">
+                        <div class="deal-price">
+                            <span class="current-price">৳15,999</span>
+                            <span class="old-price">৳19,999</span>
+                        </div>
+                        <div class="deal-save">
+                            Save <span>৳4,000</span>
+                        </div>
+                    </div>
+                    <div class="bundle-items">
+                        <span>Case + Screen Protector + Charger + AirTag</span>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 50%"></div>
+                        <div class="progress-text">50% Claimed</div>
+                    </div>
+                    <button class="btn primary-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Deal 8 -->
+            <div class="deal-card" data-category="clearance">
+                <div class="deal-badge clearance">Clearance -45%</div>
+                <div class="deal-image">
+                    <img src="images/airpodsM.png" alt="Wireless Earbuds">
+                    <div class="deal-overlay">
+                        <div class="deal-timer" data-expires="2025-05-09T23:59:59">
+                            <i class="fas fa-clock"></i> <span class="deal-countdown">1d 15h 40m</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="deal-info">
+                    <h3>AirGo Mini Wireless Earbuds</h3>
+                    <div class="deal-prices">
+                        <div class="deal-price">
+                            <span class="current-price">৳8,250</span>
+                            <span class="old-price">৳15,000</span>
+                        </div>
+                        <div class="deal-save">
+                            Save <span>৳6,750</span>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 80%"></div>
+                        <div class="progress-text">80% Claimed</div>
+                    </div>
+                    <button class="btn primary-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="load-more">
+            <button class="btn secondary-btn load-more-btn">Load More Deals <i class="fas fa-angle-down"></i></button>
+        </div>
+    </section>
+
+    <!-- Deal of the Day -->
+    <section class="deal-of-the-day">
+        <div class="section-header">
+            <h2>Deal of the Day</h2>
+            <p>Don't miss out on our best offer today</p>
+        </div>
+
+        <div class="dotd-container">
+            <div class="dotd-image">
+                <img src="images/macbook.png" alt="MacBook Pro">
+                <div class="dotd-badge">
+                    <div class="badge-text">40% OFF</div>
+                </div>
+            </div>
+            <div class="dotd-content">
+                <h3 class="dotd-title">MacBook Pro M3</h3>
+                <div class="dotd-subtitle">16-inch Liquid Retina XDR display, 16GB RAM, 512GB SSD</div>
+                
+                <div class="dotd-price">
+                    <div class="price-tag">
+                        <span class="current-price">৳189,999</span>
+                        <span class="old-price">৳235,000</span>
+                    </div>
+                    <div class="save-tag">You Save: <span>৳45,001</span></div>
+                </div>
+                
+                <div class="dotd-features">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>M3 Pro chip - Ultimate Performance</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Up to 22 hours battery life</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Stunning Liquid Retina XDR display</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Free AirPods included in this offer</span>
+                    </div>
+                </div>
+                
+                <div class="dotd-timer">
+                    <div class="timer-label">Hurry! Offer ends in:</div>
+                    <div class="timer-display">
+                        <div class="timer-item">
+                            <span id="dotd-hours">00</span>
+                            <span class="timer-label">Hours</span>
+                        </div>
+                        <div class="timer-divider">:</div>
+                        <div class="timer-item">
+                            <span id="dotd-minutes">00</span>
+                            <span class="timer-label">Mins</span>
+                        </div>
+                        <div class="timer-divider">:</div>
+                        <div class="timer-item">
+                            <span id="dotd-seconds">00</span>
+                            <span class="timer-label">Secs</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dotd-progress">
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 70%"></div>
+                    </div>
+                    <div class="stock-info">
+                        <div class="items-sold"><span>42</span> sold</div>
+                        <div class="items-available"><span>18</span> left</div>
+                    </div>
+                </div>
+                
+                <div class="dotd-actions">
+                    <button class="btn primary-btn buy-now-btn">Buy Now</button>
+                    <button class="btn secondary-btn add-to-cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers Banner -->
+    <section class="special-offers">
+        <div class="offers-banner">
+            <div class="offer-card">
+                <div class="offer-icon"><i class="fas fa-gift"></i></div>
+                <h3>Buy One Get One Free</h3>
+                <p>On selected accessories</p>
+                <a href="#" class="btn secondary-btn">View Offers</a>
+            </div>
+            <div class="offer-card">
+                <div class="offer-icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3>Trade-in & Save</h3>
+                <p>Up to ৳50,000 off on new phones</p>
+                <a href="#" class="btn secondary-btn">Learn More</a>
+            </div>
+            <div class="offer-card">
+                <div class="offer-icon"><i class="fas fa-percent"></i></div>
+                <h3>Student Discount</h3>
+                <p>Extra 10% off with valid ID</p>
+                <a href="#" class="btn secondary-btn">Check Eligibility</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coupon Section -->
+    <section class="coupons-section">
+        <div class="section-header">
+            <h2>Exclusive Coupons</h2>
+            <p>Save even more with these special codes</p>
+        </div>
+        
+        <div class="coupons-container">
+            <div class="coupon-card">
+                <div class="coupon-amount">৳5,000 OFF</div>
+                <div class="coupon-details">
+                    <h3>On purchases over ৳50,000</h3>
+                    <p>Valid on all smartphones and laptops</p>
+                </div>
+                <div class="coupon-code">
+                    <span>TECH5K</span>
+                    <button class="copy-btn" data-coupon="TECH5K">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <div class="coupon-expiry">Expires: May 15, 2025</div>
+            </div>
+            
+            <div class="coupon-card">
+                <div class="coupon-amount">15% OFF</div>
+                <div class="coupon-details">
+                    <h3>On all accessories</h3>
+                    <p>Cases, chargers, screen protectors & more</p>
+                </div>
+                <div class="coupon-code">
+                    <span>ACCESS15</span>
+                    <button class="copy-btn" data-coupon="ACCESS15">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <div class="coupon-expiry">Expires: May 20, 2025</div>
+            </div>
+            
+            <div class="coupon-card">
+                <div class="coupon-amount">FREE SHIPPING</div>
+                <div class="coupon-details">
+                    <h3>On any order</h3>
+                    <p>No minimum purchase required</p>
+                </div>
+                <div class="coupon-code">
+                    <span>SHIPFREE</span>
+                    <button class="copy-btn" data-coupon="SHIPFREE">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <div class="coupon-expiry">Expires: May 10, 2025</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="section-header">
+            <h2>Frequently Asked Questions</h2>
+            <p>Everything you need to know about our deals</p>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How long do the flash sales last?</h3>
+                    <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                </div>
+                <div class="faq-answer">
+                    <p>Our flash sales typically last between 24-72 hours, depending on the promotion. Each deal has its own countdown timer showing exactly when the offer expires. Once the timer reaches zero, the deal will automatically end and prices will return to normal.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can I combine multiple discounts or coupons?</h3>
+                    <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                </div>
+                <div class="faq-answer">
+                    <p>Most of our promotions cannot be combined with other offers. Each product can only have one discount applied at checkout. However, free shipping coupons can often be used alongside product discounts. For specific information about combining offers, please check the terms and conditions of each coupon or contact our customer support team.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What happens if a deal sells out before the timer ends?</h3>
+                    <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                </div>
+                <div class="faq-answer">
+                    <p>All our deals are available while supplies last. Once a product sells out, the deal will be marked as "Sold Out" even if the timer hasn't expired. We recommend adding items to your cart as soon as possible to secure your discount, as popular deals tend to sell out quickly.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Are sale items eligible for returns?</h3>
+                    <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, all sale items follow our standard return policy of 30 days, unless otherwise specified in the product description. If you're not satisfied with your purchase, you can return it for a full refund or exchange within 30 days of delivery. Please note that the item must be in its original condition with all packaging and accessories.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How do I know if a deal is good value?</h3>
+                    <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                </div>
+                <div class="faq-answer">
+                    <p>We always display the original price alongside the sale price, so you can see exactly how much you're saving. The percentage discount and total amount saved are also clearly shown. Our original prices are genuine and were in effect for at least 30 days before being discounted, giving you confidence that you're getting a real deal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter with Special Deals Alert -->
+    <section class="deals-newsletter">
+        <div class="newsletter-content">
+            <h2>Get Exclusive Deal Alerts</h2>
+            <p>Subscribe to our newsletter and be the first to know about flash sales and limited-time offers</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your Email Address" required>
+                <button type="submit" class="btn primary-btn">Subscribe & Get 10% Off</button>
+            </form>
+            <div class="newsletter-benefits">
+                <div class="benefit-item">
+                    <i class="fas fa-bolt"></i>
+                    <span>Early access to sales</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-tag"></i>
+                    <span>Exclusive subscriber offers</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-bell"></i>
+                    <span>Sale alerts</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <div class="logo-text footer-logo-text">
+                            <div class="bolt-icon"><i class="fas fa-bolt"></i></div>
+                            <span class="tech">Tech</span><span class="nest">Nest</span>
+                        </div>
+                    </a>
+                </div>
+                <p>Premium tech gadgets at affordable prices. Experience innovation without breaking the bank.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="category.html?category=phones">Mobile Phones</a></li>
+                    <li><a href="category.html?category=headphones">Headphones</a></li>
+                    <li><a href="category.html?category=earbuds">Earbuds</a></li>
+                    <li><a href="category.html?category=laptops">Laptops</a></li>
+                    <li><a href="category.html?category=smartwatches">Smartwatches</a></li>
+                    <li><a href="category.html?category=tablets">Tablets</a></li>
+                    <li><a href="category.html?category=accessories">Accessories</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="shipping.html">Shipping & Returns</a></li>
+                    <li><a href="warranty.html">Warranty</a></li>
+                    <li><a href="repair.html">Repair Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="press.html">Press</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> SASH, CUET, Raozan-4349, Chattogram</li>
+                    <li><i class="fas fa-phone"></i> +8801581448561</li>
+                    <li><i class="fas fa-envelope"></i> support@technest.com</li>
+                </ul>
+                <div class="payment-methods">
+                    <span class="payment-icon bkash">bKash</span>
+                    <span class="payment-icon nagad">Nagad</span>
+                    <span class="payment-icon rocket">Rocket</span>
+                    <i class="fab fa-cc-visa"></i>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 TechNest. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Notification for Copied Coupon -->
+    <div class="coupon-notification" id="couponNotification">
+        <div class="notification-content">
+            <i class="fas fa-check-circle"></i>
+            <span>Coupon code copied to clipboard!</span>
+        </div>
+    </div>
+
+    <!-- Cart and Wishlist Sidebars (from main site) -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <span class="close-cart">&times;</span>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be added dynamically -->
+            <!-- Empty cart message -->
+            <div class="empty-cart">
+                <div class="empty-cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <p>Your cart is empty</p>
+                <a href="#featured" class="btn secondary-btn">Start Shopping</a>
+            </div>
+        </div>
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span>৳0.00</span>
+            </div>
+            <a href="checkout.html" class="btn primary-btn checkout-btn">Proceed to Checkout</a>
+            <button class="btn secondary-btn continue-shopping">Continue Shopping</button>
+        </div>
+    </div>
+    
+    <!-- Wishlist Sidebar -->
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h3>Your Wishlist</h3>
+            <span class="close-wishlist">&times;</span>
+        </div>
+        <div class="wishlist-items">
+            <!-- Wishlist items will be added dynamically -->
+            <!-- Empty wishlist message -->
+            <div class="empty-wishlist">
+                <div class="empty-wishlist-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <p>Your wishlist is empty</p>
+                <a href="#featured" class="btn secondary-btn">Discover Products</a>
+            </div>
+        </div>
+        <div class="wishlist-actions">
+            <button class="btn primary-btn clear-wishlist-btn">Clear Wishlist</button>
+        </div>
+    </div>
+    
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+</body>
+</html>
