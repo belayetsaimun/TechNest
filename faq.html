@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechNest - Frequently Asked Questions</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <meta name="theme-color" content="#0052cc">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="faq.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <div class="logo-text">
+                        <div class="bolt-icon"><i class="fas fa-bolt"></i></div>
+                        <span class="tech">Tech</span><span class="nest">Nest</span>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <i class="fas fa-times" id="closeMenu"></i>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="new-arrivals.html">New Arrivals</a></li>
+                    <li><a href="deals.html">Deals</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <form class="search-container" id="searchForm">
+                    <input type="text" placeholder="Search products..." class="search-input">
+                    <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                </form>
+               
+                <a href="auth.html" class="account"><i class="fas fa-user"></i></a>
+                <a href="wishlist.html" class="wishlist" id="wishlistBtn">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-count">0</span>
+                </a>
+                <a href="cart.html" class="cart" id="cartBtn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+            <i class="fas fa-bars" id="menuIcon"></i>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="active">FAQ</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- FAQ Hero Section -->
+    <section class="faq-hero">
+        <div class="faq-hero-content">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about our products, shipping, returns, and more.</p>
+            
+            <div class="faq-search-container">
+                <input type="text" id="faqSearch" placeholder="Search for questions...">
+                <button type="button" id="faqSearchBtn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Categories -->
+    <section class="faq-categories">
+        <div class="container">
+            <div class="faq-category-nav">
+                <button class="faq-category-btn active" data-category="all">All Questions</button>
+                <button class="faq-category-btn" data-category="shopping">Shopping</button>
+                <button class="faq-category-btn" data-category="orders">Orders & Shipping</button>
+                <button class="faq-category-btn" data-category="returns">Returns & Refunds</button>
+                <button class="faq-category-btn" data-category="payment">Payment</button>
+                <button class="faq-category-btn" data-category="account">Account</button>
+                <button class="faq-category-btn" data-category="warranty">Warranty</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="faq-content">
+        <div class="container">
+            <div class="faq-wrapper">
+                <!-- Shopping FAQ's -->
+                <div class="faq-group" data-category="shopping">
+                    <h2>Shopping</h2>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How do I know if a product is in stock?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>All products displayed on our website are currently in stock unless marked as "Out of Stock". The inventory is updated in real-time, so what you see is what's available. If a product is out of stock, you can click the "Notify Me" button to receive an email when it's available again.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Can I purchase items in bulk for my business?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we offer special pricing for bulk orders. If you're interested in placing a bulk order for your business, please contact our business sales team at business@technest.com with details about your requirements, and we'll provide you with a customized quote.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How can I be sure I'm buying an authentic product?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>TechNest is an authorized retailer for all brands we sell. We source our products directly from manufacturers or their authorized distributors, ensuring every item is 100% authentic. Each product comes with the manufacturer's warranty and all original accessories. You can verify the authenticity of your purchase through the manufacturer's website using the serial number provided with your product.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Do you offer price matching?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we offer price matching on identical products from authorized retailers. If you find a lower price on the same product from a qualified competitor within 7 days of your purchase, we'll match the price. To request a price match, contact our customer service team with proof of the competitor's price.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Orders & Shipping FAQ's -->
+                <div class="faq-group" data-category="orders">
+                    <h2>Orders & Shipping</h2>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How long will it take to receive my order?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Orders within Dhaka are typically delivered within 2-3 business days. Orders to other locations in Bangladesh take 3-5 business days. Once your order ships, you'll receive a tracking number via email so you can monitor the progress of your delivery. Please note that delivery times may be extended during high-volume periods like holiday seasons or promotions.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How can I track my order?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>You can track your order by:
+                            <ol>
+                                <li>Logging into your TechNest account and viewing your order history</li>
+                                <li>Clicking the tracking link in the shipment confirmation email</li>
+                                <li>Contacting our customer service team with your order number</li>
+                            </ol>
+                            Our system sends automatic updates at each stage of the shipping process, so you'll always know where your order is.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Do you offer international shipping?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Currently, we only offer shipping within Bangladesh. We are working on expanding our shipping services to other countries in the future. Follow our social media channels or subscribe to our newsletter to stay updated on any changes to our shipping policies.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Can I change or cancel my order after it's been placed?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Orders can be modified or canceled within 1 hour of placement. After that, our system begins processing orders for shipping, making changes difficult. To request a change or cancellation, contact our customer service team immediately at support@technest.com or call our hotline at +8801581448561 with your order number ready.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Returns & Refunds FAQ's -->
+                <div class="faq-group" data-category="returns">
+                    <h2>Returns & Refunds</h2>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What is your return policy?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We accept returns within 30 days of delivery for most products in their original condition and packaging. Some exceptions apply, such as personalized items and opened software. To initiate a return, log into your account and select the order you wish to return, or contact our customer service team. Return shipping costs are covered by TechNest for defective items or our errors, otherwise, return shipping is the responsibility of the customer.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How long does it take to process a refund?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Once we receive and inspect your return, refunds are processed within 3-5 business days. The time it takes for the refund to appear in your account depends on your payment method:
+                            <ul>
+                                <li>Credit/Debit Cards: 5-7 business days</li>
+                                <li>Mobile Banking (bKash, Nagad, Rocket): 2-3 business days</li>
+                                <li>Store Credit: Immediate</li>
+                            </ul>
+                            You'll receive an email notification when your refund has been processed.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Can I exchange a product instead of returning it?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we offer exchanges for items in their original condition. You can request an exchange for a different color, size, or even a different product of equal or greater value (paying the difference if applicable). To request an exchange, contact our customer service team with your order number and details of the item you'd like to exchange.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What should I do if I receive a defective product?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>If you receive a defective product, please contact our customer service team within 48 hours of delivery. We'll need photos or videos showing the defect and the product's serial number. For electronic devices, our technical team may provide troubleshooting steps before authorizing a return. Once verified, we'll arrange for the item to be picked up at no cost to you and send a replacement or issue a full refund based on your preference.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Payment FAQ's -->
+                <div class="faq-group" data-category="payment">
+                    <h2>Payment</h2>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What payment methods do you accept?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We accept the following payment methods:
+                            <ul>
+                                <li>Credit/Debit Cards (Visa, Mastercard)</li>
+                                <li>Mobile Banking (bKash, Nagad, Rocket)</li>
+                                <li>Cash on Delivery (for orders within Bangladesh)</li>
+                                <li>Bank Transfer (for bulk orders)</li>
+                            </ul>
+                            All online payments are secured with industry-standard encryption to protect your information.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Is it safe to use my credit card on your website?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, our website uses SSL encryption to protect your personal and payment information. We comply with PCI DSS requirements and never store complete credit card information on our servers. Additionally, we implement multiple security measures including fraud detection systems to ensure all transactions on our site are safe and secure.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>When will my card be charged?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Your card will be authorized when you place your order and charged when your order ships. For pre-orders or back-ordered items, your card will be charged when the item is ready to ship. We will notify you via email before processing the charge for any orders that have been delayed more than 7 days.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Do you offer installment payment options?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we offer 0% interest installment payment options for purchases over ৳50,000 with selected banks. Currently, we have partnerships with City Bank, BRAC Bank, and Eastern Bank Limited (EBL) to offer 3, 6, or 12-month installment plans. To use this option, select "Pay with EMI" during checkout and choose your bank. Approval is subject to your bank's terms and conditions.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Account FAQ's -->
+                <div class="faq-group" data-category="account">
+                    <h2>Account</h2>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How do I create an account?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Creating an account is simple:
+                            <ol>
+                                <li>Click on the account icon in the top right corner of any page</li>
+                                <li>Select "Create Account"</li>
+                                <li>Enter your email address and create a password</li>
+                                <li>Fill in your personal information</li>
+                                <li>Verify your email address by clicking the link in the verification email</li>
+                            </ol>
+                            Once verified, you can start shopping, track orders, and manage your account preferences.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How do I reset my password?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To reset your password:
+                            <ol>
+                                <li>Click on the account icon in the top right corner</li>
+                                <li>Select "Sign In"</li>
+                                <li>Click "Forgot Password"</li>
+                                <li>Enter the email address associated with your account</li>
+                                <li>Check your email for a password reset link</li>
+                                <li>Follow the link to create a new password</li>
+                            </ol>
+                            If you don't receive the reset email within a few minutes, check your spam folder or contact our support team.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Can I shop as a guest without creating an account?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, you can shop as a guest without creating an account. During checkout, you'll have the option to continue as a guest by providing only the necessary information to complete your order. However, creating an account offers several benefits, including order tracking, faster checkout in the future, access to exclusive offers, and the ability to review products you've purchased.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How can I update my account information?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To update your account information:
+                            <ol>
+                                <li>Sign in to your TechNest account</li>
+                                <li>Click on "My Account" in the dropdown menu</li>
+                                <li>Select "Account Settings"</li>
+                                <li>Update your personal information, shipping addresses, or payment methods</li>
+                                <li>Click "Save Changes"</li>
+                            </ol>
+                            Your account will be immediately updated with the new information.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Warranty FAQ's -->
+                <div class="faq-group" data-category="warranty">
+                    <h2>Warranty & Support</h2>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What warranty do you offer on products?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>All products sold on TechNest come with the manufacturer's warranty. Additionally, we provide a TechNest Guarantee which offers:
+                            <ul>
+                                <li>Standard products: 1-year warranty covering manufacturing defects</li>
+                                <li>Premium TechNest-branded products: 2-year comprehensive warranty</li>
+                                <li>Extended warranty options available at checkout for most electronics</li>
+                            </ul>
+                            Warranty coverage begins from the date of delivery. Specific warranty terms vary by product category and brand, which are listed on each product page.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How do I claim warranty service?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To claim warranty service:
+                            <ol>
+                                <li>Log into your TechNest account and go to "Order History"</li>
+                                <li>Find the product and select "Request Warranty Service"</li>
+                                <li>Describe the issue you're experiencing</li>
+                                <li>Our support team will contact you within 24 hours with next steps</li>
+                            </ol>
+                            Alternatively, you can visit our service center in Dhaka with your purchase invoice and the product. For major items, we offer doorstep pickup and repair services in select locations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What is not covered under warranty?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>The following are typically not covered under warranty:
+                            <ul>
+                                <li>Physical damage caused by accidents, drops, or mishandling</li>
+                                <li>Water damage or exposure to extreme conditions</li>
+                                <li>Unauthorized repairs or modifications</li>
+                                <li>Normal wear and tear</li>
+                                <li>Consumable parts (e.g., batteries after 6 months)</li>
+                                <li>Software issues not related to hardware defects</li>
+                                <li>Products with removed or damaged serial numbers</li>
+                            </ul>
+                            For specific warranty exclusions, please refer to the warranty information provided with your product or contact our customer service team.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Do you offer technical support for products?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we offer technical support for all products purchased from TechNest. Our support services include:
+                            <ul>
+                                <li>Phone support: Available daily from 9 AM to 10 PM</li>
+                                <li>Email support: 24/7 with responses within 24 hours</li>
+                                <li>Live chat: Available on our website from 10 AM to 8 PM</li>
+                                <li>In-store support: Available at our physical locations during business hours</li>
+                                <li>Video tutorials and guides on our website</li>
+                            </ul>
+                            For technical assistance, contact our support team at support@technest.com or call our hotline at +8801581448561.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- No Results Message -->
+                <div id="noResultsFound" class="no-results-message" style="display: none;">
+                    <div class="no-results-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>No matching questions found</h3>
+                    <p>Try different keywords or browse the categories above</p>
+                    <button id="resetSearch" class="btn secondary-btn">Reset Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Still Have Questions Section -->
+    <section class="still-have-questions">
+        <div class="container">
+            <div class="contact-options">
+                <div class="contact-option-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Customer Support</h3>
+                    <p>Our team is available 7 days a week</p>
+                    <a href="tel:+8801581448561" class="contact-link">+880 1581 448561</a>
+                </div>
+                
+                <div class="contact-option-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Us</h3>
+                    <p>Get a response within 24 hours</p>
+                    <a href="mailto:support@technest.com" class="contact-link">support@technest.com</a>
+                </div>
+                
+                <div class="contact-option-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Live Chat</h3>
+                    <p>Chat with our support team</p>
+                    <button class="btn primary-btn">Start Chat</button>
+                </div>
+            </div>
+            
+            <div class="faq-cta">
+                <h2>Still have questions?</h2>
+                <p>If you couldn't find the answer to your question, our team is ready to help you.</p>
+                <a href="contact.html" class="btn primary-btn">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <div class="logo-text footer-logo-text">
+                            <div class="bolt-icon"><i class="fas fa-bolt"></i></div>
+                            <span class="tech">Tech</span><span class="nest">Nest</span>
+                        </div>
+                    </a>
+                </div>
+                <p>Premium tech gadgets at affordable prices. Experience innovation without breaking the bank.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="category.html?category=phones">Mobile Phones</a></li>
+                    <li><a href="category.html?category=headphones">Headphones</a></li>
+                    <li><a href="category.html?category=earbuds">Earbuds</a></li>
+                    <li><a href="category.html?category=laptops">Laptops</a></li>
+                    <li><a href="category.html?category=smartwatches">Smartwatches</a></li>
+                    <li><a href="category.html?category=tablets">Tablets</a></li>
+                    <li><a href="category.html?category=accessories">Accessories</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="shipping.html">Shipping & Returns</a></li>
+                    <li><a href="warranty.html">Warranty</a></li>
+                    <li><a href="repair.html">Repair Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="press.html">Press</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> SASH, CUET, Raozan-4349, Chattogram</li>
+                    <li><i class="fas fa-phone"></i> +8801581448561</li>
+                    <li><i class="fas fa-envelope"></i> support@technest.com</li>
+                </ul>
+                <div class="payment-methods">
+                    <span class="payment-icon bkash">bKash</span>
+                    <span class="payment-icon nagad">Nagad</span>
+                    <span class="payment-icon rocket">Rocket</span>
+                    <i class="fab fa-cc-visa"></i>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 TechNest. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <span class="close-cart">&times;</span>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be added dynamically -->
+            <!-- Empty cart message -->
+            <div class="empty-cart">
+                <div class="empty-cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <p>Your cart is empty</p>
+                <a href="#featured" class="btn secondary-btn">Start Shopping</a>
+            </div>
+        </div>
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span>৳0.00</span>
+            </div>
+            <a href="checkout.html" class="btn primary-btn checkout-btn">Proceed to Checkout</a>
+            <button class="btn secondary-btn continue-shopping">Continue Shopping</button>
+        </div>
+    </div>
+    
+    <!-- Wishlist Sidebar -->
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h3>Your Wishlist</h3>
+            <span class="close-wishlist">&times;</span>
+        </div>
+        <div class="wishlist-items">
+            <!-- Wishlist items will be added dynamically -->
+            <!-- Empty wishlist message -->
+            <div class="empty-wishlist">
+                <div class="empty-wishlist-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <p>Your wishlist is empty</p>
+                <a href="#featured" class="btn secondary-btn">Discover Products</a>
+            </div>
+        </div>
+        <div class="wishlist-actions">
+            <button class="btn primary-btn clear-wishlist-btn">Clear Wishlist</button>
+        </div>
+    </div>
+    
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <script src="script.js"></script>
+    <script src="faq.js"></script>
+</body>
+</html>

@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechNest - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <div class="logo-text">
+                        <div class="bolt-icon"><i class="fas fa-bolt"></i></div>
+                        <span class="tech">Tech</span><span class="nest">Nest</span>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <i class="fas fa-times" id="closeMenu"></i>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#featured">Products</a></li>
+                    <li><a href="index.html#categories">Categories</a></li>
+                    <li><a href="index.html#new-arrivals">New Arrivals</a></li>
+                    <li><a href="index.html#deals">Deals</a></li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <form class="search-container" id="searchForm">
+                    <input type="text" placeholder="Search products..." class="search-input">
+                    <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                </form>
+               
+                <a href="dashboard.html" class="account active"><i class="fas fa-user"></i></a>
+                <a href="#" class="cart" id="cartBtn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+            <i class="fas fa-bars" id="menuIcon"></i>
+        </nav>
+    </header>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard-container">
+        <div class="dashboard-sidebar">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <img src="images/avatar-placeholder.png" alt="User Avatar" id="userAvatar">
+                    <div class="avatar-upload">
+                        <label for="avatar-input">
+                            <i class="fas fa-camera"></i>
+                        </label>
+                        <input type="file" id="avatar-input" accept="image/*">
+                    </div>
+                </div>
+                <h3 id="userDisplayName">John Doe</h3>
+                <p id="userEmail">john.doe@example.com</p>
+                <div class="user-status">
+                    <span class="status-badge gold">Gold Member</span>
+                </div>
+            </div>
+            <nav class="dashboard-nav">
+                <ul>
+                    <li class="active" data-tab="overview">
+                        <i class="fas fa-home"></i> Overview
+                    </li>
+                    <li data-tab="orders">
+                        <i class="fas fa-shopping-bag"></i> My Orders
+                        <span class="notification-badge">3</span>
+                    </li>
+                    <li data-tab="wishlist">
+                        <i class="fas fa-heart"></i> Wishlist
+                    </li>
+                    <li data-tab="reviews">
+                        <i class="fas fa-star"></i> My Reviews
+                    </li>
+                    <li data-tab="addresses">
+                        <i class="fas fa-map-marker-alt"></i> Addresses
+                    </li>
+                    <li data-tab="payments">
+                        <i class="fas fa-credit-card"></i> Payment Methods
+                    </li>
+                    <li data-tab="profile">
+                        <i class="fas fa-user-edit"></i> Edit Profile
+                    </li>
+                    <li data-tab="settings">
+                        <i class="fas fa-cog"></i> Settings
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="btn logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+        
+        <div class="dashboard-content">
+            <!-- Overview Tab -->
+            <div class="dashboard-tab active" id="overview">
+                <div class="dashboard-header">
+                    <h2>Dashboard Overview</h2>
+                    <p class="last-login">Last login: <span id="lastLoginDate">May 5, 2025, 10:24 AM</span></p>
+                </div>
+                
+                <div class="dashboard-welcome">
+                    <div class="welcome-card">
+                        <h3>Welcome back, <span id="welcomeUserName">John</span>!</h3>
+                        <p>Here's what's happening with your TechNest account today.</p>
+                    </div>
+                </div>
+                
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-icon orders">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>Orders</h4>
+                            <p class="stat-value">12</p>
+                            <p class="stat-label">Total Orders</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon wishlist">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>Wishlist</h4>
+                            <p class="stat-value">8</p>
+                            <p class="stat-label">Saved Items</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon reviews">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>Reviews</h4>
+                            <p class="stat-value">5</p>
+                            <p class="stat-label">Submitted</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon rewards">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>Reward Points</h4>
+                            <p class="stat-value">1,245</p>
+                            <p class="stat-label">Available Points</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recent-orders-container">
+                    <div class="section-header">
+                        <h3>Recent Orders</h3>
+                        <a href="#" class="view-all" data-tab="orders">View All</a>
+                    </div>
+                    <div class="recent-orders">
+                        <div class="order-card">
+                            <div class="order-header">
+                                <div class="order-id">
+                                    <h4>Order #TN38492</h4>
+                                    <span class="order-date">May 2, 2025</span>
+                                </div>
+                                <div class="order-status">
+                                    <span class="status delivered">Delivered</span>
+                                </div>
+                            </div>
+                            <div class="order-items">
+                                <div class="order-item">
+                                    <img src="images/iphone16W.png" alt="iPhone 16 Pro">
+                                    <div class="item-details">
+                                        <h5>iPhone 16 Pro</h5>
+                                        <p>White, 128GB</p>
+                                    </div>
+                                    <div class="item-price">৳219,999</div>
+                                </div>
+                            </div>
+                            <div class="order-actions">
+                                <a href="#" class="btn secondary-btn sm-btn">Track Order</a>
+                                <a href="#" class="btn outline-btn sm-btn">View Details</a>
+                            </div>
+                        </div>
+                        
+                        <div class="order-card">
+                            <div class="order-header">
+                                <div class="order-id">
+                                    <h4>Order #TN38451</h4>
+                                    <span class="order-date">April 28, 2025</span>
+                                </div>
+                                <div class="order-status">
+                                    <span class="status shipped">Shipped</span>
+                                </div>
+                            </div>
+                            <div class="order-items">
+                                <div class="order-item">
+                                    <img src="images/airpods proW.png" alt="AirPods Pro">
+                                    <div class="item-details">
+                                        <h5>TechNest AirPods Pro</h5>
+                                        <p>White</p>
+                                    </div>
+                                    <div class="item-price">৳21,499</div>
+                                </div>
+                            </div>
+                            <div class="order-actions">
+                                <a href="#" class="btn secondary-btn sm-btn">Track Order</a>
+                                <a href="#" class="btn outline-btn sm-btn">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-sections">
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3>Recently Viewed</h3>
+                        </div>
+                        <div class="product-slider-container">
+                            <div class="product-slider">
+                                <div class="product-card mini-card">
+                                    <div class="product-image">
+                                        <img src="images/headphone1.png" alt="Headphones">
+                                    </div>
+                                    <div class="product-info">
+                                        <h4>TechNest Bass Boost 2.0</h4>
+                                        <div class="product-price">
+                                            <span class="current-price">৳68,000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="product-card mini-card">
+                                    <div class="product-image">
+                                        <img src="images/macbook.png" alt="MacBook Pro">
+                                    </div>
+                                    <div class="product-info">
+                                        <h4>TechNest MacBook Pro</h4>
+                                        <div class="product-price">
+                                            <span class="current-price">৳230,000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="product-card mini-card">
+                                    <div class="product-image">
+                                        <img src="images/appwatch.png" alt="Apple Watch">
+                                    </div>
+                                    <div class="product-info">
+                                        <h4>TechNest SmartFit Pro</h4>
+                                        <div class="product-price">
+                                            <span class="current-price">৳43,499</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3>Recommended For You</h3>
+                        </div>
+                        <div class="product-slider-container">
+                            <div class="product-slider">
+                                <div class="product-card mini-card">
+                                    <div class="product-badge">New</div>
+                                    <div class="product-image">
+                                        <img src="images/ipad1.png" alt="iPad">
+                                    </div>
+                                    <div class="product-info">
+                                        <h4>TechNest iPad</h4>
+                                        <div class="product-price">
+                                            <span class="current-price">৳39,000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="product-card mini-card">
+                                    <div class="product-badge bestseller">Bestseller</div>
+                                    <div class="product-image">
+                                        <img src="images/headphone1.png" alt="Headphones">
+                                    </div>
+                                    <div class="product-info">
+                                        <h4>TechNest Bass Boost 2.0</h4>
+                                        <div class="product-price">
+                                            <span class="current-price">৳68,000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="product-card mini-card">
+                                    <div class="product-badge sale">-30%</div>
+                                    <div class="product-image">
+                                        <img src="images/appwatch.png" alt="Apple Watch">
+                                    </div>
+                                    <div class="product-info">
+                                        <h4>TechNest SmartFit Pro</h4>
+                                        <div class="product-price">
+                                            <span class="current-price">৳43,499</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Orders Tab -->
+            <div class="dashboard-tab" id="orders">
+                <div class="dashboard-header">
+                    <h2>My Orders</h2>
+                </div>
+                
+                <div class="orders-filter">
+                    <div class="filter-group">
+                        <label for="order-status">Filter by Status:</label>
+                        <select id="order-status" class="filter-select">
+                            <option value="all">All Orders</option>
+                            <option value="pending">Pending</option>
+                            <option value="processing">Processing</option>
+                            <option value="shipped">Shipped</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="order-date">Filter by Date:</label>
+                        <select id="order-date" class="filter-select">
+                            <option value="all">All Time</option>
+                            <option value="last-30">Last 30 Days</option>
+                            <option value="last-90">Last 90 Days</option>
+                            <option value="last-year">Last Year</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group search-order">
+                        <input type="text" placeholder="Search orders..." id="search-orders">
+                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                
+                <div class="orders-list">
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-id">
+                                <h4>Order #TN38492</h4>
+                                <span class="order-date">May 2, 2025</span>
+                            </div>
+                            <div class="order-status">
+                                <span class="status delivered">Delivered</span>
+                            </div>
+                        </div>
+                        <div class="order-items">
+                            <div class="order-item">
+                                <img src="images/iphone16W.png" alt="iPhone 16 Pro">
+                                <div class="item-details">
+                                    <h5>iPhone 16 Pro</h5>
+                                    <p>White, 128GB</p>
+                                </div>
+                                <div class="item-price">৳219,999</div>
+                            </div>
+                        </div>
+                        <div class="order-footer">
+                            <div class="order-total">
+                                <span>Total:</span>
+                                <span class="total-price">৳219,999</span>
+                            </div>
+                            <div class="order-actions">
+                                <a href="#" class="btn secondary-btn sm-btn">Track Order</a>
+                                <a href="#" class="btn outline-btn sm-btn">View Details</a>
+                                <a href="#" class="btn primary-btn sm-btn">Buy Again</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-id">
+                                <h4>Order #TN38451</h4>
+                                <span class="order-date">April 28, 2025</span>
+                            </div>
+                            <div class="order-status">
+                                <span class="status shipped">Shipped</span>
+                            </div>
+                        </div>
+                        <div class="order-items">
+                            <div class="order-item">
+                                <img src="images/airpods proW.png" alt="AirPods Pro">
+                                <div class="item-details">
+                                    <h5>TechNest AirPods Pro</h5>
+                                    <p>White</p>
+                                </div>
+                                <div class="item-price">৳21,499</div>
+                            </div>
+                        </div>
+                        <div class="order-footer">
+                            <div class="order-total">
+                                <span>Total:</span>
+                                <span class="total-price">৳21,499</span>
+                            </div>
+                            <div class="order-actions">
+                                <a href="#" class="btn secondary-btn sm-btn">Track Order</a>
+                                <a href="#" class="btn outline-btn sm-btn">View Details</a>
+                                <a href="#" class="btn primary-btn sm-btn">Buy Again</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-id">
+                                <h4>Order #TN38299</h4>
+                                <span class="order-date">April 15, 2025</span>
+                            </div>
+                            <div class="order-status">
+                                <span class="status delivered">Delivered</span>
+                            </div>
+                        </div>
+                        <div class="order-items">
+                            <div class="order-item">
+                                <img src="images/macbook.png" alt="MacBook Pro">
+                                <div class="item-details">
+                                    <h5>TechNest MacBook Pro</h5>
+                                    <p>Silver, 512GB</p>
+                                </div>
+                                <div class="item-price">৳230,000</div>
+                            </div>
+                        </div>
+                        <div class="order-footer">
+                            <div class="order-total">
+                                <span>Total:</span>
+                                <span class="total-price">৳230,000</span>
+                            </div>
+                            <div class="order-actions">
+                                <a href="#" class="btn outline-btn sm-btn">View Details</a>
+                                <a href="#" class="btn primary-btn sm-btn">Buy Again</a>
+                                <a href="#" class="btn secondary-btn sm-btn">Write Review</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Wishlist Tab -->
+            <div class="dashboard-tab" id="wishlist">
+                <div class="dashboard-header">
+                    <h2>My Wishlist</h2>
+                </div>
+                
+                <div class="wishlist-actions-header">
+                    <div class="filter-group search-wishlist">
+                        <input type="text" placeholder="Search wishlist..." id="search-wishlist">
+                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                    <button class="btn outline-btn">
+                        <i class="fas fa-trash"></i> Clear Wishlist
+                    </button>
+                </div>
+                
+                <div class="wishlist-grid">
+                    <div class="wishlist-product-card">
+                        <div class="product-image">
+                            <img src="images/iphone16W.png" alt="iPhone 16 Pro">
+                            <div class="product-actions">
+                                <a href="#" class="quick-view"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="remove-wishlist"><i class="fas fa-times"></i></a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h4>iPhone 16 Pro</h4>
+                            <div class="product-price">
+                                <span class="current-price">৳219,999</span>
+                            </div>
+                            <button class="btn primary-btn sm-btn full-width">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <div class="wishlist-product-card">
+                        <div class="product-image">
+                            <img src="images/macbook.png" alt="MacBook Pro">
+                            <div class="product-actions">
+                                <a href="#" class="quick-view"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="remove-wishlist"><i class="fas fa-times"></i></a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h4>TechNest MacBook Pro</h4>
+                            <div class="product-price">
+                                <span class="current-price">৳230,000</span>
+                            </div>
+                            <button class="btn primary-btn sm-btn full-width">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <div class="wishlist-product-card">
+                        <div class="product-image">
+                            <img src="images/headphone1.png" alt="Bass Boost 2.0">
+                            <div class="product-actions">
+                                <a href="#" class="quick-view"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="remove-wishlist"><i class="fas fa-times"></i></a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h4>TechNest Bass Boost 2.0</h4>
+                            <div class="product-price">
+                                <span class="current-price">৳68,000</span>
+                            </div>
+                            <button class="btn primary-btn sm-btn full-width">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <div class="wishlist-product-card">
+                        <div class="product-image">
+                            <img src="images/airpods proW.png" alt="AirPods Pro">
+                            <div class="product-actions">
+                                <a href="#" class="quick-view"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="remove-wishlist"><i class="fas fa-times"></i></a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h4>TechNest AirPods Pro</h4>
+                            <div class="product-price">
+                                <span class="current-price">৳21,499</span>
+                            </div>
+                            <button class="btn primary-btn sm-btn full-width">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reviews Tab -->
+            <div class="dashboard-tab" id="reviews">
+                <div class="dashboard-header">
+                    <h2>My Reviews</h2>
+                </div>
+                
+                <div class="reviews-filter">
+                    <div class="filter-group">
+                        <label for="review-rating">Filter by Rating:</label>
+                        <select id="review-rating" class="filter-select">
+                            <option value="all">All Ratings</option>
+                            <option value="5">5 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="2">2 Stars</option>
+                            <option value="1">1 Star</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="review-date">Filter by Date:</label>
+                        <select id="review-date" class="filter-select">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="reviews-list">
+                    <div class="review-card">
+                        <div class="review-product">
+                            <img src="images/headphone1.png" alt="Bass Boost 2.0">
+                            <div class="product-info">
+                                <h4>TechNest Bass Boost 2.0</h4>
+                                <p class="review-date">Reviewed on April 20, 2025</p>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h5 class="review-title">Amazing sound quality!</h5>
+                            <p class="review-text">These headphones have incredible sound quality. The bass is deep and rich without overpowering the mids and highs. They're also very comfortable to wear for extended periods. Battery life is excellent too, lasting well over 30 hours on a single charge. Highly recommended!</p>
+                        </div>
+                        <div class="review-actions">
+                            <button class="btn outline-btn sm-btn">Edit Review</button>
+                            <button class="btn text-btn sm-btn">Delete</button>
+                        </div>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-product">
+                            <img src="images/iphone16W.png" alt="iPhone 16 Pro">
+                            <div class="product-info">
+                                <h4>iPhone 16 Pro</h4>
+                                <p class="review-date">Reviewed on May 4, 2025</p>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <h5 class="review-title">Great phone but battery could be better</h5>
+                            <p class="review-text">The iPhone 16 Pro is an excellent device with a stunning display and powerful performance. The camera system is impressive, especially in low light. My only complaint is that the battery life could be better - I find myself needing to charge it by the evening with moderate use. Otherwise, it's a fantastic upgrade from my previous phone.</p>
+                        </div>
+                        <div class="review-actions">
+                            <button class="btn outline-btn sm-btn">Edit Review</button>
+                            <button class="btn text-btn sm-btn">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="awaiting-reviews">
+                    <h3>Products to Review</h3>
+                    <p>You have purchased these products but haven't reviewed them yet.</p>
+                    
+                    <div class="pending-reviews-list">
+                        <div class="pending-review-card">
+                            <div class="product-image">
+                                <img src="images/macbook.png" alt="MacBook Pro">
+                            </div>
+                            <div class="product-info">
+                                <h4>TechNest MacBook Pro</h4>
+                                <p>Purchased on April 15, 2025</p>
+                            </div>
+                            <button class="btn primary-btn sm-btn">Write Review</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Addresses Tab -->
+            <div class="dashboard-tab" id="addresses">
+                <div class="dashboard-header">
+                    <h2>My Addresses</h2>
+                    <button class="btn primary-btn" id="addAddressBtn">
+                        <i class="fas fa-plus"></i> Add New Address
+                    </button>
+                </div>
+                
+                <div class="addresses-grid">
+                    <div class="address-card default">
+                        <div class="address-badge">Default</div>
+                        <h4>Home</h4>
+                        <p>John Doe</p>
+                        <p>123 Main Street, Apt 4B</p>
+                        <p>Chattogram 4349</p>
+                        <p>Bangladesh</p>
+                        <p>Phone: +8801581448XXX</p>
+                        <div class="address-actions">
+                            <button class="btn outline-btn sm-btn">Edit</button>
+                            <button class="btn text-btn sm-btn" disabled>Delete</button>
+                        </div>
+                    </div>
+                    
+                    <div class="address-card">
+                        <h4>Office</h4>
+                        <p>John Doe</p>
+                        <p>456 Business Avenue, Floor 3</p>
+                        <p>Chattogram 4349</p>
+                        <p>Bangladesh</p>
+                        <p>Phone: +8801712345XXX</p>
+                        <div class="address-actions">
+                            <button class="btn outline-btn sm-btn">Edit</button>
+                            <button class="btn text-btn sm-btn">Delete</button>
+                            <button class="btn secondary-btn sm-btn">Set as Default</button>
+                        </div>
+                    </div>
+                    
+                    <div class="add-address-card" id="addAddressCard">
+                        <div class="add-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <p>Add New Address</p>
+                    </div>
+                </div>
+                
+                <!-- Add/Edit Address Form (Initially Hidden) -->
+                <div class="address-form-container" id="addressFormContainer">
+                    <div class="form-card">
+                        <div class="form-header">
+                            <h3>Add New Address</h3>
+                            <button class="close-form" id="closeAddressForm">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <form id="addressForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="addressType">Address Type</label>
+                                    <select id="addressType" required>
+                                        <option value="">Select Type</option>
+                                        <option value="home">Home</option>
+                                        <option value="office">Office</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" id="fullName" placeholder="Your full name" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="addressLine1">Address Line 1</label>
+                                <input type="text" id="addressLine1" placeholder="Street address, P.O. box, etc." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="addressLine2">Address Line 2 (Optional)</label>
+                                <input type="text" id="addressLine2" placeholder="Apartment, suite, unit, building, floor, etc.">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" id="city" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="postalCode">Postal Code</label>
+                                    <input type="text" id="postalCode" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="state">State/Division</label>
+                                    <input type="text" id="state" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <select id="country" required>
+                                        <option value="Bangladesh">Bangladesh</option>
+                                        <option value="India">India</option>
+                                        <option value="Pakistan">Pakistan</option>
+                                        <option value="United States">United States</option>
+                                        <option value="United Kingdom">United Kingdom</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phoneNumber">Phone Number</label>
+                                <input type="tel" id="phoneNumber" placeholder="+880XXXXXXXXXX" required>
+                            </div>
+                            
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="defaultAddress">
+                                <label for="defaultAddress">Set as default address</label>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn outline-btn" id="cancelAddressForm">Cancel</button>
+                                <button type="submit" class="btn primary-btn">Save Address</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Payment Methods Tab -->
+            <div class="dashboard-tab" id="payments">
+                <div class="dashboard-header">
+                    <h2>Payment Methods</h2>
+                    <button class="btn primary-btn" id="addPaymentBtn">
+                        <i class="fas fa-plus"></i> Add Payment Method
+                    </button>
+                </div>
+                
+                <div class="payment-methods-grid">
+                    <div class="payment-card default">
+                        <div class="payment-badge">Default</div>
+                        <div class="card-type visa">
+                            <i class="fab fa-cc-visa"></i>
+                        </div>
+                        <div class="card-info">
+                            <h4>Visa ending in 4321</h4>
+                            <p>Expiry: 09/28</p>
+                            <p>John Doe</p>
+                        </div>
+                        <div class="payment-actions">
+                            <button class="btn outline-btn sm-btn">Edit</button>
+                            <button class="btn text-btn sm-btn" disabled>Delete</button>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-card">
+                        <div class="card-type mastercard">
+                            <i class="fab fa-cc-mastercard"></i>
+                        </div>
+                        <div class="card-info">
+                            <h4>Mastercard ending in 8765</h4>
+                            <p>Expiry: 05/26</p>
+                            <p>John Doe</p>
+                        </div>
+                        <div class="payment-actions">
+                            <button class="btn outline-btn sm-btn">Edit</button>
+                            <button class="btn text-btn sm-btn">Delete</button>
+                            <button class="btn secondary-btn sm-btn">Set as Default</button>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-card">
+                        <div class="card-type mobile-banking">
+                            <span class="custom-icon bkash">bKash</span>
+                        </div>
+                        <div class="card-info">
+                            <h4>bKash</h4>
+                            <p>Account: 01712345XXX</p>
+                            <p>John Doe</p>
+                        </div>
+                        <div class="payment-actions">
+                            <button class="btn outline-btn sm-btn">Edit</button>
+                            <button class="btn text-btn sm-btn">Delete</button>
+                            <button class="btn secondary-btn sm-btn">Set as Default</button>
+                        </div>
+                    </div>
+                    
+                    <div class="add-payment-card" id="addPaymentCard">
+                        <div class="add-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <p>Add Payment Method</p>
+                    </div>
+                </div>
+                
+                <!-- Add/Edit Payment Form (Initially Hidden) -->
+                <div class="payment-form-container" id="paymentFormContainer">
+                    <div class="form-card">
+                        <div class="form-header">
+                            <h3>Add Payment Method</h3>
+                            <button class="close-form" id="closePaymentForm">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <form id="paymentForm">
+                            <div class="form-group">
+                                <label for="paymentType">Payment Type</label>
+                                <select id="paymentType" required>
+                                    <option value="">Select Payment Type</option>
+                                    <option value="credit">Credit Card</option>
+                                    <option value="debit">Debit Card</option>
+                                    <option value="bkash">bKash</option>
+                                    <option value="nagad">Nagad</option>
+                                    <option value="rocket">Rocket</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Credit/Debit Card Fields -->
+                            <div id="cardFields" style="display: none;">
+                                <div class="form-group">
+                                    <label for="cardNumber">Card Number</label>
+                                    <input type="text" id="cardNumber" placeholder="XXXX XXXX XXXX XXXX">
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="expiryDate">Expiry Date</label>
+                                        <input type="text" id="expiryDate" placeholder="MM/YY">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cvv">CVV</label>
+                                        <input type="text" id="cvv" placeholder="XXX">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="cardholderName">Cardholder Name</label>
+                                    <input type="text" id="cardholderName">
+                                </div>
+                            </div>
+                            
+                            <!-- Mobile Banking Fields -->
+                            <div id="mobileFields" style="display: none;">
+                                <div class="form-group">
+                                    <label for="mobileNumber">Mobile Number</label>
+                                    <input type="tel" id="mobileNumber" placeholder="+880XXXXXXXXXX">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="accountName">Account Name</label>
+                                    <input type="text" id="accountName">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="defaultPayment">
+                                <label for="defaultPayment">Set as default payment method</label>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn outline-btn" id="cancelPaymentForm">Cancel</button>
+                                <button type="submit" class="btn primary-btn">Save Payment Method</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Profile Tab -->
+            <div class="dashboard-tab" id="profile">
+                <div class="dashboard-header">
+                    <h2>Edit Profile</h2>
+                </div>
+                
+                <div class="profile-card">
+                    <form id="profileForm">
+                        <div class="profile-avatar-section">
+                            <div class="profile-avatar">
+                                <img src="images/avatar-placeholder.png" alt="User Avatar" id="profileAvatar">
+                                <div class="avatar-upload">
+                                    <label for="profile-avatar-input">
+                                        <i class="fas fa-camera"></i>
+                                    </label>
+                                    <input type="file" id="profile-avatar-input" accept="image/*">
+                                </div>
+                            </div>
+                            <p class="upload-hint">Click to upload a new profile picture</p>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" value="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" value="Doe" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" value="john.doe@example.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" value="+8801581448XXX">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="birthDate">Date of Birth</label>
+                                <input type="date" id="birthDate" value="1990-05-15">
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select id="gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="male" selected>Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                    <option value="prefer-not-to-say">Prefer not to say</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-divider">
+                            <span>Password Change</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="currentPassword">Current Password</label>
+                            <input type="password" id="currentPassword" placeholder="Enter current password">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="newPassword">New Password</label>
+                                <input type="password" id="newPassword" placeholder="Enter new password">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <input type="password" id="confirmPassword" placeholder="Confirm new password">
+                            </div>
+                        </div>
+                        
+                        <div class="password-strength" style="display: none;">
+                            <span class="strength-label">Password strength:</span>
+                            <div class="strength-meter">
+                                <div class="strength-segment"></div>
+                                <div class="strength-segment"></div>
+                                <div class="strength-segment"></div>
+                                <div class="strength-segment"></div>
+                            </div>
+                            <span class="strength-text">Weak</span>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="reset" class="btn outline-btn">Cancel</button>
+                            <button type="submit" class="btn primary-btn">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Settings Tab -->
+            <div class="dashboard-tab" id="settings">
+                <div class="dashboard-header">
+                    <h2>Account Settings</h2>
+                </div>
+                
+                <div class="settings-card">
+                    <form id="settingsForm">
+                        <div class="settings-section">
+                            <h3>Notification Preferences</h3>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Email Notifications</h4>
+                                    <p>Receive updates about your orders, account, and special offers</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="emailNotifications" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Order Updates</h4>
+                                    <p>Receive notifications about order status changes</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="orderNotifications" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Promotions and Deals</h4>
+                                    <p>Receive notifications about promotions and special deals</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="promoNotifications" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Product Updates</h4>
+                                    <p>Receive notifications about new products and features</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="productNotifications">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section">
+                            <h3>Privacy Settings</h3>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Show Recently Viewed</h4>
+                                    <p>Show recently viewed products on your dashboard</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="showRecentlyViewed" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Personalized Recommendations</h4>
+                                    <p>Allow us to show product recommendations based on your browsing history</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="showRecommendations" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Activity History</h4>
+                                    <p>Keep track of your viewed products and search history</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="activityHistory" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section">
+                            <h3>Security Settings</h3>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Two-Factor Authentication</h4>
+                                    <p>Add an extra layer of security to your account</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="twoFactorAuth">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Login Notifications</h4>
+                                    <p>Receive notifications when someone logs into your account</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="loginNotifications" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section danger-zone">
+                            <h3>Account Actions</h3>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Download Your Data</h4>
+                                    <p>Download a copy of your personal data</p>
+                                </div>
+                                <div class="setting-control">
+                                    <button type="button" class="btn outline-btn">Download</button>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Deactivate Account</h4>
+                                    <p>Temporarily disable your account</p>
+                                </div>
+                                <div class="setting-control">
+                                    <button type="button" class="btn warning-btn">Deactivate</button>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Delete Account</h4>
+                                    <p>Permanently delete your account and all your data</p>
+                                </div>
+                                <div class="setting-control">
+                                    <button type="button" class="btn danger-btn">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn primary-btn">Save Settings</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <div class="logo-text footer-logo-text">
+                            <div class="bolt-icon"><i class="fas fa-bolt"></i></div>
+                            <span class="tech">Tech</span><span class="nest">Nest</span>
+                        </div>
+                    </a>
+                </div>
+                <p>Premium tech gadgets at affordable prices. Experience innovation without breaking the bank.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="#">MobilePhones</a></li>
+                    <li><a href="#">Headphones</a></li>
+                    <li><a href="#">Earbuds</a></li>
+                    <li><a href="#">Laptops</a></li>
+                    <li><a href="#">Smartwatches</a></li>
+                    <li><a href="#">Tablets</a></li>
+                    <li><a href="#">Accessories</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Warranty</a></li>
+                    <li><a href="#">Repair Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> SASH, CUET, Raozan-4349, Chattogram</li>
+                    <li><i class="fas fa-phone"></i> +8801581448561</li>
+                    <li><i class="fas fa-envelope"></i> support@technest.com</li>
+                </ul>
+                <div class="payment-methods">
+                    <span class="payment-icon bkash">bKash</span>
+                    <span class="payment-icon nagad">Nagad</span>
+                    <span class="payment-icon rocket">Rocket</span>
+                    <i class="fab fa-cc-visa"></i>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 TechNest. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <span class="close-cart">&times;</span>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be added dynamically -->
+        </div>
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span>$0.00</span>
+            </div>
+            <button class="btn primary-btn checkout-btn">Checkout</button>
+            <button class="btn secondary-btn continue-shopping">Continue Shopping</button>
+        </div>
+    </div>
+    
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <script src="script.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="auth-dashboard-integration.js"></script>
+</body>
+</html>

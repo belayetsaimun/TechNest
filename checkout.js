@@ -38,6 +38,18 @@ document.addEventListener('DOMContentLoaded', function() {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
     
+    // ADDED: Check for any buyNowItem in localStorage
+    const buyNowItem = JSON.parse(localStorage.getItem('buyNowItem'));
+    if (buyNowItem) {
+        // If a buyNowItem exists and the cart is empty, use the buyNowItem
+        if (cart.length === 0) {
+            cart.push(buyNowItem);
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+        // Clear the buyNowItem from localStorage
+        localStorage.removeItem('buyNowItem');
+    }
+    
     // Set default delivery location and fee
     let deliveryLocation = 'inside-dhaka';
     let deliveryFee = 60; // Default: Inside Dhaka

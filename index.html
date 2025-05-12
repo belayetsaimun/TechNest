@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechNest - Premium Tech Gadgets</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <meta name="theme-color" content="#0052cc">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,11 +45,11 @@
                 </form>
                
                 <a href="auth.html" class="account"><i class="fas fa-user"></i></a>
-                <a href="#" class="wishlist" id="wishlistBtn">
+                <a href="wishlist.html" class="wishlist" id="wishlistBtn">
                     <i class="fas fa-heart"></i>
                     <span class="wishlist-count">0</span>
                 </a>
-                <a href="#" class="cart" id="cartBtn">
+                <a href="cart.html" class="cart" id="cartBtn">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
                 </a>
@@ -95,8 +99,8 @@
             </div>
             
             <div class="hero-buttons">
-                <a href="#featured" class="btn primary-btn">Buy Now</a>
-                <a href="#categories" class="btn secondary-btn">Learn More</a>
+                <a href="products.html" class="btn primary-btn">Buy Now</a>
+                <a href="category.html?category=phones" class="btn secondary-btn">Learn More</a>
             </div>
         </div>
         <div class="hero-product">
@@ -187,7 +191,7 @@
             <div class="product-card" data-id="2" data-name="TechNest AirPods Pro" data-price="21499" data-image="images/airpods pro.png">
                 <div class="product-badge">New</div>
                 <div class="product-image">
-                    <img src="images/airpods pro.png" alt="Wireless Earbuds">
+                    <img src="images/airpods proW.png" alt="Wireless Earbuds">
                     <div class="product-actions">
                         <a href="#" class="quick-view"><i class="fas fa-eye"></i></a>
                         <a href="#" class="add-to-wishlist"><i class="far fa-heart"></i></a>
@@ -270,7 +274,7 @@
             <div class="product-card" data-id="5" data-name="TechNest MacBook Pro" data-price="230000" data-image="images/macbook.png">
                 <div class="product-badge bestseller">Bestseller</div>
                 <div class="product-image">
-                    <img src="images/macbook.png" alt="Laptop">
+                    <img src="images/macbookW.png" alt="Laptop">
                     <div class="product-actions">
                         <a href="#" class="quick-view"><i class="fas fa-eye"></i></a>
                         <a href="#" class="add-to-wishlist"><i class="far fa-heart"></i></a>
@@ -655,7 +659,7 @@
                         <span class="discount">-6%</span>
                     </div>
                     <div class="product-description">
-                        <p>The iPhone 16 Pro Max offers cutting-edge technology with an exceptional display, advanced camera system, and lightning-fast performance. Packed with the latest A17 Bionic chip, it provides a seamless user experience. The stunning 48MP camera and all-day battery life make it perfect for capturing memories and staying productive.</p>
+                        <p>The iPhone 16 Pro Max offers cutting-edge technology with an exceptional display, advanced camera system, and lightning-fast performance. Packed with the latest A17 Bionic c[...]
                     </div>
                     <div class="product-colors">
                         <h4>Colors:</h4>
@@ -784,5 +788,6 @@
     <div class="overlay" id="overlay"></div>
 
     <script src="script.js"></script>
+    <script src="search.js"></script>
 </body>
 </html>

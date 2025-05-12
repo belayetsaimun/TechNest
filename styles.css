@@ -657,7 +657,7 @@ header {
 
 .hero-content {
     flex: 1;
-    max-width: 550px;
+    max-width: 1000px;
     position: relative;
     z-index: 3;
     animation: fadeInLeft 1s forwards;

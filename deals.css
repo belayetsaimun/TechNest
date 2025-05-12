@@ -368,8 +368,8 @@
 
 /* Deal of the Day Section */
 .deal-of-the-day {
-    padding: 80px 5%;
-    background-color: #f8f9fa;
+    padding: 50px 5%;
+    background-color: #e0e5ea;
 }
 
 .dotd-container {
@@ -378,10 +378,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
-    background: white;
+    background: #e0e5ea;
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 40px rgba(255, 254, 254, 0.193);
 }
 
 .dotd-image {
@@ -389,13 +389,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 3rem;
-    background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+    padding: 1rem;
+    background: linear-gradient(135deg,#efebeb, #e0e0e0);
 }
 
 .dotd-image img {
-    max-width: 90%;
-    max-height: 350px;
+    max-width: 100%;
+    max-height: 1000px;
     object-fit: contain;
     filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.15));
     animation: floatImage 6s ease-in-out infinite;
@@ -407,13 +407,13 @@
     right: 2rem;
     width: 100px;
     height: 100px;
-    background: #ff6b6b;
+    background: #bf6335;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     transform: rotate(12deg);
-    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.5);
+    box-shadow: 0 5px 15px rgba(171, 25, 25, 0.5);
     animation: pulseBadge 2s infinite;
 }
 
@@ -430,7 +430,7 @@
 }
 
 .badge-text {
-    color: white;
+    color: rgb(34, 31, 31);
     font-weight: 800;
     font-size: 1.3rem;
     text-align: center;

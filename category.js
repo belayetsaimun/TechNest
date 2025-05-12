@@ -1,1040 +1,1876 @@
-/**
- * TechNest E-commerce - Enhanced Category Page JavaScript
- * Complete implementation with fixed bugs and improved functionality
- */
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Get category parameter from URL
+    // DOM Elements
+    const productGrid = document.getElementById('product-grid');
+    const categoryTitle = document.getElementById('category-title');
+    const categoryDescription = document.getElementById('category-description');
+    const categoryNameBreadcrumb = document.getElementById('category-name');
+    const categoryBanner = document.querySelector('.category-banner');
+    const relatedCategoriesGrid = document.getElementById('related-categories-grid');
+    const paginationContainer = document.getElementById('pagination');
+    
+    // Quick View Modal Elements
+    const quickViewModal = document.getElementById('quickViewModal');
+    const closeModal = document.querySelector('.close-modal');
+    
+    // Cart Sidebar Elements
+    const cartSidebar = document.getElementById('cartSidebar');
+    const closeCart = document.querySelector('.close-cart');
+    const cartItems = document.querySelector('.cart-items');
+    const cartTotal = document.querySelector('.cart-total span:last-child');
+    const continueShopping = document.querySelector('.continue-shopping');
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    
+    // Wishlist Sidebar Elements
+    const wishlistSidebar = document.getElementById('wishlistSidebar');
+    const closeWishlist = document.querySelector('.close-wishlist');
+    const wishlistItems = document.querySelector('.wishlist-items');
+    const clearWishlistBtn = document.querySelector('.clear-wishlist-btn');
+    
+    // Overlay
+    const overlay = document.getElementById('overlay');
+    
+    // Sorting and filtering controls
+    const sortBySelect = document.getElementById('sort-by');
+    const priceRangeSelect = document.getElementById('price-range');
+    const resetFiltersBtn = document.getElementById('reset-filters');
+    
+    // Items per page
+    const itemsPerPage = 8;
+    let currentPage = 1;
+    
+    // Get category from URL parameter
     const urlParams = new URLSearchParams(window.location.search);
     const categoryParam = urlParams.get('category');
     
-    // Initialize cart and wishlist
+    // Initialize cart and wishlist from localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    
+    // SVG banners for categories
+    const svgBanners = {
+        phones: `<svg viewBox="0 0 1400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="phones-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0052cc;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#00b8d4;stop-opacity:0.8" />
+    </linearGradient>
+    <pattern id="phones-pattern" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <circle cx="30" cy="30" r="3" fill="white" fill-opacity="0.1" />
+    </pattern>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="100%" height="100%" fill="url(#phones-bg)" />
+  
+  <!-- Pattern overlay -->
+  <rect width="100%" height="100%" fill="url(#phones-pattern)" />
+  
+  <!-- Phone illustrations -->
+  <g transform="translate(1050, 150) scale(0.8)">
+    <!-- Phone 1 -->
+    <rect x="-120" y="-140" width="90" height="180" rx="12" fill="#222" stroke="white" stroke-width="2" />
+    <rect x="-110" y="-130" width="70" height="160" rx="2" fill="#0052cc" />
+    <rect x="-90" y="-120" width="30" height="60" rx="2" fill="white" fill-opacity="0.3" />
+    <circle cx="-75" cy="110" r="8" fill="white" fill-opacity="0.5" />
+    
+    <!-- Phone 2 -->
+    <rect x="0" y="-150" width="100" height="200" rx="15" fill="#333" stroke="white" stroke-width="2" />
+    <rect x="10" y="-140" width="80" height="180" rx="2" fill="#00b8d4" />
+    <rect x="30" y="-130" width="40" height="70" rx="2" fill="white" fill-opacity="0.3" />
+    <circle cx="50" cy="120" r="10" fill="white" fill-opacity="0.5" />
+    
+    <!-- Phone 3 -->
+    <rect x="130" y="-130" width="80" height="170" rx="10" fill="#444" stroke="white" stroke-width="2" />
+    <rect x="140" y="-120" width="60" height="150" rx="2" fill="#0066cc" />
+    <rect x="150" y="-110" width="40" height="50" rx="2" fill="white" fill-opacity="0.3" />
+    <circle cx="170" cy="100" r="8" fill="white" fill-opacity="0.5" />
+  </g>
+  
+  <!-- Text elements -->
+  
+</svg>`,
+
+        laptops: `<svg viewBox="0 0 1400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="laptops-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4b0082;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#8a2be2;stop-opacity:0.8" />
+    </linearGradient>
+    <pattern id="laptops-pattern" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <circle cx="30" cy="30" r="3" fill="white" fill-opacity="0.1" />
+    </pattern>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="100%" height="100%" fill="url(#laptops-bg)" />
+  
+  <!-- Pattern overlay -->
+  <rect width="100%" height="100%" fill="url(#laptops-pattern)" />
+  
+  <!-- Laptop illustrations -->
+  <g transform="translate(1050, 150) scale(0.6)">
+    <!-- Laptop 1 -->
+    <g transform="translate(-250, 0)">
+      <rect x="-100" y="-70" width="200" height="140" rx="10" fill="#333" />
+      <rect x="-90" y="-60" width="180" height="120" fill="#4b0082" />
+      <rect x="-80" y="-50" width="160" height="100" fill="#8a2be2" opacity="0.7" />
+      <rect x="-130" y="70" width="260" height="15" rx="5" fill="#222" />
+    </g>
+    
+    <!-- Laptop 2 -->
+    <g transform="translate(50, -20)">
+      <rect x="-120" y="-80" width="240" height="160" rx="10" fill="#444" />
+      <rect x="-110" y="-70" width="220" height="140" fill="#6a0dad" />
+      <rect x="-100" y="-60" width="200" height="120" fill="#9932cc" opacity="0.8" />
+      <rect x="-150" y="80" width="300" height="15" rx="5" fill="#333" />
+    </g>
+    
+    <!-- Laptop 3 -->
+    <g transform="translate(280, 20) rotate(-10)">
+      <rect x="-90" y="-60" width="180" height="120" rx="10" fill="#555" />
+      <rect x="-80" y="-50" width="160" height="100" fill="#483d8b" />
+      <rect x="-70" y="-40" width="140" height="80" fill="#7b68ee" opacity="0.7" />
+      <rect x="-110" y="60" width="220" height="12" rx="5" fill="#444" />
+    </g>
+  </g>
+</svg>`,
+
+        headphones: `<svg viewBox="0 0 1400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="headphones-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dc143c;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#ff4500;stop-opacity:0.8" />
+    </linearGradient>
+    <pattern id="headphones-pattern" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <circle cx="30" cy="30" r="3" fill="white" fill-opacity="0.1" />
+    </pattern>
+    <linearGradient id="headphones-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ddd" />
+      <stop offset="50%" style="stop-color:#aaa" />
+      <stop offset="100%" style="stop-color:#ddd" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="100%" height="100%" fill="url(#headphones-bg)" />
+  
+  <!-- Pattern overlay -->
+  <rect width="100%" height="100%" fill="url(#headphones-pattern)" />
+  
+  <!-- Headphones illustrations -->
+  <g transform="translate(1050, 150) scale(0.9)">
+    <!-- Headphone 1 -->
+    <g transform="translate(-200, 0)">
+      <!-- Headband -->
+      <path d="M-70,-60 A140,140 0 0,1 70,-60" stroke="url(#headphones-metal)" stroke-width="15" fill="none" />
+      
+      <!-- Ear cups -->
+      <g transform="translate(-85, 0)">
+        <ellipse cx="0" cy="0" rx="40" ry="50" fill="#222" />
+        <ellipse cx="0" cy="0" rx="30" ry="40" fill="#dc143c" />
+        <ellipse cx="0" cy="0" rx="20" ry="30" fill="#ff4500" opacity="0.7" />
+      </g>
+      
+      <g transform="translate(85, 0)">
+        <ellipse cx="0" cy="0" rx="40" ry="50" fill="#222" />
+        <ellipse cx="0" cy="0" rx="30" ry="40" fill="#dc143c" />
+        <ellipse cx="0" cy="0" rx="20" ry="30" fill="#ff4500" opacity="0.7" />
+      </g>
+      
+      <!-- Headband support -->
+      <path d="M-70,-60 L-85,0" stroke="#333" stroke-width="8" fill="none" />
+      <path d="M70,-60 L85,0" stroke="#333" stroke-width="8" fill="none" />
+    </g>
+    
+    <!-- Headphone 2 -->
+    <g transform="translate(80, 0) rotate(15)">
+      <!-- Headband -->
+      <path d="M-60,-50 A120,120 0 0,1 60,-50" stroke="url(#headphones-metal)" stroke-width="12" fill="none" />
+      
+      <!-- Ear cups -->
+      <g transform="translate(-75, 0)">
+        <ellipse cx="0" cy="0" rx="35" ry="45" fill="#333" />
+        <ellipse cx="0" cy="0" rx="25" ry="35" fill="#ff6347" />
+        <ellipse cx="0" cy="0" rx="15" ry="25" fill="#ff7f50" opacity="0.7" />
+      </g>
+      
+      <g transform="translate(75, 0)">
+        <ellipse cx="0" cy="0" rx="35" ry="45" fill="#333" />
+        <ellipse cx="0" cy="0" rx="25" ry="35" fill="#ff6347" />
+        <ellipse cx="0" cy="0" rx="15" ry="25" fill="#ff7f50" opacity="0.7" />
+      </g>
+      
+      <!-- Headband support -->
+      <path d="M-60,-50 L-75,0" stroke="#444" stroke-width="6" fill="none" />
+      <path d="M60,-50 L75,0" stroke="#444" stroke-width="6" fill="none" />
+    </g>
+  </g>
+  
+  <!-- Sound waves -->
+  <g transform="translate(950, 150)" opacity="0.3">
+    <circle cx="0" cy="0" r="30" fill="none" stroke="white" stroke-width="2" />
+    <circle cx="0" cy="0" r="60" fill="none" stroke="white" stroke-width="2" />
+    <circle cx="0" cy="0" r="90" fill="none" stroke="white" stroke-width="2" />
+    <circle cx="0" cy="0" r="120" fill="none" stroke="white" stroke-width="2" />
+  </g>
+</svg>`,
+
+        earbuds: `<svg viewBox="0 0 1400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="earbuds-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#50C878;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#90EE90;stop-opacity:0.8" />
+    </linearGradient>
+    <pattern id="earbuds-pattern" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <circle cx="30" cy="30" r="3" fill="white" fill-opacity="0.1" />
+    </pattern>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="100%" height="100%" fill="url(#earbuds-bg)" />
+  
+  <!-- Pattern overlay -->
+  <rect width="100%" height="100%" fill="url(#earbuds-pattern)" />
+  
+  <!-- Earbuds illustrations -->
+  <g transform="translate(1050, 150) scale(0.9)">
+    <!-- Earbud case -->
+    <ellipse cx="0" cy="0" rx="90" ry="50" fill="#333" />
+    <ellipse cx="0" cy="-10" rx="85" ry="45" fill="#50C878" opacity="0.9" />
+    <ellipse cx="0" cy="-10" rx="75" ry="35" fill="#90EE90" opacity="0.7" />
+    
+    <!-- Left earbud -->
+    <g transform="translate(-120, -50)">
+      <circle cx="0" cy="0" r="25" fill="#333" />
+      <circle cx="0" cy="0" r="20" fill="#50C878" />
+      <circle cx="0" cy="0" r="10" fill="#90EE90" opacity="0.8" />
+    </g>
+    
+    <!-- Right earbud -->
+    <g transform="translate(120, -50)">
+      <circle cx="0" cy="0" r="25" fill="#333" />
+      <circle cx="0" cy="0" r="20" fill="#50C878" />
+      <circle cx="0" cy="0" r="10" fill="#90EE90" opacity="0.8" />
+    </g>
+  </g>
+  
+  <!-- Sound waves -->
+  <g transform="translate(950, 150)" opacity="0.3">
+    <circle cx="0" cy="0" r="30" fill="none" stroke="white" stroke-width="2" />
+    <circle cx="0" cy="0" r="60" fill="none" stroke="white" stroke-width="2" />
+    <circle cx="0" cy="0" r="90" fill="none" stroke="white" stroke-width="2" />
+  </g>
+</svg>`,
+
+        tablets: `<svg viewBox="0 0 1400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="tablets-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF8C00;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0.8" />
+    </linearGradient>
+    <pattern id="tablets-pattern" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <circle cx="30" cy="30" r="3" fill="white" fill-opacity="0.1" />
+    </pattern>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="100%" height="100%" fill="url(#tablets-bg)" />
+  
+  <!-- Pattern overlay -->
+  <rect width="100%" height="100%" fill="url(#tablets-pattern)" />
+  
+  <!-- Tablet illustrations -->
+  <g transform="translate(1050, 150) scale(0.8)">
+    <!-- Tablet 1 -->
+    <rect x="-140" y="-100" width="180" height="240" rx="10" fill="#333" stroke="white" stroke-width="2" />
+    <rect x="-130" y="-90" width="160" height="220" rx="5" fill="#FF8C00" />
+    <rect x="-120" y="-80" width="140" height="200" rx="2" fill="#FFD700" opacity="0.7" />
+    <circle cx="-50" cy="100" r="10" fill="white" fill-opacity="0.5" />
+    
+    <!-- Tablet 2 -->
+    <g transform="translate(100, 0) rotate(15)">
+      <rect x="-100" y="-80" width="150" height="200" rx="10" fill="#444" stroke="white" stroke-width="2" />
+      <rect x="-90" y="-70" width="130" height="180" rx="5" fill="#FFA500" />
+      <rect x="-80" y="-60" width="110" height="160" rx="2" fill="#FFCC00" opacity="0.7" />
+      <circle cx="-25" cy="80" r="8" fill="white" fill-opacity="0.5" />
+    </g>
+  </g>
+  
+</svg>`,
+
+        smartwatches: `<svg viewBox="0 0 1400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="smartwatches-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4169E1;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#1E90FF;stop-opacity:0.8" />
+    </linearGradient>
+    <pattern id="smartwatches-pattern" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <circle cx="30" cy="30" r="3" fill="white" fill-opacity="0.1" />
+    </pattern>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="100%" height="100%" fill="url(#smartwatches-bg)" />
+  
+  <!-- Pattern overlay -->
+  <rect width="100%" height="100%" fill="url(#smartwatches-pattern)" />
+  
+  <!-- Smartwatch illustrations -->
+  <g transform="translate(1050, 150) scale(0.9)">
+    <!-- Smartwatch 1 -->
+    <g transform="translate(-100, 0)">
+      <!-- Watch band -->
+      <path d="M-40,-80 L-40,-40 L-40,40 L-40,80 C-40,90 -20,90 -20,80 L-20,40 L-20,-40 L-20,-80 C-20,-90 -40,-90 -40,-80 Z" fill="#333" />
+      
+      <!-- Watch face -->
+      <rect x="-60" y="-60" width="80" height="120" rx="10" fill="#4169E1" />
+      <rect x="-50" y="-50" width="60" height="100" rx="5" fill="#1E90FF" />
+      
+      <!-- Watch screen -->
+      <rect x="-40" y="-40" width="40" height="80" rx="5" fill="#fff" opacity="0.9" />
+      
+      <!-- Watch elements -->
+      <rect x="-35" y="-30" width="30" height="5" rx="2" fill="#4169E1" opacity="0.5" />
+      <rect x="-35" y="-20" width="20" height="5" rx="2" fill="#4169E1" opacity="0.5" />
+      <circle cx="-20" cy="20" r="15" fill="#4169E1" opacity="0.3" />
+    </g>
+    
+    <!-- Smartwatch 2 -->
+    <g transform="translate(100, 0) rotate(15)">
+      <!-- Watch band -->
+      <path d="M-30,-70 L-30,-40 L-30,40 L-30,70 C-30,80 -10,80 -10,70 L-10,40 L-10,-40 L-10,-70 C-10,-80 -30,-80 -30,-70 Z" fill="#444" />
+      
+      <!-- Watch face -->
+      <rect x="-50" y="-50" width="70" height="100" rx="15" fill="#1E90FF" />
+      <rect x="-40" y="-40" width="50" height="80" rx="10" fill="#4169E1" />
+      
+      <!-- Watch screen -->
+      <rect x="-30" y="-30" width="30" height="60" rx="5" fill="#fff" opacity="0.9" />
+      
+      <!-- Watch elements -->
+      <rect x="-25" y="-20" width="20" height="4" rx="2" fill="#1E90FF" opacity="0.5" />
+      <rect x="-25" y="-10" width="15" height="4" rx="2" fill="#1E90FF" opacity="0.5" />
+      <circle cx="-15" cy="15" r="10" fill="#1E90FF" opacity="0.3" />
+    </g>
+  </g>
+</svg>`,
+
+        gaming: `<svg viewBox="0 0 1400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="gaming-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#800080;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#BA55D3;stop-opacity:0.8" />
+    </linearGradient>
+    <pattern id="gaming-pattern" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <circle cx="30" cy="30" r="3" fill="white" fill-opacity="0.1" />
+    </pattern>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="100%" height="100%" fill="url(#gaming-bg)" />
+  
+  <!-- Pattern overlay -->
+  <rect width="100%" height="100%" fill="url(#gaming-pattern)" />
+  
+  <!-- Gaming console illustrations -->
+  <g transform="translate(1050, 150) scale(0.9)">
+    <!-- Game console -->
+    <rect x="-120" y="-40" width="240" height="80" rx="10" fill="#333" />
+    <rect x="-110" y="-30" width="220" height="60" rx="5" fill="#800080" />
+    <rect x="-100" y="-20" width="200" height="40" rx="5" fill="#BA55D3" opacity="0.7" />
+    
+    <!-- Controller 1 -->
+    <g transform="translate(-150, 60)">
+      <rect x="-30" y="-20" width="60" height="40" rx="20" fill="#444" />
+      <circle cx="-15" cy="0" r="10" fill="#800080" />
+      <circle cx="15" cy="0" r="10" fill="#BA55D3" />
+      <rect x="-25" y="-15" width="50" height="30" rx="5" fill="#333" opacity="0.5" />
+    </g>
+    
+    <!-- Controller 2 -->
+    <g transform="translate(150, 60)">
+      <rect x="-30" y="-20" width="60" height="40" rx="20" fill="#444" />
+      <circle cx="-15" cy="0" r="10" fill="#800080" />
+      <circle cx="15" cy="0" r="10" fill="#BA55D3" />
+      <rect x="-25" y="-15" width="50" height="30" rx="5" fill="#333" opacity="0.5" />
+    </g>
+  </g>
+  
+</svg>`,
+
+        accessories: `<svg viewBox="0 0 1400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="accessories-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#008080;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#20B2AA;stop-opacity:0.8" />
+    </linearGradient>
+    <pattern id="accessories-pattern" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <circle cx="30" cy="30" r="3" fill="white" fill-opacity="0.1" />
+    </pattern>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="100%" height="100%" fill="url(#accessories-bg)" />
+  
+  <!-- Pattern overlay -->
+  <rect width="100%" height="100%" fill="url(#accessories-pattern)" />
+  
+  <!-- Accessories illustrations -->
+  <g transform="translate(1050, 150) scale(0.8)">
+    <!-- Mouse -->
+    <g transform="translate(-150, 0)">
+      <path d="M-30,-40 C-40,-40 -50,-20 -50,0 C-50,30 -40,50 -20,50 C0,50 20,40 20,0 C20,-20 10,-40 -30,-40 Z" fill="#333" />
+      <path d="M-25,-35 C-35,-35 -45,-20 -45,0 C-45,25 -35,45 -20,45 C0,45 15,35 15,0 C15,-20 5,-35 -25,-35 Z" fill="#008080" />
+      <rect x="-30" y="-30" width="30" height="2" rx="1" fill="#fff" opacity="0.5" />
+    </g>
+    
+    <!-- Keyboard -->
+    <g transform="translate(50, 20)">
+      <rect x="-100" y="-30" width="200" height="60" rx="5" fill="#333" />
+      <rect x="-95" y="-25" width="190" height="50" rx="3" fill="#008080" />
+      
+      <!-- Keys -->
+      <g>
+        <rect x="-85" y="-20" width="170" height="40" rx="2" fill="#20B2AA" opacity="0.7" />
+        <rect x="-80" y="-15" width="10" height="10" rx="2" fill="#fff" opacity="0.5" />
+        <rect x="-65" y="-15" width="10" height="10" rx="2" fill="#fff" opacity="0.5" />
+        <rect x="-50" y="-15" width="10" height="10" rx="2" fill="#fff" opacity="0.5" />
+        <rect x="-35" y="-15" width="10" height="10" rx="2" fill="#fff" opacity="0.5" />
+      </g>
+    </g>
+    
+    <!-- Charger -->
+    <g transform="translate(-50, -60)">
+      <rect x="-20" y="-10" width="40" height="20" rx="2" fill="#444" />
+      <rect x="-5" y="-10" width="10" height="20" fill="#20B2AA" opacity="0.8" />
+      <path d="M0,10 L0,30" stroke="#333" stroke-width="3" />
+    </g>
+  </g>
+  
+ 
+</svg>`
+    };
+    
+    // Category data - descriptions and banners
+    const categoryData = {
+        phones: {
+            title: "Mobile Phones",
+            description: "Discover our wide range of premium smartphones with cutting-edge technology.",
+            class: "phones"
+        },
+        laptops: {
+            title: "Laptops",
+            description: "Powerful laptops for work, gaming, and creative projects.",
+            class: "laptops"
+        },
+        headphones: {
+            title: "Headphones",
+            description: "Premium headphones with superior sound quality and comfort.",
+            class: "headphones"
+        },
+        earbuds: {
+            title: "Earbuds",
+            description: "Wireless earbuds for an immersive audio experience on the go.",
+            class: "earbuds"
+        },
+        tablets: {
+            title: "Tablets",
+            description: "Versatile tablets perfect for work, creativity, and entertainment.",
+            class: "tablets"
+        },
+        smartwatches: {
+            title: "Smartwatches",
+            description: "Stay connected and track your fitness with our smartwatch collection.",
+            class: "smartwatches"
+        },
+        gaming: {
+            title: "Gaming",
+            description: "Level up your gaming experience with our premium gaming products.",
+            class: "gaming"
+        },
+        accessories: {
+            title: "Accessories",
+            description: "Essential accessories to enhance your tech experience.",
+            class: "accessories"
+        }
+    };
+    
+    // Products database - this would normally come from a backend API
+    const allProducts = [
+        // Phones category
+        {
+            id: "p1",
+            name: "TechNest iPhone 16 Pro Max",
+            price: 219999,
+            oldPrice: 225999,
+            image: "images/iphone16W.png",
+            category: "phones",
+            rating: 4.5,
+            reviews: 120,
+            description: "The latest iPhone with A17 Pro chip, 48MP camera system, and stunning Super Retina XDR display.",
+            features: ["6.7-inch display", "A17 Pro chip", "48MP camera", "Up to 29 hours video playback"],
+            variations: ["Titanium Black", "Titanium White", "Titanium Blue"],
+            hasColors: true,
+            isNew: true,
+            isBestseller: false,
+            quantity: 15
+        },
+        {
+            id: "p2",
+            name: "TechNest Galaxy S25 Ultra",
+            price: 199999,
+            oldPrice: 209999,
+            image: "images/s25.png",
+            category: "phones",
+            rating: 4.7,
+            reviews: 98,
+            description: "Flagship Android smartphone with 200MP camera, 8K video recording, and powerful Snapdragon processor.",
+            features: ["6.8-inch Dynamic AMOLED", "Snapdragon 8 Gen 3", "200MP camera", "5000mAh battery"],
+            variations: ["Cosmic Black", "Phantom Silver", "Emerald Green"],
+            hasColors: true,
+            isNew: true,
+            isBestseller: false,
+            quantity: 12
+        },
+        {
+            id: "p3",
+            name: "TechNest Pixel 9 Pro",
+            price: 129999,
+            oldPrice: 139999,
+            image: "images/pixel9.png",
+            category: "phones",
+            rating: 4.6,
+            reviews: 75,
+            description: "Google's flagship phone with exceptional camera capabilities and pure Android experience.",
+            features: ["6.5-inch OLED display", "Google Tensor G4", "50MP main camera", "24-hour battery life"],
+            variations: ["Obsidian", "Snow", "Hazel"],
+            hasColors: true,
+            isNew: false,
+            isBestseller: true,
+            quantity: 8
+        },
+        {
+            id: "p4",
+            name: "TechNest Nothing Phone 3",
+            price: 89999,
+            oldPrice: 95999,
+            image: "images/nothing3.png",
+            category: "phones",
+            rating: 4.3,
+            reviews: 62,
+            description: "Innovative design with transparent back, Glyph interface, and clean Android experience.",
+            features: ["6.5-inch AMOLED display", "Snapdragon 8 Gen 2", "50MP Sony sensor", "Glyph Interface 2.0"],
+            variations: ["Clear White", "Matte Black"],
+            hasColors: true,
+            isNew: true,
+            isBestseller: false,
+            quantity: 20
+        },
+        {
+            id: "p5",
+            name: "TechNest iPhone 16",
+            price: 159999,
+            oldPrice: 169999,
+            image: "images/iphone16.png",
+            category: "phones",
+            rating: 4.4,
+            reviews: 89,
+            description: "Apple's newest iPhone with powerful performance, excellent camera, and iOS ecosystem.",
+            features: ["6.1-inch display", "A17 chip", "Dual 12MP camera", "All-day battery life"],
+            variations: ["White", "Black", "Blue", "Product Red"],
+            hasColors: true,
+            isNew: true,
+            isBestseller: false,
+            quantity: 25
+        },
+        
+        // Headphones category
+        {
+            id: "h1",
+            name: "TechNest Bass Boost 2.0",
+            price: 68000,
+            oldPrice: 70000,
+            image: "images/headphone1.png",
+            category: "headphones",
+            rating: 5.0,
+            reviews: 245,
+            description: "Premium over-ear headphones with active noise cancellation and exceptional sound quality.",
+            features: ["Active Noise Cancellation", "40mm drivers", "50-hour battery life", "Premium leather cushions"],
+            variations: ["Matte Black", "Silver", "Midnight Blue"],
+            hasColors: true,
+            isNew: false,
+            isBestseller: true,
+            quantity: 18
+        },
+        {
+            id: "h2",
+            name: "TechNest SoundMax Pro",
+            price: 54999,
+            oldPrice: 59999,
+            image: "images/headphone2.png",
+            category: "headphones",
+            rating: 4.7,
+            reviews: 178,
+            description: "Over-ear headphones with premium audio clarity and spatial sound technology.",
+            features: ["Spatial Audio", "45mm titanium drivers", "40-hour battery life", "Memory foam ear cups"],
+            variations: [], // No color variations
+            hasColors: false,
+            isNew: false,
+            isBestseller: true,
+            quantity: 15
+        },
+        {
+            id: "h3",
+            name: "TechNest Studio Pro",
+            price: 75999,
+            oldPrice: 82999,
+            image: "images/headphone3.png",
+            category: "headphones",
+            rating: 4.8,
+            reviews: 112,
+            description: "Professional studio headphones with high-resolution audio and premium build quality.",
+            features: ["Hi-Res Audio certified", "50mm beryllium drivers", "Wired connection", "Precision sound"],
+            variations: [], // No color variations
+            hasColors: false,
+            isNew: true,
+            isBestseller: false,
+            quantity: 10
+        },
+        {
+            id: "h4",
+            name: "TechNest Active Sport",
+            price: 42999,
+            oldPrice: 47999,
+            image: "images/headphone4.png",
+            category: "headphones",
+            rating: 4.5,
+            reviews: 98,
+            description: "Sweat-resistant headphones designed for active lifestyles and intense workouts.",
+            features: ["IPX5 water resistance", "Secure fit", "30-hour battery life", "Quick charge"],
+            variations: ["Black", "Neon Yellow"],
+            hasColors: true,
+            isNew: false,
+            isBestseller: false,
+            quantity: 22
+        },
+        
+        // Earbuds category
+        {
+            id: "e1",
+            name: "TechNest AirDots Pro",
+            price: 24999,
+            oldPrice: 27999,
+            image: "images/earbud1.png",
+            category: "earbuds",
+            rating: 4.6,
+            reviews: 210,
+            description: "Premium wireless earbuds with active noise cancellation and crystal-clear sound.",
+            features: ["ANC technology", "24-hour battery", "Wireless charging", "Touch controls"],
+            variations: ["White", "Black", "Blue"],
+            hasColors: true,
+            isNew: true,
+            isBestseller: false,
+            quantity: 30
+        },
+        {
+            id: "e2",
+            name: "TechNest BassBuds",
+            price: 16999,
+            oldPrice: 19999,
+            image: "images/earbud2.png",
+            category: "earbuds",
+            rating: 4.4,
+            reviews: 165,
+            description: "Wireless earbuds with enhanced bass and long battery life for music enthusiasts.",
+            features: ["Deep bass", "20-hour battery", "IPX4 water resistance", "Bluetooth 5.2"],
+            variations: [], // No color variations
+            hasColors: false,
+            isNew: false,
+            isBestseller: true,
+            quantity: 25
+        },
+        {
+            id: "e3",
+            name: "TechNest Sport Wireless",
+            price: 12999,
+            oldPrice: 14999,
+            image: "images/earbud3.png",
+            category: "earbuds",
+            rating: 4.3,
+            reviews: 142,
+            description: "Sport-focused wireless earbuds with secure fit and sweat resistance for workouts.",
+            features: ["Secure ear hooks", "IPX6 water resistance", "15-hour battery", "Quick charge"],
+            variations: ["Black/Red", "White/Blue"],
+            hasColors: true,
+            isNew: false,
+            isBestseller: false,
+            quantity: 40
+        },
+        
+        // Laptops category
+        {
+            id: "l1",
+            name: "TechNest MacBook Pro 16",
+            price: 349999,
+            oldPrice: 369999,
+            image: "images/laptop1.png",
+            category: "laptops",
+            rating: 4.9,
+            reviews: 132,
+            description: "Powerful MacBook Pro with M3 chip, stunning Retina display, and all-day battery life.",
+            features: ["16-inch Retina display", "M3 Pro/Max chip", "Up to 32GB RAM", "Up to 8TB storage"],
+            variations: ["Space Gray", "Silver"],
+            hasColors: true,
+            isNew: true,
+            isBestseller: false,
+            quantity: 12
+        },
+        {
+            id: "l2",
+            name: "TechNest UltraBook X1",
+            price: 219999,
+            oldPrice: 229999,
+            image: "images/laptop2.png",
+            category: "laptops",
+            rating: 4.7,
+            reviews: 98,
+            description: "Ultra-thin and lightweight laptop with premium performance for professionals.",
+            features: ["14-inch 4K display", "Intel Core i7", "16GB RAM", "1TB SSD"],
+            variations: [], // No color variations
+            hasColors: false,
+            isNew: false,
+            isBestseller: true,
+            quantity: 15
+        },
+        {
+            id: "l3",
+            name: "TechNest Gaming Beast",
+            price: 289999,
+            oldPrice: 309999,
+            image: "images/laptop3.png",
+            category: "laptops",
+            rating: 4.8,
+            reviews: 118,
+            description: "High-performance gaming laptop with RTX graphics and high refresh rate display.",
+            features: ["17.3-inch 165Hz display", "AMD Ryzen 9", "RTX 4080", "32GB RAM"],
+            variations: [], // No color variations
+            hasColors: false,
+            isNew: true,
+            isBestseller: false,
+            quantity: 10
+        },
+        {
+            id: "l4",
+            name: "TechNest Chromebook Plus",
+            price: 79999,
+            oldPrice: 84999,
+            image: "images/laptop4.png",
+            category: "laptops",
+            rating: 4.5,
+            reviews: 87,
+            description: "Affordable Chromebook with excellent battery life and premium build quality.",
+            features: ["13.3-inch FHD display", "Intel Core i3", "8GB RAM", "128GB storage"],
+            variations: ["Silver", "Midnight Blue"],
+            hasColors: true,
+            isNew: false,
+            isBestseller: false,
+            quantity: 20
+        },
+        
+        // Tablets category
+        {
+            id: "t1",
+            name: "TechNest iPad Pro 12.9",
+            price: 189999,
+            oldPrice: 199999,
+            image: "images/tablet1.png",
+            category: "tablets",
+            rating: 4.9,
+            reviews: 156,
+            description: "Powerful iPad Pro with M2 chip, stunning Liquid Retina XDR display, and Apple Pencil support.",
+            features: ["12.9-inch Liquid Retina XDR", "M2 chip", "Face ID", "All-day battery"],
+            variations: ["Space Gray", "Silver"],
+            hasColors: true,
+            isNew: true,
+            isBestseller: false,
+            quantity: 15
+        },
+        {
+            id: "t2",
+            name: "TechNest Galaxy Tab Ultra",
+            price: 119999,
+            oldPrice: 129999,
+            image: "images/tablet2.png",
+            category: "tablets",
+            rating: 4.7,
+            reviews: 124,
+            description: "Premium Android tablet with S Pen support, vibrant AMOLED display, and powerful performance.",
+            features: ["11-inch AMOLED", "Snapdragon 8 Gen 2", "8GB RAM", "256GB storage"],
+            variations: [], // No color variations
+            hasColors: false,
+            isNew: false,
+            isBestseller: true,
+            quantity: 18
+        },
+        {
+            id: "t3",
+            name: "TechNest Budget Tab",
+            price: 39999,
+            oldPrice: 44999,
+            image: "images/tablet3.png",
+            category: "tablets",
+            rating: 4.4,
+            reviews: 98,
+            description: "Affordable tablet with solid performance for everyday tasks and entertainment.",
+            features: ["10.1-inch display", "MediaTek processor", "4GB RAM", "64GB storage"],
+            variations: [], // No color variations
+            hasColors: false,
+            isNew: false,
+            isBestseller: false,
+            quantity: 25
+        },
+        
+        // Smartwatches category
+        {
+            id: "sw1",
+            name: "TechNest Watch Series 9",
+            price: 79999,
+            oldPrice: 84999,
+            image: "images/smartwatch1.png",
+            category: "smartwatches",
+            rating: 4.8,
+            reviews: 145,
+            description: "Advanced smartwatch with health monitoring, GPS, and stunning always-on display.",
+            features: ["ECG monitoring", "Blood oxygen sensor", "Always-on display", "18-hour battery"],
+            variations: ["Silver", "Black", "Gold"],
+            hasColors: true,
+            isNew: true,
+            isBestseller: false,
+            quantity: 20
+        },
+        {
+            id: "sw2",
+            name: "TechNest Fitness Pro",
+            price: 44999,
+            oldPrice: 49999,
+            image: "images/smartwatch2.png",
+            category: "smartwatches",
+            rating: 4.6,
+            reviews: 128,
+            description: "Fitness-focused smartwatch with advanced workout tracking and durable design.",
+            features: ["Heart rate monitoring", "GPS tracking", "50+ workout modes", "7-day battery"],
+            variations: [], // No color variations
+            hasColors: false,
+            isNew: false,
+            isBestseller: true,
+            quantity: 25
+        },
+        {
+            id: "sw3",
+            name: "TechNest Smart Band",
+            price: 12999,
+            oldPrice: 14999,
+            image: "images/smartwatch3.png",
+            category: "smartwatches",
+            rating: 4.5,
+            reviews: 185,
+            description: "Affordable smart band with essential health and fitness tracking features.",
+            features: ["Heart rate monitor", "Step tracking", "Sleep analysis", "14-day battery"],
+            variations: ["Black", "Blue", "Red"],
+            hasColors: true,
+            isNew: false,
+            isBestseller: false,
+            quantity: 35
+        },
+        
+        // Gaming category
+        {
+            id: "g1",
+            name: "TechNest Edge PS5",
+            price: 75000,
+            oldPrice: 79999,
+            image: "images/ps5.png",
+            category: "gaming",
+            rating: 4.9,
+            reviews: 215,
+            description: "Next-generation gaming console with ultra-fast SSD, ray tracing, and immersive controller.",
+            features: ["Custom AMD Ryzen CPU", "10.28 TFLOPs GPU", "825GB SSD", "4K gaming at up to 120fps"],
+            variations: [], // No color variations
+            hasColors: false,
+            isNew: false,
+            isBestseller: true,
+            quantity: 10
+        },
+        {
+            id: "g2",
+            name: "TechNest Xbox Series X",
+            price: 69999,
+            oldPrice: 74999,
+            image: "images/xbox.png",
+            category: "gaming",
+            rating: 4.8,
+            reviews: 198,
+            description: "Powerful gaming console with fast load times, high frame rates, and Game Pass.",
+            features: ["12 TFLOPs GPU", "1TB SSD", "4K gaming", "Quick Resume"],
+            variations: [], // No color variations
+            hasColors: false,
+            isNew: false,
+            isBestseller: false,
+            quantity: 12
+        },
+        {
+            id: "g3",
+            name: "TechNest Gaming Controller Pro",
+            price: 12999,
+            oldPrice: 14999,
+            image: "images/controller.png",
+            category: "gaming",
+            rating: 4.7,
+            reviews: 156,
+            description: "Premium gaming controller with customizable buttons and excellent ergonomics.",
+            features: ["Programmable buttons", "Wireless", "Adjustable triggers", "20-hour battery"],
+            variations: ["Black", "White", "Red"],
+            hasColors: true,
+            isNew: true,
+            isBestseller: false,
+            quantity: 30
+        },
+        {
+            id: "g4",
+            name: "TechNest VR Headset",
+            price: 59999,
+            oldPrice: 64999,
+            image: "images/vr.png",
+            category: "gaming",
+            rating: 4.6,
+            reviews: 124,
+            description: "Immersive VR headset with high-resolution display and motion tracking.",
+            features: ["4K resolution per eye", "120Hz refresh rate", "6DOF tracking", "Wi-Fi 6"],
+            variations: [], // No color variations
+            hasColors: false,
+            isNew: true,
+            isBestseller: false,
+            quantity: 15
+        },
+        
+        // Accessories category
+        {
+            id: "a1",
+            name: "TechNest Gaming Mouse",
+            price: 4500,
+            oldPrice: 5200,
+            image: "images/mouse.png",
+            category: "accessories",
+            rating: 4.7,
+            reviews: 175,
+            description: "High-precision gaming mouse with customizable RGB lighting and programmable buttons.",
+            features: ["25,000 DPI sensor", "8 programmable buttons", "RGB lighting", "Lightweight design"],
+            variations: ["Black", "White"],
+            hasColors: true,
+            isNew: false,
+            isBestseller: false,
+            quantity: 35
+        },
+        {
+            id: "a2",
+            name: "TechNest Mechanical Keyboard",
+            price: 9999,
+            oldPrice: 11999,
+            image: "images/keyboard.png",
+            category: "accessories",
+            rating: 4.8,
+            reviews: 145,
+            description: "Premium mechanical keyboard with RGB lighting and customizable switches.",
+            features: ["Cherry MX switches", "Per-key RGB", "Aluminum frame", "Programmable macros"],
+            variations: [], // No color variations
+            hasColors: false,
+            isNew: true,
+            isBestseller: false,
+            quantity: 25
+        },
+        {
+            id: "a3",
+            name: "TechNest Ultra Dock",
+            price: 8499,
+            oldPrice: 9999,
+            image: "images/dock.png",
+            category: "accessories",
+            rating: 4.6,
+            reviews: 112,
+            description: "Versatile USB-C dock with multiple ports for expanded connectivity.",
+            features: ["HDMI output", "Ethernet port", "SD card reader", "USB-A and USB-C ports"],
+            variations: [], // No color variations
+            hasColors: false,
+            isNew: false,
+            isBestseller: true,
+            quantity: 20
+        },
+        {
+            id: "a4",
+            name: "TechNest Fast Charge Pro",
+            price: 2999,
+            oldPrice: 3499,
+            image: "images/charger.png",
+            category: "accessories",
+            rating: 4.5,
+            reviews: 135,
+            description: "65W GaN charger with multiple ports for fast charging multiple devices.",
+            features: ["65W output", "3 USB ports", "Compact size", "Universal compatibility"],
+            variations: ["White", "Black"],
+            hasColors: true,
+            isNew: false,
+            isBestseller: false,
+            quantity: 40
+        },
+        {
+            id: "a5",
+            name: "TechNest Premium Laptop Bag",
+            price: 3999,
+            oldPrice: 4599,
+            image: "images/bag.png",
+            category: "accessories",
+            rating: 4.4,
+            reviews: 89,
+            description: "Stylish and protective laptop bag with multiple compartments and water resistance.",
+            features: ["Fits up to 16-inch laptops", "Water-resistant", "RFID protection", "Padded straps"],
+            variations: [], // No color variations
+            hasColors: false,
+            isNew: false,
+            isBestseller: false,
+            quantity: 30
+        }
+    ];
     
     // Update cart and wishlist counts
     updateCartCount();
     updateWishlistCount();
     
-    // Set up DOM element constants
-    const cartBtn = document.getElementById('cartBtn');
-    const wishlistBtn = document.getElementById('wishlistBtn');
-    const cartSidebar = document.getElementById('cartSidebar');
-    const wishlistSidebar = document.getElementById('wishlistSidebar');
-    const closeCart = document.querySelector('.close-cart');
-    const closeWishlist = document.querySelector('.close-wishlist');
-    const overlay = document.getElementById('overlay');
-    const menuIcon = document.getElementById('menuIcon');
-    const closeMenu = document.getElementById('closeMenu');
-    const navLinks = document.getElementById('navLinks');
-    const clearWishlistBtn = document.querySelector('.clear-wishlist-btn');
-    const continueShoppingBtn = document.querySelector('.continue-shopping');
+    // Initialize the page
+    init();
     
-    // Category-specific elements
-    const sortBySelect = document.getElementById('sort-by');
-    const priceRangeSelect = document.getElementById('price-range');
-    const productsGrid = document.getElementById('category-products-grid');
-    const paginationContainer = document.querySelector('.pagination');
-    
-    // Event listeners for mobile menu
-    if (menuIcon) {
-        menuIcon.addEventListener('click', () => {
-            navLinks.style.right = '0';
-            overlay.style.display = 'block';
-    }
-    
-    if (closeMenu) {
-        closeMenu.addEventListener('click', () => {
-            navLinks.style.right = '-300px';
-            overlay.style.display = 'none';
-        });
-    }
-    
-    // Event listeners for cart sidebar
-    if (cartBtn) {
-        cartBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            cartSidebar.style.right = '0';
-            overlay.style.display = 'block';
-            updateCartUI();
-        });
-    }
-    
-    if (closeCart) {
-        closeCart.addEventListener('click', () => {
-            cartSidebar.style.right = '-400px';
-            overlay.style.display = 'none';
-        });
-    }
-    
-    if (continueShoppingBtn) {
-        continueShoppingBtn.addEventListener('click', () => {
-            cartSidebar.style.right = '-400px';
-            overlay.style.display = 'none';
-        });
-    }
-    
-    // Event listeners for wishlist sidebar
-    if (wishlistBtn) {
-        wishlistBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            wishlistSidebar.style.right = '0';
-            overlay.style.display = 'block';
-            updateWishlistUI();
-        });
-    }
-    
-    if (closeWishlist) {
-        closeWishlist.addEventListener('click', () => {
-            wishlistSidebar.style.right = '-400px';
-            overlay.style.display = 'none';
-        });
-    }
-    
-    if (clearWishlistBtn) {
-        clearWishlistBtn.addEventListener('click', clearWishlist);
-    }
-    
-    // Overlay click handler
-    if (overlay) {
-        overlay.addEventListener('click', () => {
-            if (cartSidebar) cartSidebar.style.right = '-400px';
-            if (wishlistSidebar) wishlistSidebar.style.right = '-400px';
-            if (navLinks && window.innerWidth <= 768) navLinks.style.right = '-300px';
-            
-            // Close modals
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => {
-                modal.style.display = 'none';
-            });
-            
-            overlay.style.display = 'none';
-        });
-    }
-    
-    // Load category content if a valid category is specified
-    if (categoryParam && categoryData[categoryParam]) {
-        loadCategoryContent(categoryParam);
-    } else {
-        // Redirect to categories page if category not found
-        window.location.href = 'categories.html';
-    }
-    
-    // Function to load category content
-    function loadCategoryContent(category) {
-        const data = categoryData[category];
-        
-        // Update page title with category name
-        document.title = `TechNest - ${data.name}`;
-        
-        // Update breadcrumb
-        const categoryNameElement = document.getElementById('category-name');
-        if (categoryNameElement) {
-            categoryNameElement.textContent = data.name;
-        }
-        
-        // Update banner content
-        const categoryTitleElement = document.getElementById('category-title');
-        const categoryDescriptionElement = document.getElementById('category-description');
-        
-        if (categoryTitleElement) {
-            categoryTitleElement.textContent = data.title;
-        }
-        
-        if (categoryDescriptionElement) {
-            categoryDescriptionElement.textContent = data.description;
-        }
-        
-        // Update category info
-        const categoryImageElement = document.getElementById('category-image');
-        const categoryNameTextElement = document.getElementById('category-name-text');
-        const categoryLongDescriptionElement = document.getElementById('category-long-description');
-        const categoryFeaturesElement = document.getElementById('category-features');
-        
-        if (categoryImageElement) {
-            categoryImageElement.src = data.image;
-            categoryImageElement.alt = data.name;
-        }
-        
-        if (categoryNameTextElement) {
-            categoryNameTextElement.textContent = data.name;
-        }
-        
-        if (categoryLongDescriptionElement) {
-            categoryLongDescriptionElement.textContent = data.longDescription;
-        }
-        
-        if (categoryFeaturesElement) {
-            categoryFeaturesElement.innerHTML = '';
-            
-            data.features.forEach(feature => {
-                const li = document.createElement('li');
-                li.innerHTML = `<i class="fas fa-check"></i> ${feature}`;
-                categoryFeaturesElement.appendChild(li);
-            });
-        }
-        
-        // Update products title
-        const productsTitleElement = document.getElementById('products-title');
-        if (productsTitleElement) {
-            productsTitleElement.textContent = `${data.name} Products`;
-        }
-        
-        // Load products with simulated loading delay for better UX
-        setTimeout(() => {
-            loadProducts(data.products);
-        }, 800);
-        
-        // Load related categories
-        loadRelatedCategories(category);
-    }
-    
-    // Function to load products
-    function loadProducts(products) {
-        if (!productsGrid) return;
-        
-        // Clear loading spinner
-        productsGrid.innerHTML = '';
-        
-        if (products.length === 0) {
-            // Display no products message
-            productsGrid.innerHTML = `
-                <div class="no-products">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <p>No products found in this category.</p>
-                </div>
-            `;
+    function init() {
+        if (!categoryParam || !categoryData[categoryParam]) {
+            // Show "Category not found" message or redirect to categories page
+            showCategoryNotFound();
             return;
         }
         
-        // Add products to grid
-        products.forEach(product => {
-            const productCard = document.createElement('div');
-            productCard.className = 'product-card';
-            productCard.dataset.id = product.id;
-            productCard.dataset.name = product.name;
-            productCard.dataset.price = product.price;
-            productCard.dataset.image = product.image;
-            productCard.dataset.description = product.description;
-            productCard.dataset.stock = product.stock;
-            
-            // Generate rating stars HTML
-            let ratingStars = '';
-            const fullStars = Math.floor(product.rating);
-            const hasHalfStar = product.rating % 1 !== 0;
-            
-            for (let i = 0; i < fullStars; i++) {
-                ratingStars += '<i class="fas fa-star"></i>';
-            }
-            
-            if (hasHalfStar) {
-                ratingStars += '<i class="fas fa-star-half-alt"></i>';
-            }
-            
-            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-            for (let i = 0; i < emptyStars; i++) {
-                ratingStars += '<i class="far fa-star"></i>';
-            }
-            
-            // Set badge class based on badge type
-            let badgeClass = '';
-            if (product.badge) {
-                badgeClass = product.badge.toLowerCase();
-                if (badgeClass === 'new') {
-                    badgeClass = 'new-badge';
-                } else if (badgeClass === 'bestseller') {
-                    badgeClass = 'bestseller';
-                } else if (badgeClass === 'sale') {
-                    badgeClass = 'sale';
-                }
-            }
-            
-            // Set product card HTML
-            productCard.innerHTML = `
-                ${product.badge ? `<div class="product-badge ${badgeClass}">${product.badge}</div>` : ''}
-                <div class="product-image">
-                    <img src="${product.image}" alt="${product.name}">
-                    <div class="product-actions">
-                        <a href="#" class="quick-view"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="add-to-wishlist"><i class="${wishlist.some(item => item.id === product.id) ? 'fas' : 'far'} fa-heart"></i></a>
-                        <a href="#" class="add-to-cart"><i class="fas fa-shopping-cart"></i></a>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <h3>${product.name}</h3>
-                    <div class="product-rating">
-                        ${ratingStars}
-                        <span>(${product.ratingCount})</span>
-                    </div>
-                    <div class="product-price">
-                        <span class="current-price">৳${product.price.toLocaleString('en-IN')}</span>
-                        ${product.oldPrice ? `<span class="old-price">৳${product.oldPrice.toLocaleString('en-IN')}</span>` : ''}
-                    </div>
-                    <div class="product-stock">
-                        <span class="${product.stock > 10 ? 'in-stock' : product.stock > 0 ? 'low-stock' : 'out-of-stock'}">
-                            ${product.stock > 10 ? 'In Stock' : product.stock > 0 ? `Low Stock (${product.stock} left)` : 'Out of Stock'}
-                        </span>
-                    </div>
-                </div>
-            `;
-            
-            productsGrid.appendChild(productCard);
-            
-            // Add event listeners to action buttons
-            const quickViewBtn = productCard.querySelector('.quick-view');
-            const addToCartBtn = productCard.querySelector('.add-to-cart');
-            const addToWishlistBtn = productCard.querySelector('.add-to-wishlist');
-            
-            if (quickViewBtn) {
-                quickViewBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    openQuickView(productCard);
-                });
-            }
-            
-            if (addToCartBtn) {
-                addToCartBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    addToCart(productCard);
-                });
-            }
-            
-            if (addToWishlistBtn) {
-                addToWishlistBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    toggleWishlist(productCard);
-                });
-            }
-        });
+        // Set up page for the selected category
+        setupCategoryPage(categoryParam);
         
-        // Setup pagination
-        setupPagination(products.length);
+        // Set up event listeners
+        setupEventListeners();
         
-        // Initialize sort and filter functionality
-        initSortAndFilter();
+        // Load products for the selected category
+        loadCategoryProducts(categoryParam);
+        
+        // Load related categories
+        loadRelatedCategories(categoryParam);
     }
     
-    // Function to setup pagination
-    function setupPagination(totalProducts) {
-        if (!paginationContainer) return;
+    function setupCategoryPage(category) {
+        const data = categoryData[category];
         
-        // Clear existing pagination
-        paginationContainer.innerHTML = '';
+        // Update page title and description
+        document.title = `TechNest - ${data.title}`;
+        categoryTitle.textContent = data.title;
+        categoryDescription.textContent = data.description;
+        categoryNameBreadcrumb.textContent = data.title;
         
-        // Calculate total pages (8 products per page)
-        const productsPerPage = 8;
-        const totalPages = Math.ceil(totalProducts / productsPerPage);
+        // Add category-specific class to banner for custom styling
+        categoryBanner.classList.add(data.class);
         
-        // Add prev button
-        if (totalPages > 1) {
-            const prevBtn = document.createElement('button');
-            prevBtn.className = 'page-btn prev';
-            prevBtn.setAttribute('aria-label', 'Previous Page');
-            prevBtn.innerHTML = '<i class="fas fa-angle-left"></i>';
-            prevBtn.addEventListener('click', () => {
-                // Logic for previous page
-                const activePage = parseInt(document.querySelector('.page-btn.active').textContent);
-                if (activePage > 1) {
-                    document.querySelector(`.page-btn[data-page="${activePage - 1}"]`).click();
-                }
-            });
-            paginationContainer.appendChild(prevBtn);
-        }
-        
-        // Add page buttons
-        for (let i = 1; i <= totalPages; i++) {
-            const pageBtn = document.createElement('button');
-            pageBtn.className = 'page-btn' + (i === 1 ? ' active' : '');
-            pageBtn.textContent = i;
-            pageBtn.dataset.page = i;
-            pageBtn.addEventListener('click', function() {
-                // Remove active class from all buttons
-                document.querySelectorAll('.page-btn').forEach(btn => btn.classList.remove('active'));
-                // Add active class to clicked button
-                this.classList.add('active');
-                
-                // Show/hide products based on page
-                const productCards = document.querySelectorAll('.product-card');
-                const startIndex = (i - 1) * productsPerPage;
-                const endIndex = startIndex + productsPerPage;
-                
-                productCards.forEach((card, index) => {
-                    if (index >= startIndex && index < endIndex) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-                
-                // Scroll to top of products section
-                document.getElementById('category-products-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-            paginationContainer.appendChild(pageBtn);
-        }
-        
-        // Add next button
-        if (totalPages > 1) {
-            const nextBtn = document.createElement('button');
-            nextBtn.className = 'page-btn next';
-            nextBtn.setAttribute('aria-label', 'Next Page');
-            nextBtn.innerHTML = '<i class="fas fa-angle-right"></i>';
-            nextBtn.addEventListener('click', () => {
-                // Logic for next page
-                const activePage = parseInt(document.querySelector('.page-btn.active').textContent);
-                if (activePage < totalPages) {
-                    document.querySelector(`.page-btn[data-page="${activePage + 1}"]`).click();
-                }
-            });
-            paginationContainer.appendChild(nextBtn);
-        }
-        
-        // Initial pagination setup - show only first page
-        const productCards = document.querySelectorAll('.product-card');
-        productCards.forEach((card, index) => {
-            if (index < productsPerPage) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
+        // Add SVG banner if available
+        if (svgBanners[category]) {
+            // First clear any existing SVG
+            const existingSvg = categoryBanner.querySelector('.svg-background');
+            if (existingSvg) {
+                existingSvg.remove();
             }
-        });
+            
+            // Create SVG container and add to banner
+            const svgContainer = document.createElement('div');
+            svgContainer.className = 'svg-background';
+            svgContainer.innerHTML = svgBanners[category];
+            categoryBanner.insertBefore(svgContainer, categoryBanner.firstChild);
+        }
+        
+        // Add product count to the banner
+        const categoryProducts = allProducts.filter(product => product.category === category);
+        const productCountBadge = document.createElement('div');
+        productCountBadge.className = 'product-count-badge';
+        productCountBadge.textContent = `${categoryProducts.length} Products`;
+        
+        // Check if productCountBadge already exists
+        const existingBadge = categoryBanner.querySelector('.product-count-badge');
+        if (existingBadge) {
+            existingBadge.textContent = `${categoryProducts.length} Products`;
+        } else {
+            categoryDescription.insertAdjacentElement('afterend', productCountBadge);
+        }
     }
     
-    // Function to load related categories
-    function loadRelatedCategories(currentCategory) {
-        const relatedCategoriesGrid = document.getElementById('related-categories-grid');
-        
-        if (!relatedCategoriesGrid) return;
-        
-        // Clear existing content
-        relatedCategoriesGrid.innerHTML = '';
-        
-        // Get related categories for current category
-        const related = relatedCategories[currentCategory] || [];
-        
-        // Add related categories to grid
-        related.forEach(categoryId => {
-            const category = categoryData[categoryId];
-            
-            if (!category) return;
-            
-            const categoryBox = document.createElement('div');
-            categoryBox.className = 'category-box';
-            
-            categoryBox.innerHTML = `
-                <a href="category.html?category=${categoryId}">
-                    <div class="category-image">
-                        <img src="${category.image}" alt="${category.name}">
-                        <div class="category-overlay">
-                            <div class="category-content">
-                                <h2>${category.name}</h2>
-                                <p>${category.products.length} Products</p>
-                                <span class="category-btn">Shop Now</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            `;
-            
-            relatedCategoriesGrid.appendChild(categoryBox);
-        });
-    }
-    
-    // Function to initialize sort and filter functionality
-    function initSortAndFilter() {
-        if (!sortBySelect || !priceRangeSelect || !productsGrid) return;
-        
-        const productCards = Array.from(productsGrid.querySelectorAll('.product-card'));
-        
-        // Sort functionality
+    function setupEventListeners() {
+        // Sort by dropdown
         if (sortBySelect) {
-            sortBySelect.addEventListener('change', () => {
-                const sortValue = sortBySelect.value;
-                const productsArray = Array.from(productCards);
-                
-                productsArray.sort((a, b) => {
-                    const priceA = parseFloat(a.dataset.price);
-                    const priceB = parseFloat(b.dataset.price);
-                    
-                    switch (sortValue) {
-                        case 'price-asc':
-                            return priceA - priceB;
-                        case 'price-desc':
-                            return priceB - priceA;
-                        case 'newest':
-                            // Assuming newer products have higher IDs
-                            return parseInt(b.dataset.id) - parseInt(a.dataset.id);
-                        case 'popularity':
-                        default:
-                            // Use rating count as popularity metric
-                            const ratingA = parseInt(a.querySelector('.product-rating span').textContent.replace(/[()]/g, ''));
-                            const ratingB = parseInt(b.querySelector('.product-rating span').textContent.replace(/[()]/g, ''));
-                            return ratingB - ratingA;
-                    }
-                });
-                
-                // Reattach sorted products to grid
-                productsArray.forEach(product => {
-                    productsGrid.appendChild(product);
-                });
-                
-                // Reset pagination after sorting
-                // Get active page
-                const activePage = document.querySelector('.page-btn.active');
-                if (activePage) {
-                    activePage.click();
-                } else {
-                    // If no active page, click first page
-                    const firstPage = document.querySelector('.page-btn[data-page="1"]');
-                    if (firstPage) firstPage.click();
-                }
-                
-                // Show sort notification
-                showNotification(`Products sorted by ${sortBySelect.options[sortBySelect.selectedIndex].text}`, 'info');
+            sortBySelect.addEventListener('change', function() {
+                currentPage = 1;
+                loadCategoryProducts(categoryParam);
             });
         }
         
         // Price range filter
         if (priceRangeSelect) {
-            priceRangeSelect.addEventListener('change', () => {
-                const rangeValue = priceRangeSelect.value;
-                let visibleCount = 0;
-                
-                productCards.forEach(card => {
-                    const price = parseFloat(card.dataset.price);
-                    
-                    if (rangeValue === 'all') {
-                        card.style.display = '';
-                        visibleCount++;
-                        return;
-                    }
-                    
-                    // Parse price range
-                    if (rangeValue === '100000+') {
-                        if (price >= 100000) {
-                            card.style.display = '';
-                            visibleCount++;
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    } else {
-                        const [min, max] = rangeValue.split('-').map(val => parseFloat(val));
-                        if (price >= min && price <= max) {
-                            card.style.display = '';
-                            visibleCount++;
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    }
-                });
-                
-                // Update pagination based on filtered products
-                setupPagination(visibleCount);
-                
-                // Show filter notification
-                const rangeText = priceRangeSelect.options[priceRangeSelect.selectedIndex].text;
-                showNotification(`Showing ${visibleCount} products in price range: ${rangeText}`, 'info');
+            priceRangeSelect.addEventListener('change', function() {
+                currentPage = 1;
+                loadCategoryProducts(categoryParam);
+            });
+        }
+        
+        // Reset filters button
+        if (resetFiltersBtn) {
+            resetFiltersBtn.addEventListener('click', function() {
+                resetFilters();
+            });
+        }
+        
+        // Close modal button
+        if (closeModal) {
+            closeModal.addEventListener('click', function() {
+                quickViewModal.style.display = 'none';
+                overlay.style.display = 'none';
+            });
+        }
+        
+        // Cart sidebar close button
+        if (closeCart) {
+            closeCart.addEventListener('click', function() {
+                cartSidebar.style.right = '-400px';
+                overlay.style.display = 'none';
+            });
+        }
+        
+        // Continue shopping button
+        if (continueShopping) {
+            continueShopping.addEventListener('click', function() {
+                cartSidebar.style.right = '-400px';
+                overlay.style.display = 'none';
+            });
+        }
+        
+        // Wishlist sidebar close button
+        if (closeWishlist) {
+            closeWishlist.addEventListener('click', function() {
+                wishlistSidebar.style.right = '-400px';
+                overlay.style.display = 'none';
+            });
+        }
+        
+        // Clear wishlist button
+        if (clearWishlistBtn) {
+            clearWishlistBtn.addEventListener('click', function() {
+                clearWishlist();
+            });
+        }
+        
+        // Overlay click to close modals/sidebars
+        if (overlay) {
+            overlay.addEventListener('click', function() {
+                if (quickViewModal) quickViewModal.style.display = 'none';
+                if (cartSidebar) cartSidebar.style.right = '-400px';
+                if (wishlistSidebar) wishlistSidebar.style.right = '-400px';
+                overlay.style.display = 'none';
             });
         }
     }
     
-    // Quick View Modal
+    function resetFilters() {
+        // Reset filter dropdowns
+        if (sortBySelect) sortBySelect.value = 'popularity';
+        if (priceRangeSelect) priceRangeSelect.value = 'all';
+        
+        // Reset to first page and reload products
+        currentPage = 1;
+        loadCategoryProducts(categoryParam);
+        
+        // Show notification
+        showNotification('Filters have been reset', 'info');
+    }
+    
+    function loadCategoryProducts(category) {
+        // Filter products by category
+        let filteredProducts = allProducts.filter(product => product.category === category);
+        
+        // Apply price range filter
+        if (priceRangeSelect && priceRangeSelect.value !== 'all') {
+            const priceRange = priceRangeSelect.value;
+            
+            filteredProducts = filteredProducts.filter(product => {
+                const price = product.price;
+                
+                switch (priceRange) {
+                    case '0-20000':
+                        return price < 20000;
+                    case '20000-50000':
+                        return price >= 20000 && price <= 50000;
+                    case '50000-100000':
+                        return price > 50000 && price <= 100000;
+                    case '100000+':
+                        return price > 100000;
+                    default:
+                        return true;
+                }
+            });
+        }
+        
+        // Apply sorting
+        if (sortBySelect) {
+            const sortValue = sortBySelect.value;
+            
+            switch (sortValue) {
+                case 'popularity':
+                    // Sort by reviews count (as a proxy for popularity)
+                    filteredProducts.sort((a, b) => b.reviews - a.reviews);
+                    break;
+                    
+                case 'price-asc':
+                    filteredProducts.sort((a, b) => a.price - b.price);
+                    break;
+                    
+                case 'price-desc':
+                    filteredProducts.sort((a, b) => b.price - a.price);
+                    break;
+                    
+                case 'newest':
+                    // Sort by isNew flag
+                    filteredProducts.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
+                    break;
+                    
+                default:
+                    // Default to popularity
+                    filteredProducts.sort((a, b) => b.reviews - a.reviews);
+                    break;
+            }
+        }
+        
+        // Calculate pagination
+        const totalProducts = filteredProducts.length;
+        const totalPages = Math.ceil(totalProducts / itemsPerPage);
+        
+        // Get products for current page
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = Math.min(startIndex + itemsPerPage, totalProducts);
+        const currentPageProducts = filteredProducts.slice(startIndex, endIndex);
+        
+        // Display products
+        displayProducts(currentPageProducts, totalProducts);
+        
+        // Update pagination
+        updatePagination(totalPages);
+    }
+    
+    function displayProducts(products, totalCount) {
+        // Clear the product grid
+        productGrid.innerHTML = '';
+        
+        if (products.length === 0) {
+            // Show no products message
+            productGrid.innerHTML = `
+                <div class="no-products-message">
+                    <div class="no-products-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>No Products Found</h3>
+                    <p>We couldn't find any products matching your filters. Try adjusting your criteria or browse our other categories.</p>
+                    <button id="reset-search-btn" class="btn secondary-btn">Reset Filters</button>
+                </div>
+            `;
+            
+            // Add event listener to reset button
+            const resetSearchBtn = document.getElementById('reset-search-btn');
+            if (resetSearchBtn) {
+                resetSearchBtn.addEventListener('click', resetFilters);
+            }
+            
+            return;
+        }
+        
+        // Loop through products and create product cards
+        products.forEach(product => {
+            const productCard = createProductCard(product);
+            productGrid.appendChild(productCard);
+        });
+        
+        // Initialize wishlist icons
+        initializeWishlistIcons();
+        
+        // Setup event listeners for product cards
+        setupProductCardEventListeners();
+    }
+    
+    function createProductCard(product) {
+        const productCard = document.createElement('div');
+        productCard.className = 'product-card';
+        productCard.dataset.id = product.id;
+        productCard.dataset.name = product.name;
+        productCard.dataset.price = product.price;
+        productCard.dataset.image = product.image;
+        productCard.dataset.category = product.category;
+        productCard.dataset.hasColors = product.hasColors; // Adding hasColors to data attributes
+        
+        // Create badge if product is new or bestseller
+        let badgeHTML = '';
+        if (product.isNew) {
+            badgeHTML = '<div class="product-badge">New</div>';
+        } else if (product.isBestseller) {
+            badgeHTML = '<div class="product-badge bestseller">Bestseller</div>';
+        }
+        
+        // Calculate discount percentage if old price exists
+        if (product.oldPrice) {
+            const discountPercent = Math.round((product.oldPrice - product.price) / product.oldPrice * 100);
+            if (discountPercent >= 10) {
+                badgeHTML = `<div class="product-badge sale">-${discountPercent}%</div>`;
+            }
+        }
+        
+        // Create rating stars
+        const fullStars = Math.floor(product.rating);
+        const hasHalfStar = product.rating % 1 >= 0.5;
+        
+        let ratingHTML = '';
+        for (let i = 0; i < fullStars; i++) {
+            ratingHTML += '<i class="fas fa-star"></i>';
+        }
+        
+        if (hasHalfStar) {
+            ratingHTML += '<i class="fas fa-star-half-alt"></i>';
+        }
+        
+        const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+        for (let i = 0; i < emptyStars; i++) {
+            ratingHTML += '<i class="far fa-star"></i>';
+        }
+        
+        // Format price with commas
+        const formattedPrice = product.price.toLocaleString('en-IN');
+        const formattedOldPrice = product.oldPrice ? product.oldPrice.toLocaleString('en-IN') : '';
+        
+        // Create HTML for old price if it exists
+        const oldPriceHTML = product.oldPrice ? `<span class="old-price">৳${formattedOldPrice}</span>` : '';
+        
+        // Check if product is in wishlist
+        const isInWishlist = wishlist.some(item => item.id === product.id);
+        const wishlistIconClass = isInWishlist ? 'fas' : 'far';
+        
+        productCard.innerHTML = `
+            ${badgeHTML}
+            <div class="product-image">
+                <img src="${product.image}" alt="${product.name}">
+                <div class="product-actions">
+                    <a href="#" class="quick-view"><i class="fas fa-eye"></i></a>
+                    <a href="#" class="add-to-wishlist"><i class="${wishlistIconClass} fa-heart"></i></a>
+                    <a href="#" class="add-to-cart"><i class="fas fa-shopping-cart"></i></a>
+                </div>
+            </div>
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <div class="product-rating">
+                    ${ratingHTML}
+                    <span>(${product.reviews})</span>
+                </div>
+                <div class="product-price">
+                    <span class="current-price">৳${formattedPrice}</span>
+                    ${oldPriceHTML}
+                </div>
+            </div>
+        `;
+        
+        return productCard;
+    }
+    
+    function setupProductCardEventListeners() {
+        // Quick View buttons
+        document.querySelectorAll('.product-card .quick-view').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productCard = this.closest('.product-card');
+                if (productCard) {
+                    openQuickView(productCard);
+                }
+            });
+        });
+        
+        // Add to Cart buttons
+        document.querySelectorAll('.product-card .add-to-cart').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productCard = this.closest('.product-card');
+                if (productCard) {
+                    addToCart(productCard);
+                }
+            });
+        });
+        
+        // Add to Wishlist buttons
+        document.querySelectorAll('.product-card .add-to-wishlist').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productCard = this.closest('.product-card');
+                if (productCard) {
+                    toggleWishlist(productCard);
+                }
+            });
+        });
+    }
+    
+    function updatePagination(totalPages) {
+        // Clear pagination container
+        paginationContainer.innerHTML = '';
+        
+        // Don't show pagination if there's only one page
+        if (totalPages <= 1) {
+            return;
+        }
+        
+        // Add prev button
+        const prevBtn = document.createElement('button');
+        prevBtn.className = `page-btn prev ${currentPage === 1 ? 'disabled' : ''}`;
+        prevBtn.innerHTML = '<i class="fas fa-angle-left"></i>';
+        prevBtn.disabled = currentPage === 1;
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                loadCategoryProducts(categoryParam);
+                
+                // Scroll to top of product grid
+                productGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+        paginationContainer.appendChild(prevBtn);
+        
+        // Determine page buttons to show
+        let startPage = Math.max(1, currentPage - 2);
+        let endPage = Math.min(totalPages, startPage + 4);
+        
+        if (endPage - startPage < 4 && startPage > 1) {
+            startPage = Math.max(1, endPage - 4);
+        }
+        
+        // Add page buttons
+        for (let i = startPage; i <= endPage; i++) {
+            const pageBtn = document.createElement('button');
+            pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+            pageBtn.textContent = i;
+            pageBtn.addEventListener('click', () => {
+                currentPage = i;
+                loadCategoryProducts(categoryParam);
+                
+                // Scroll to top of product grid
+                productGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+            paginationContainer.appendChild(pageBtn);
+        }
+        
+        // Add next button
+        const nextBtn = document.createElement('button');
+        nextBtn.className = `page-btn next ${currentPage === totalPages ? 'disabled' : ''}`;
+        nextBtn.innerHTML = '<i class="fas fa-angle-right"></i>';
+        nextBtn.disabled = currentPage === totalPages;
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                loadCategoryProducts(categoryParam);
+                
+                // Scroll to top of product grid
+                productGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+        paginationContainer.appendChild(nextBtn);
+    }
+    
+    function loadRelatedCategories(currentCategory) {
+        // Get categories except the current one
+        const categories = Object.keys(categoryData).filter(cat => cat !== currentCategory);
+        
+        // Shuffle array to get random categories
+        const shuffledCategories = categories.sort(() => 0.5 - Math.random());
+        
+        // Take first 3 categories
+        const relatedCategories = shuffledCategories.slice(0, 3);
+        
+        // Clear the grid
+        relatedCategoriesGrid.innerHTML = '';
+        
+        // Add related category cards
+        relatedCategories.forEach(category => {
+            const categoryInfo = categoryData[category];
+            const categoryCard = document.createElement('div');
+            categoryCard.className = 'related-category-card';
+            
+            categoryCard.innerHTML = `
+                <div class="related-category-image">
+                    <img src="images/${category}.png" onerror="this.src='images/placeholder.png'" alt="${categoryInfo.title}">
+                </div>
+                <div class="related-category-content">
+                    <h3>${categoryInfo.title}</h3>
+                    <p>${getCategoryProductCount(category)} Products</p>
+                    <a href="category.html?category=${category}" class="view-category-btn">View Category</a>
+                </div>
+            `;
+            
+            relatedCategoriesGrid.appendChild(categoryCard);
+        });
+    }
+    
+    function getCategoryProductCount(category) {
+        return allProducts.filter(product => product.category === category).length;
+    }
+    
+    function showCategoryNotFound() {
+        // Update page title
+        document.title = 'TechNest - Category Not Found';
+        
+        // Update banner content
+        categoryTitle.textContent = 'Category Not Found';
+        categoryDescription.textContent = 'The requested category does not exist.';
+        
+        // Hide product grid and show error message
+        productGrid.innerHTML = `
+            <div class="no-products-message">
+                <div class="no-products-icon">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <h3>Category Not Found</h3>
+                <p>The category you're looking for doesn't exist or has been removed.</p>
+                <a href="categories.html" class="btn primary-btn">View All Categories</a>
+            </div>
+        `;
+        
+        // Hide filters and pagination
+        document.querySelector('.products-header').style.display = 'none';
+        paginationContainer.style.display = 'none';
+        
+        // Hide related categories section
+        document.querySelector('.related-categories').style.display = 'none';
+    }
+    
+    // Modal functions
     function openQuickView(productCard) {
         const modal = document.getElementById('quickViewModal');
-        const overlay = document.getElementById('overlay');
-        
-        if (!modal || !overlay || !productCard) return;
+        if (!modal || !productCard) return;
         
         // Get product data
         const productId = productCard.dataset.id;
         const productName = productCard.dataset.name;
         const productPrice = parseFloat(productCard.dataset.price);
         const productImage = productCard.dataset.image;
-        const productDescription = productCard.dataset.description || 'No description available';
-        const productStock = parseInt(productCard.dataset.stock || 0);
-        const productRating = productCard.querySelector('.product-rating').innerHTML;
-        const productOldPrice = productCard.querySelector('.old-price')?.textContent;
+        const hasColors = productCard.dataset.hasColors === 'true'; // Convert string to boolean
+        
+        // Get full product data
+        const product = allProducts.find(p => p.id === productId);
+        
+        if (!product) return;
         
         // Populate modal
-        const titleElement = modal.querySelector('h2');
-        const priceElement = modal.querySelector('.current-price');
-        const imageElement = modal.querySelector('.product-quick-view-image img');
-        const ratingElement = modal.querySelector('.product-rating');
-        const descriptionElement = modal.querySelector('.product-description p');
+        const modalImage = modal.querySelector('.product-quick-view-image img');
+        const modalTitle = modal.querySelector('h2');
+        const modalRating = modal.querySelector('.product-rating');
+        const modalPrice = modal.querySelector('.current-price');
+        const modalOldPrice = modal.querySelector('.old-price');
+        const modalDiscount = modal.querySelector('.discount');
+        const modalDescription = modal.querySelector('.product-description p');
+        const colorsContainer = modal.querySelector('.product-colors');
         
-        if (titleElement) titleElement.textContent = productName;
-        if (priceElement) priceElement.textContent = `৳${productPrice.toLocaleString('en-IN')}`;
-        if (imageElement) {
-            imageElement.src = productImage;
-            imageElement.alt = productName;
+        if (modalImage) modalImage.src = productImage;
+        if (modalTitle) modalTitle.textContent = productName;
+        if (modalDescription) modalDescription.textContent = product.description;
+        
+        // Update price and old price
+        if (modalPrice) modalPrice.textContent = `৳${product.price.toLocaleString('en-IN')}`;
+        
+        if (product.oldPrice) {
+            if (modalOldPrice) {
+                modalOldPrice.textContent = `৳${product.oldPrice.toLocaleString('en-IN')}`;
+                modalOldPrice.style.display = 'inline';
+            }
+            
+            // Calculate discount
+            const discountPercent = Math.round((product.oldPrice - product.price) / product.oldPrice * 100);
+            if (modalDiscount) {
+                modalDiscount.textContent = `-${discountPercent}%`;
+                modalDiscount.style.display = 'inline';
+            }
+        } else {
+            if (modalOldPrice) modalOldPrice.style.display = 'none';
+            if (modalDiscount) modalDiscount.style.display = 'none';
         }
-        if (ratingElement) ratingElement.innerHTML = productRating;
-        if (descriptionElement) descriptionElement.textContent = productDescription;
         
-        // Update stock information
-        const metaStockElement = modal.querySelector('.product-meta p:first-child span');
-        if (metaStockElement) {
-            if (productStock > 10) {
-                metaStockElement.textContent = `In Stock (${productStock} available)`;
-                metaStockElement.className = 'in-stock';
-            } else if (productStock > 0) {
-                metaStockElement.textContent = `Low Stock (only ${productStock} left)`;
-                metaStockElement.className = 'low-stock';
+        // Update rating stars
+        if (modalRating) {
+            const fullStars = Math.floor(product.rating);
+            const hasHalfStar = product.rating % 1 >= 0.5;
+            
+            let ratingHTML = '';
+            for (let i = 0; i < fullStars; i++) {
+                ratingHTML += '<i class="fas fa-star"></i>';
+            }
+            
+            if (hasHalfStar) {
+                ratingHTML += '<i class="fas fa-star-half-alt"></i>';
+            }
+            
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            for (let i = 0; i < emptyStars; i++) {
+                ratingHTML += '<i class="far fa-star"></i>';
+            }
+            
+            ratingHTML += `<span>(${product.reviews} reviews)</span>`;
+            modalRating.innerHTML = ratingHTML;
+        }
+        
+        // Hide/show color options based on product configuration
+        if (colorsContainer) {
+            if (product.hasColors && product.variations && product.variations.length > 0) {
+                colorsContainer.style.display = 'block';
             } else {
-                metaStockElement.textContent = 'Out of Stock';
-                metaStockElement.className = 'out-of-stock';
+                colorsContainer.style.display = 'none';
             }
         }
         
-        // Set product data as attributes for add to cart functionality
+        // Store product data in modal for add to cart functionality
         modal.dataset.id = productId;
         modal.dataset.name = productName;
         modal.dataset.price = productPrice;
         modal.dataset.image = productImage;
-        modal.dataset.stock = productStock;
+        modal.dataset.hasColors = product.hasColors; // Store hasColors in the modal
         
-        // Check if product has old price/discount
-        const oldPriceElement = modal.querySelector('.old-price');
-        const discountElement = modal.querySelector('.discount');
-        
-        if (productOldPrice && oldPriceElement && discountElement) {
-            oldPriceElement.textContent = productOldPrice;
-            oldPriceElement.style.display = 'inline';
-            
-            // Calculate discount percentage
-            const oldPrice = parseFloat(productOldPrice.replace(/[৳,]/g, ''));
-            const discountPercent = Math.round((oldPrice - productPrice) / oldPrice * 100);
-            
-            discountElement.textContent = `-${discountPercent}%`;
-            discountElement.style.display = 'inline';
-        } else if (oldPriceElement && discountElement) {
-            oldPriceElement.style.display = 'none';
-            discountElement.style.display = 'none';
-        }
-        
-        // Set up category info
-        const category = categoryParam ? categoryData[categoryParam].name : 'Products';
-        const metaCategoryElement = modal.querySelector('.product-meta p:nth-child(2)');
-        if (metaCategoryElement) {
-            metaCategoryElement.innerHTML = `<strong>Category:</strong> ${category}`;
-        }
-        
-        // Set SKU (using product ID)
-        const metaSkuElement = modal.querySelector('.product-meta p:nth-child(3)');
-        if (metaSkuElement) {
-            metaSkuElement.innerHTML = `<strong>SKU:</strong> TN-${productId.padStart(4, '0')}`;
-        }
-        
-        // Handle out of stock products
-        const quantitySection = modal.querySelector('.product-quantity');
-        const actionButtons = modal.querySelector('.product-actions');
-        const outOfStockMsg = modal.querySelector('.out-of-stock-message');
-        
-        if (productStock <= 0) {
-            // Disable quantity and buttons
-            if (quantitySection) {
-                quantitySection.style.opacity = '0.5';
-                quantitySection.style.pointerEvents = 'none';
-            }
-            if (actionButtons) {
-                actionButtons.style.opacity = '0.5';
-                actionButtons.style.pointerEvents = 'none';
-            }
-            
-            // Add out of stock message if it doesn't exist
-            if (!outOfStockMsg) {
-                const message = document.createElement('div');
-                message.className = 'out-of-stock-message';
-                message.innerHTML = '<i class="fas fa-exclamation-circle"></i> This product is currently out of stock. Please check back later.';
-                
-                if (actionButtons && actionButtons.parentNode) {
-                    actionButtons.parentNode.insertBefore(message, actionButtons);
-                }
-            }
-        } else {
-            // Enable quantity and buttons
-            if (quantitySection) {
-                quantitySection.style.opacity = '1';
-                quantitySection.style.pointerEvents = 'auto';
-            }
-            if (actionButtons) {
-                actionButtons.style.opacity = '1';
-                actionButtons.style.pointerEvents = 'auto';
-            }
-            
-            // Remove out of stock message if it exists
-            if (outOfStockMsg) {
-                outOfStockMsg.remove();
-            }
-            
-            // Set max quantity based on stock
-            const quantityInput = modal.querySelector('.quantity-selector input');
-            if (quantityInput) {
-                quantityInput.max = Math.min(10, productStock);
-                quantityInput.value = 1; // Reset to 1
-            }
-        }
+        // Setup buttons and color options
+        setupModalButtons(modal, product);
         
         // Show modal
         modal.style.display = 'block';
         overlay.style.display = 'block';
-        
-        // Add event listeners for the modal
-        setupQuickViewEventListeners(modal, productStock);
     }
     
-    // Setup event listeners for Quick View modal
-    function setupQuickViewEventListeners(modal, stockQuantity) {
-        // Modal close event
-        const closeBtn = modal.querySelector('.close-modal');
-        if (closeBtn) {
-            closeBtn.onclick = () => {
-                modal.style.display = 'none';
-                document.getElementById('overlay').style.display = 'none';
-            };
-        }
-        
-        // Add to cart button in modal
+    function setupModalButtons(modal, product) {
         const addToCartBtn = modal.querySelector('.add-to-cart-btn');
-        if (addToCartBtn && stockQuantity > 0) {
-            addToCartBtn.onclick = () => {
-                const quantity = parseInt(modal.querySelector('.quantity-selector input').value);
-                
-                // Validate quantity against available stock
-                const actualQuantity = Math.min(quantity, stockQuantity);
-                
-                addItemToCart({
-                    id: modal.dataset.id,
-                    name: modal.dataset.name,
-                    price: parseFloat(modal.dataset.price),
-                    image: modal.dataset.image,
-                    quantity: actualQuantity,
-                    stock: stockQuantity
-                });
-                
-                modal.style.display = 'none';
-                document.getElementById('overlay').style.display = 'none';
-            };
-        }
-        
-        // Buy now button in modal
         const buyNowBtn = modal.querySelector('.buy-now-btn');
-        if (buyNowBtn && stockQuantity > 0) {
-            buyNowBtn.onclick = () => {
-                const quantity = parseInt(modal.querySelector('.quantity-selector input').value);
-                
-                // Validate quantity against available stock
-                const actualQuantity = Math.min(quantity, stockQuantity);
-                
-                showBuyNowModal({
-                    id: modal.dataset.id,
-                    name: modal.dataset.name,
-                    price: parseFloat(modal.dataset.price),
-                    image: modal.dataset.image,
-                    quantity: actualQuantity,
-                    stock: stockQuantity
-                });
-                
-                modal.style.display = 'none';
-            };
-        }
-        
-        // Quantity buttons in modal
-        const quantityBtns = modal.querySelectorAll('.quantity-btn');
         const quantityInput = modal.querySelector('.quantity-selector input');
-        
-        if (quantityBtns && quantityInput) {
-            quantityBtns.forEach(btn => {
-                btn.onclick = () => {
-                    const currentValue = parseInt(quantityInput.value);
-                    
-                    if (btn.classList.contains('minus') && currentValue > 1) {
-                        quantityInput.value = currentValue - 1;
-                    } else if (btn.classList.contains('plus') && currentValue < Math.min(10, stockQuantity)) {
-                        quantityInput.value = currentValue + 1;
-                    }
-                };
-            });
-            
-            // Ensure quantity doesn't exceed stock
-            quantityInput.max = Math.min(10, stockQuantity);
-            
-            // Add change event to validate manual input
-            quantityInput.onchange = () => {
-                let value = parseInt(quantityInput.value);
-                
-                if (isNaN(value) || value < 1) {
-                    value = 1;
-                } else if (value > Math.min(10, stockQuantity)) {
-                    value = Math.min(10, stockQuantity);
-                }
-                
-                quantityInput.value = value;
-            };
-        }
-        
-        // Color options in modal
+        const colorsContainer = modal.querySelector('.product-colors');
         const colorOptions = modal.querySelectorAll('.color-option');
-        if (colorOptions) {
-            colorOptions.forEach(option => {
-                option.onclick = () => {
-                    colorOptions.forEach(opt => opt.classList.remove('active'));
-                    option.classList.add('active');
-                };
-            });
-        }
-    }
-    
-    // Buy Now Modal
-    function showBuyNowModal(product) {
-        const buyNowModal = document.getElementById('buyNowModal');
-        const overlay = document.getElementById('overlay');
         
-        if (!buyNowModal || !overlay) return;
+        // Reset quantity input
+        if (quantityInput) quantityInput.value = 1;
         
-        // Populate modal
-        const imageElement = buyNowModal.querySelector('.buy-now-product-image img');
-        const nameElement = buyNowModal.querySelector('.buy-now-product-info h3');
-        const priceElement = buyNowModal.querySelector('.price');
-        const productNameElement = buyNowModal.querySelector('.product-name');
-        const productPriceElement = buyNowModal.querySelector('.product-price');
-        const productQuantityElement = buyNowModal.querySelector('.product-quantity');
-        const productTotalElement = buyNowModal.querySelector('.product-total');
-        const quantityInput = buyNowModal.querySelector('.quantity-selector input');
+        // Setup quantity buttons
+        const minusBtn = modal.querySelector('.quantity-btn.minus');
+        const plusBtn = modal.querySelector('.quantity-btn.plus');
         
-        if (imageElement) {
-            imageElement.src = product.image;
-            imageElement.alt = product.name;
-        }
-        
-        if (nameElement) nameElement.textContent = product.name;
-        if (priceElement) priceElement.textContent = `৳${product.price.toLocaleString('en-IN')}`;
-        if (productNameElement) productNameElement.textContent = product.name;
-        if (productPriceElement) productPriceElement.textContent = `৳${product.price.toLocaleString('en-IN')}`;
-        
-        // Set initial quantity
-        const quantity = product.quantity || 1;
-        if (quantityInput) quantityInput.value = quantity;
-        if (productQuantityElement) productQuantityElement.textContent = quantity;
-        
-        // Calculate total
-        const total = product.price * quantity;
-        if (productTotalElement) productTotalElement.textContent = `৳${total.toLocaleString('en-IN')}`;
-        
-        // Store product data for add to cart functionality
-        buyNowModal.dataset.id = product.id;
-        buyNowModal.dataset.name = product.name;
-        buyNowModal.dataset.price = product.price;
-        buyNowModal.dataset.image = product.image;
-        buyNowModal.dataset.stock = product.stock || 0;
-        
-        // Limit quantity input max value based on stock
-        const stockQuantity = parseInt(product.stock || 0);
-        if (quantityInput) {
-            quantityInput.max = Math.min(10, stockQuantity);
-        }
-        
-        // Show modal
-        buyNowModal.style.display = 'block';
-        overlay.style.display = 'block';
-        
-        // Setup event listeners
-        setupBuyNowModalListeners(buyNowModal, stockQuantity);
-    }
-    
-    // Setup event listeners for Buy Now modal
-    function setupBuyNowModalListeners(modal, stockQuantity) {
-        const closeBtn = modal.querySelector('.close-modal');
-        const addToCartBtn = modal.querySelector('.add-to-cart-from-buynow');
-        const quantityBtns = modal.querySelectorAll('.quantity-btn');
-        const quantityInput = modal.querySelector('.quantity-selector input');
-        const checkoutBtn = modal.querySelector('.buy-now-actions .primary-btn');
-        
-        // Close modal
-        if (closeBtn) {
-            closeBtn.onclick = () => {
-                modal.style.display = 'none';
-                document.getElementById('overlay').style.display = 'none';
+        if (minusBtn) {
+            minusBtn.onclick = () => {
+                const currentValue = parseInt(quantityInput.value);
+                if (currentValue > 1) {
+                    quantityInput.value = currentValue - 1;
+                }
             };
         }
         
-        // Add to cart
+        if (plusBtn) {
+            plusBtn.onclick = () => {
+                const currentValue = parseInt(quantityInput.value);
+                if (currentValue < 10) {
+                    quantityInput.value = currentValue + 1;
+                }
+            };
+        }
+        
+        // Show/hide color options based on product configuration
+        if (colorsContainer) {
+            if (product.hasColors && product.variations && product.variations.length > 0) {
+                colorsContainer.style.display = 'block';
+                
+                // Reset and setup color options
+                colorOptions.forEach(option => {
+                    // Reset active state
+                    option.classList.remove('active');
+                    
+                    // Set white as default for products with colors
+                    if (option.classList.contains('white')) {
+                        option.classList.add('active');
+                    }
+                    
+                    // Add click event for color change
+                    option.onclick = () => {
+                        colorOptions.forEach(opt => opt.classList.remove('active'));
+                        option.classList.add('active');
+                        
+                        // Change product image based on color selection
+                        changeProductImageColor(option, modal);
+                    };
+                });
+            } else {
+                // Hide color options for products without colors
+                colorsContainer.style.display = 'none';
+            }
+        }
+        
+        // Add to cart button
         if (addToCartBtn) {
             addToCartBtn.onclick = () => {
-                const quantity = parseInt(quantityInput.value);
-                
-                // Validate quantity against stock
-                const actualQuantity = Math.min(quantity, stockQuantity);
-                
-                addItemToCart({
-                    id: modal.dataset.id,
-                    name: modal.dataset.name,
-                    price: parseFloat(modal.dataset.price),
-                    image: modal.dataset.image,
-                    quantity: actualQuantity,
-                    stock: stockQuantity
-                });
-                
+                addToCartFromModal();
                 modal.style.display = 'none';
-                document.getElementById('overlay').style.display = 'none';
-            };
-        }
-        
-        // Quantity buttons
-        if (quantityBtns && quantityInput) {
-            quantityBtns.forEach(btn => {
-                btn.onclick = () => {
-                    const currentValue = parseInt(quantityInput.value);
-                    
-                    if (btn.classList.contains('minus') && currentValue > 1) {
-                        quantityInput.value = currentValue - 1;
-                        updateBuyNowTotal(modal);
-                    } else if (btn.classList.contains('plus') && currentValue < Math.min(10, stockQuantity)) {
-                        quantityInput.value = currentValue + 1;
-                        updateBuyNowTotal(modal);
-                    }
-                };
-            });
-            
-            // Add change event for direct input
-            quantityInput.onchange = () => {
-                let value = parseInt(quantityInput.value);
+                overlay.style.display = 'none';
                 
-                if (isNaN(value) || value < 1) {
-                    value = 1;
-                } else if (value > Math.min(10, stockQuantity)) {
-                    value = Math.min(10, stockQuantity);
+                // Show cart sidebar
+                if (cartSidebar) {
+                    cartSidebar.style.right = '0';
+                    overlay.style.display = 'block';
                 }
-                
-                quantityInput.value = value;
-                updateBuyNowTotal(modal);
             };
         }
         
-        // Checkout button - add validation
-        if (checkoutBtn) {
-            checkoutBtn.onclick = () => {
-                // Add the item to cart and redirect
-                const quantity = parseInt(quantityInput.value);
+        // Buy now button
+        if (buyNowBtn) {
+            buyNowBtn.onclick = () => {
+                // First add to cart
+                addToCartFromModal();
                 
-                // Validate quantity against stock
-                const actualQuantity = Math.min(quantity, stockQuantity);
-                
-                addItemToCart({
-                    id: modal.dataset.id,
-                    name: modal.dataset.name,
-                    price: parseFloat(modal.dataset.price),
-                    image: modal.dataset.image,
-                    quantity: actualQuantity,
-                    stock: stockQuantity
-                });
-                
-                // Show notification before redirect
-                showNotification('Proceeding to checkout...', 'success');
-                
-                // Small delay before redirect for better UX
-                setTimeout(() => {
-                    // Redirect to checkout page
-                    window.location.href = 'checkout.html';
-                }, 1000);
+                // Then redirect to checkout
+                window.location.href = 'checkout.html';
             };
         }
     }
     
-    // Update buy now modal total
-    function updateBuyNowTotal(modal) {
+    // Function to change product image based on color selection
+    function changeProductImageColor(colorOption, modal) {
+        const productImage = modal.querySelector('.product-quick-view-image img');
+        if (!productImage) return;
+        
+        // Get current image URL
+        const currentImageUrl = productImage.src;
+        
+        // Extract base filename without extension
+        const urlParts = currentImageUrl.split('.');
+        const extension = urlParts.pop(); // Get extension (png, jpg, etc)
+        let baseUrl = urlParts.join('.');
+        
+        // Remove any existing color suffixes (W, B, BL)
+        baseUrl = baseUrl.replace(/W$|B$|BL$/i, '');
+        
+        // Determine color suffix based on selected color
+        let colorSuffix = '';
+        if (colorOption.classList.contains('white')) colorSuffix = 'W';
+        else if (colorOption.classList.contains('black')) colorSuffix = 'B';
+        else if (colorOption.classList.contains('blue')) colorSuffix = 'BL';
+        else if (colorOption.classList.contains('red')) colorSuffix = 'R';
+        
+        // Create new image URL with color suffix
+        const newImageUrl = `${baseUrl}${colorSuffix}.${extension}`;
+        
+        // Apply fade effect for smooth transition
+        productImage.style.opacity = '0';
+        
+        // Set timeout for smooth transition
+        setTimeout(() => {
+            productImage.src = newImageUrl;
+            productImage.style.opacity = '1';
+            
+            // Update modal data for cart
+            modal.dataset.image = newImageUrl;
+        }, 200);
+    }
+    
+    // Cart and Wishlist Functions
+    function addToCartFromModal() {
+        const modal = quickViewModal;
         if (!modal) return;
         
+        const productId = modal.dataset.id;
+        const productName = modal.dataset.name;
+        const productPrice = parseFloat(modal.dataset.price);
+        const productImage = modal.dataset.image;
         const quantityInput = modal.querySelector('.quantity-selector input');
-        const productQuantityElement = modal.querySelector('.product-quantity');
-        const productTotalElement = modal.querySelector('.product-total');
+        const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
         
-        if (!quantityInput || !productQuantityElement || !productTotalElement) return;
-        
-        const quantity = parseInt(quantityInput.value);
-        const price = parseFloat(modal.dataset.price);
-        const total = price * quantity;
-        
-        productQuantityElement.textContent = quantity;
-        productTotalElement.textContent = `৳${total.toLocaleString('en-IN')}`;
-    }
-    
-    // Add to cart function
-    function addToCart(productCard) {
-        if (!productCard) return;
-        
-        const productId = productCard.dataset.id;
-        const productName = productCard.dataset.name;
-        const productPrice = parseFloat(productCard.dataset.price);
-        const productImage = productCard.dataset.image;
-        const productStock = parseInt(productCard.dataset.stock || 0);
-        
-        // Check if stock is available
-        if (productStock <= 0) {
-            showNotification('Sorry, this product is out of stock.', 'error');
-            return;
-        }
-        
-        const quantity = 1;
-        
-        addItemToCart({
+        // Create product object
+        const product = {
             id: productId,
             name: productName,
             price: productPrice,
             image: productImage,
-            quantity: quantity,
-            stock: productStock
-        });
+            quantity: quantity
+        };
         
-        // Show notification
-        showNotification(`Added ${productName} to cart!`, 'success');
+        // Add to cart
+        addItemToCart(product);
     }
     
-    // Add item to cart function (used by multiple functions)
+    // Initialize wishlist icons on page load
+    function initializeWishlistIcons() {
+        wishlist.forEach(item => {
+            const productCard = document.querySelector(`.product-card[data-id="${item.id}"]`);
+            if (productCard) {
+                const heartIcon = productCard.querySelector('.add-to-wishlist i');
+                if (heartIcon) {
+                    heartIcon.classList.remove('far');
+                    heartIcon.classList.add('fas');
+                }
+            }
+        });
+    }
+    
+    function addToCart(productCard) {
+        const productId = productCard.dataset.id;
+        const productName = productCard.dataset.name;
+        const productPrice = parseFloat(productCard.dataset.price);
+        const productImage = productCard.dataset.image;
+        
+        // Create product object
+        const product = {
+            id: productId,
+            name: productName,
+            price: productPrice,
+            image: productImage,
+            quantity: 1
+        };
+        
+        // Add to cart
+        addItemToCart(product);
+    }
+    
     function addItemToCart(product) {
         // Check if product is already in cart
-        const existingItem = cart.find(item => item.id === product.id);
+        const existingItemIndex = cart.findIndex(item => item.id === product.id);
         
-        if (existingItem) {
-            // Check if adding more would exceed stock
-            const newQuantity = existingItem.quantity + product.quantity;
-            const stockLimit = parseInt(product.stock || 0);
-            
-            if (stockLimit > 0 && newQuantity > stockLimit) {
-                // Show notification about stock limit
-                showNotification(`Only ${stockLimit} items available in stock.`, 'info');
-                existingItem.quantity = stockLimit;
-            } else if (newQuantity > 10) {
-                // Limit to 10 per item
-                showNotification('Maximum quantity per item is 10.', 'info');
-                existingItem.quantity = 10;
-            } else {
-                existingItem.quantity = newQuantity;
-            }
+        if (existingItemIndex !== -1) {
+            // Update quantity if product already exists in cart
+            cart[existingItemIndex].quantity += product.quantity;
         } else {
+            // Add new product to cart
             cart.push(product);
         }
         
-        // Save to localStorage
+        // Save cart to localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
         
         // Update UI
         updateCartCount();
         updateCartUI();
         
-        // Show cart sidebar
-        const cartSidebar = document.getElementById('cartSidebar');
-        const overlay = document.getElementById('overlay');
-        
-        if (cartSidebar && overlay) {
-            cartSidebar.style.right = '0';
-            overlay.style.display = 'block';
-        }
+        // Show notification
+        showNotification(`Added ${product.name} to cart!`, 'success');
     }
     
-    // Toggle wishlist function
     function toggleWishlist(productCard) {
-        if (!productCard) return;
-        
         const productId = productCard.dataset.id;
         const productName = productCard.dataset.name;
         const productPrice = parseFloat(productCard.dataset.price);
@@ -1042,6 +1878,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Check if product is already in wishlist
         const existingItemIndex = wishlist.findIndex(item => item.id === productId);
+        
+        // Get heart icon
         const heartIcon = productCard.querySelector('.add-to-wishlist i');
         
         if (existingItemIndex !== -1) {
@@ -1072,11 +1910,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Show notification
-            showNotification(`Added ${productName} towishlist`, 'success');
-            }
+            showNotification(`Added ${productName} to wishlist!`, 'success');
         }
         
-        // Save to localStorage
+        // Save wishlist to localStorage
         localStorage.setItem('wishlist', JSON.stringify(wishlist));
         
         // Update UI
@@ -1084,40 +1921,272 @@ document.addEventListener('DOMContentLoaded', function() {
         updateWishlistUI();
     }
     
-    // Clear wishlist function
-    function clearWishlist() {
-        // Confirm with user
-        if (confirm('Are you sure you want to clear your wishlist?')) {
-            // Update all heart icons on page
-            document.querySelectorAll('.add-to-wishlist i.fas').forEach(icon => {
-                icon.classList.remove('fas');
-                icon.classList.add('far');
+    function updateCartCount() {
+        const cartCountElements = document.querySelectorAll('.cart-count');
+        if (!cartCountElements.length) return;
+        
+        // Calculate total items in cart
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+        
+        // Update all cart count badges
+        cartCountElements.forEach(element => {
+            element.textContent = totalItems;
+            
+            // Add animation
+            element.style.animation = 'none';
+            void element.offsetWidth; // Force reflow
+            element.style.animation = 'cartCountPulse 0.5s ease';
+        });
+    }
+    
+    function updateWishlistCount() {
+        const wishlistCountElements = document.querySelectorAll('.wishlist-count');
+        if (!wishlistCountElements.length) return;
+        
+        // Update all wishlist count badges
+        wishlistCountElements.forEach(element => {
+            element.textContent = wishlist.length;
+            
+            // Add animation
+            element.style.animation = 'none';
+            void element.offsetWidth; // Force reflow
+            element.style.animation = 'cartCountPulse 0.5s ease';
+        });
+    }
+    
+    function updateCartUI() {
+        if (!cartItems || !cartTotal) return;
+        
+        // Clear cart items
+        cartItems.innerHTML = '';
+        
+        if (cart.length === 0) {
+            // Show empty cart message
+            cartItems.innerHTML = `
+                <div class="empty-cart">
+                    <div class="empty-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <p>Your cart is empty</p>
+                    <a href="products.html" class="btn secondary-btn">Start Shopping</a>
+                </div>
+            `;
+            
+            // Update cart total
+            cartTotal.textContent = '৳0.00';
+            
+            // Hide checkout button
+            if (checkoutBtn) {
+                checkoutBtn.style.display = 'none';
+            }
+        } else {
+            // Add items to cart
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.dataset.id = item.id;
+                
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <p class="cart-item-price">৳${(item.price * item.quantity).toLocaleString('en-IN')}</p>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" value="${item.quantity}" min="1" max="10">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                    </div>
+                    <button class="remove-item"><i class="fas fa-trash"></i></button>
+                `;
+                
+                cartItems.appendChild(cartItem);
+                
+                // Add event listeners for cart item controls
+                const minusBtn = cartItem.querySelector('.minus');
+                const plusBtn = cartItem.querySelector('.plus');
+                const quantityInput = cartItem.querySelector('input');
+                const removeBtn = cartItem.querySelector('.remove-item');
+                
+                if (minusBtn) {
+                    minusBtn.addEventListener('click', () => {
+                        let currentValue = parseInt(quantityInput.value);
+                        if (currentValue > 1) {
+                            quantityInput.value = currentValue - 1;
+                            updateCartItemQuantity(item.id, currentValue - 1);
+                        }
+                    });
+                }
+                
+                if (plusBtn) {
+                    plusBtn.addEventListener('click', () => {
+                        let currentValue = parseInt(quantityInput.value);
+                        if (currentValue < 10) {
+                            quantityInput.value = currentValue + 1;
+                            updateCartItemQuantity(item.id, currentValue + 1);
+                        }
+                    });
+                }
+                
+                if (quantityInput) {
+                    quantityInput.addEventListener('change', () => {
+                        let value = parseInt(quantityInput.value);
+                        // Ensure value is between 1 and 10
+                        if (isNaN(value) || value < 1) value = 1;
+                        if (value > 10) value = 10;
+                        
+                        quantityInput.value = value;
+                        updateCartItemQuantity(item.id, value);
+                    });
+                }
+                
+                if (removeBtn) {
+                    removeBtn.addEventListener('click', () => {
+                        removeFromCart(item.id);
+                    });
+                }
             });
             
-            // Clear wishlist array
-            wishlist = [];
+            // Update cart total
+            updateCartTotal();
             
-            // Save to localStorage
-            localStorage.setItem('wishlist', JSON.stringify(wishlist));
-            
-            // Update UI
-            updateWishlistCount();
-            updateWishlistUI();
-            
-            // Show notification
-            showNotification('Your wishlist has been cleared!', 'info');
+            // Show checkout button
+            if (checkoutBtn) {
+                checkoutBtn.style.display = 'block';
+            }
         }
     }
     
-    // Remove from cart function
-    function removeFromCart(productId) {
-        // Find the item in the cart
+    function updateWishlistUI() {
+        if (!wishlistItems) return;
+        
+        // Clear wishlist items
+        wishlistItems.innerHTML = '';
+        
+        if (wishlist.length === 0) {
+            // Show empty wishlist message
+            wishlistItems.innerHTML = `
+                <div class="empty-wishlist">
+                    <div class="empty-wishlist-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <p>Your wishlist is empty</p>
+                    <a href="products.html" class="btn secondary-btn">Discover Products</a>
+                </div>
+            `;
+            
+            // Hide clear wishlist button
+            if (clearWishlistBtn) {
+                clearWishlistBtn.style.display = 'none';
+            }
+        } else {
+            // Add wishlist items
+            wishlist.forEach(item => {
+                const wishlistItem = document.createElement('div');
+                wishlistItem.className = 'wishlist-item';
+                wishlistItem.dataset.id = item.id;
+                
+                wishlistItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="wishlist-item-info">
+                        <h4>${item.name}</h4>
+                        <p class="wishlist-item-price">৳${item.price.toLocaleString('en-IN')}</p>
+                    </div>
+                    <div class="wishlist-item-actions">
+                        <button class="move-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                        <button class="remove-from-wishlist"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+                
+                wishlistItems.appendChild(wishlistItem);
+                
+                // Add event listeners
+                const moveToCartBtn = wishlistItem.querySelector('.move-to-cart');
+                const removeBtn = wishlistItem.querySelector('.remove-from-wishlist');
+                
+                if (moveToCartBtn) {
+                    moveToCartBtn.addEventListener('click', () => {
+                        // Add to cart
+                        addItemToCart({
+                            id: item.id,
+                            name: item.name,
+                            price: item.price,
+                            image: item.image,
+                            quantity: 1
+                        });
+                        
+                        // Remove from wishlist
+                        removeFromWishlist(item.id);
+                        
+                        // Show cart sidebar
+                        if (wishlistSidebar) wishlistSidebar.style.right = '-400px';
+                        if (cartSidebar) cartSidebar.style.right = '0';
+                    });
+                }
+                
+                if (removeBtn) {
+                    removeBtn.addEventListener('click', () => {
+                        removeFromWishlist(item.id);
+                    });
+                }
+            });
+            
+            // Show clear wishlist button
+            if (clearWishlistBtn) {
+                clearWishlistBtn.style.display = 'block';
+            }
+        }
+    }
+    
+    function updateCartItemQuantity(productId, quantity) {
+        // Find item in cart
         const itemIndex = cart.findIndex(item => item.id === productId);
         
         if (itemIndex !== -1) {
-            const product = cart[itemIndex];
+            // Update quantity
+            cart[itemIndex].quantity = quantity;
             
-            // Remove the item from the cart
+            // Update UI
+            const cartItem = document.querySelector(`.cart-item[data-id="${productId}"]`);
+            if (cartItem) {
+                const priceElement = cartItem.querySelector('.cart-item-price');
+                if (priceElement) {
+                    const itemPrice = cart[itemIndex].price * quantity;
+                    priceElement.textContent = `৳${itemPrice.toLocaleString('en-IN')}`;
+                }
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Update cart count and total
+            updateCartCount();
+            updateCartTotal();
+        }
+    }
+    
+    function updateCartTotal() {
+        if (!cartTotal) return;
+        
+        // Calculate total
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        
+        // Update display with animation
+        cartTotal.textContent = `৳${total.toLocaleString('en-IN')}`;
+        cartTotal.style.animation = 'none';
+        void cartTotal.offsetWidth; // Force reflow
+        cartTotal.style.animation = 'totalUpdate 0.5s ease';
+    }
+    
+    function removeFromCart(productId) {
+        // Find item index
+        const itemIndex = cart.findIndex(item => item.id === productId);
+        
+        if (itemIndex !== -1) {
+            // Get item for notification
+            const itemName = cart[itemIndex].name;
+            
+            // Remove from cart
             cart.splice(itemIndex, 1);
             
             // Save to localStorage
@@ -1128,19 +2197,19 @@ document.addEventListener('DOMContentLoaded', function() {
             updateCartUI();
             
             // Show notification
-            showNotification(`Removed ${product.name} from cart!`, 'info');
+            showNotification(`Removed ${itemName} from cart`, 'info');
         }
     }
     
-    // Remove from wishlist function
     function removeFromWishlist(productId) {
-        // Find the item in the wishlist
+        // Find item index
         const itemIndex = wishlist.findIndex(item => item.id === productId);
         
         if (itemIndex !== -1) {
-            const product = wishlist[itemIndex];
+            // Get item for notification
+            const itemName = wishlist[itemIndex].name;
             
-            // Remove the item from the wishlist
+            // Remove from wishlist
             wishlist.splice(itemIndex, 1);
             
             // Save to localStorage
@@ -1150,7 +2219,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateWishlistCount();
             updateWishlistUI();
             
-            // Update heart icon on product card if visible
+            // Update wishlist icons on product cards
             const productCard = document.querySelector(`.product-card[data-id="${productId}"]`);
             if (productCard) {
                 const heartIcon = productCard.querySelector('.add-to-wishlist i');
@@ -1161,624 +2230,112 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Show notification
-            showNotification(`Removed ${product.name} from wishlist!`, 'info');
+            showNotification(`Removed ${itemName} from wishlist`, 'info');
         }
     }
     
-    // Update cart count
-    function updateCartCount() {
-        const cartCountElement = document.querySelector('.cart-count');
-        if (cartCountElement) {
-            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-            cartCountElement.textContent = totalItems;
-            
-            // Add animation class if count > 0
-            if (totalItems > 0) {
-                cartCountElement.classList.add('bounce');
-                setTimeout(() => {
-                    cartCountElement.classList.remove('bounce');
-                }, 1000);
-            }
-        }
-    }
-    
-    // Update wishlist count
-    function updateWishlistCount() {
-        const wishlistCountElement = document.querySelector('.wishlist-count');
-        if (wishlistCountElement) {
-            wishlistCountElement.textContent = wishlist.length;
-            
-            // Add animation class if count > 0
-            if (wishlist.length > 0) {
-                wishlistCountElement.classList.add('bounce');
-                setTimeout(() => {
-                    wishlistCountElement.classList.remove('bounce');
-                }, 1000);
-            }
-        }
-    }
-    
-    // Update cart UI
-    function updateCartUI() {
-        const cartItems = document.querySelector('.cart-items');
-        const cartTotal = document.querySelector('.cart-total span:last-child');
-        const checkoutBtn = document.querySelector('.checkout-btn');
-        const emptyCart = document.querySelector('.empty-cart');
-        
-        if (!cartItems) return;
-        
-        // Clear cart items container (except empty cart message)
-        if (emptyCart) emptyCart.style.display = cart.length === 0 ? 'flex' : 'none';
-        
-        // Remove existing cart items
-        document.querySelectorAll('.cart-item').forEach(item => item.remove());
-        
-        if (cart.length === 0) {
-            // Hide checkout button
-            if (checkoutBtn) checkoutBtn.style.display = 'none';
-            
-            // Show empty cart message
-            if (emptyCart) emptyCart.style.display = 'flex';
-            
-            // Update cart total
-            if (cartTotal) cartTotal.textContent = '৳0.00';
-            
-            return;
-        }
-        
-        // Show checkout button
-        if (checkoutBtn) checkoutBtn.style.display = 'block';
-        
-        // Hide empty cart message
-        if (emptyCart) emptyCart.style.display = 'none';
-        
-        // Create cart items
-        cart.forEach(item => {
-            const cartItem = document.createElement('div');
-            cartItem.className = 'cart-item';
-            cartItem.dataset.id = item.id;
-            
-            cartItem.innerHTML = `
-                <img src="${item.image}" alt="${item.name}">
-                <div class="cart-item-info">
-                    <h4>${item.name}</h4>
-                    <p class="cart-item-price">৳${(item.price * item.quantity).toLocaleString('en-IN')}</p>
-                    <div class="cart-item-quantity">
-                        <button class="quantity-btn minus" aria-label="Decrease quantity">-</button>
-                        <input type="number" value="${item.quantity}" min="1" max="${Math.min(10, item.stock || 10)}" aria-label="Quantity">
-                        <button class="quantity-btn plus" aria-label="Increase quantity">+</button>
-                    </div>
-                </div>
-                <button class="remove-item" aria-label="Remove item"><i class="fas fa-trash"></i></button>
-            `;
-            
-            cartItems.appendChild(cartItem);
-            
-            // Setup event listeners for quantity buttons & remove button
-            const minusBtn = cartItem.querySelector('.minus');
-            const plusBtn = cartItem.querySelector('.plus');
-            const quantityInput = cartItem.querySelector('input');
-            const removeBtn = cartItem.querySelector('.remove-item');
-            
-            if (minusBtn) {
-                minusBtn.addEventListener('click', () => {
-                    if (item.quantity > 1) {
-                        item.quantity--;
-                        updateCartItemUI(cartItem, item);
-                    }
-                });
-            }
-            
-            if (plusBtn) {
-                plusBtn.addEventListener('click', () => {
-                    if (item.quantity < Math.min(10, item.stock || 10)) {
-                        item.quantity++;
-                        updateCartItemUI(cartItem, item);
-                    }
-                });
-            }
-            
-            if (quantityInput) {
-                quantityInput.addEventListener('change', () => {
-                    let value = parseInt(quantityInput.value);
-                    
-                    if (isNaN(value) || value < 1) {
-                        value = 1;
-                    } else if (value > Math.min(10, item.stock || 10)) {
-                        value = Math.min(10, item.stock || 10);
-                    }
-                    
-                    item.quantity = value;
-                    updateCartItemUI(cartItem, item);
-                });
-            }
-            
-            if (removeBtn) {
-                removeBtn.addEventListener('click', () => {
-                    removeFromCart(item.id);
-                });
-            }
-        });
-        
-        // Calculate and update total
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        if (cartTotal) {
-            cartTotal.textContent = `৳${total.toLocaleString('en-IN')}`;
-        }
-        
-        // Save updated cart to localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
-    
-    // Update cart item UI
-    function updateCartItemUI(cartItem, item) {
-        if (!cartItem) return;
-        
-        const quantityInput = cartItem.querySelector('input');
-        const priceElement = cartItem.querySelector('.cart-item-price');
-        
-        if (quantityInput) quantityInput.value = item.quantity;
-        if (priceElement) {
-            priceElement.textContent = `৳${(item.price * item.quantity).toLocaleString('en-IN')}`;
-        }
-        
-        // Update total
-        updateCartTotal();
-        
-        // Save to localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
-    
-    // Update cart total
-    function updateCartTotal() {
-        const cartTotal = document.querySelector('.cart-total span:last-child');
-        if (!cartTotal) return;
-        
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        cartTotal.textContent = `৳${total.toLocaleString('en-IN')}`;
-    }
-    
-    // Update wishlist UI
-    function updateWishlistUI() {
-        const wishlistItems = document.querySelector('.wishlist-items');
-        const emptyWishlist = document.querySelector('.empty-wishlist');
-        const clearWishlistBtn = document.querySelector('.clear-wishlist-btn');
-        
-        if (!wishlistItems) return;
-        
-        // Show/hide empty wishlist message
-        if (emptyWishlist) {
-            emptyWishlist.style.display = wishlist.length === 0 ? 'flex' : 'none';
-        }
-        
-        // Show/hide clear wishlist button
-        if (clearWishlistBtn) {
-            clearWishlistBtn.style.display = wishlist.length === 0 ? 'none' : 'block';
-        }
-        
-        // Remove existing wishlist items
-        document.querySelectorAll('.wishlist-item').forEach(item => item.remove());
-        
+    function clearWishlist() {
+        // Confirm before clearing
         if (wishlist.length === 0) return;
         
-        // Create wishlist items
-        wishlist.forEach(item => {
-            const wishlistItem = document.createElement('div');
-            wishlistItem.className = 'wishlist-item';
-            wishlistItem.dataset.id = item.id;
-            
-            wishlistItem.innerHTML = `
-                <img src="${item.image}" alt="${item.name}">
-                <div class="wishlist-item-info">
-                    <h4>${item.name}</h4>
-                    <p class="wishlist-item-price">৳${item.price.toLocaleString('en-IN')}</p>
-                </div>
-                <div class="wishlist-item-actions">
-                    <button class="move-to-cart" aria-label="Move to cart"><i class="fas fa-shopping-cart"></i></button>
-                    <button class="remove-from-wishlist" aria-label="Remove from wishlist"><i class="fas fa-trash"></i></button>
-                </div>
-            `;
-            
-            wishlistItems.appendChild(wishlistItem);
-            
-            // Add event listeners
-            const moveToCartBtn = wishlistItem.querySelector('.move-to-cart');
-            const removeBtn = wishlistItem.querySelector('.remove-from-wishlist');
-            
-            if (moveToCartBtn) {
-                moveToCartBtn.addEventListener('click', () => {
-                    // Find product stock if available on page
-                    let stock = 10; // Default
-                    const productCard = document.querySelector(`.product-card[data-id="${item.id}"]`);
-                    if (productCard) {
-                        stock = parseInt(productCard.dataset.stock || 10);
-                    }
-                    
-                    // Add to cart
-                    addItemToCart({
-                        id: item.id,
-                        name: item.name,
-                        price: item.price,
-                        image: item.image,
-                        quantity: 1,
-                        stock: stock
-                    });
-                    
-                    // Remove from wishlist
-                    removeFromWishlist(item.id);
-                    
-                    // Show wishlist sidebar
-                    if (wishlistSidebar) {
-                        wishlistSidebar.style.right = '-400px';
-                    }
-                });
-            }
-            
-            if (removeBtn) {
-                removeBtn.addEventListener('click', () => {
-                    removeFromWishlist(item.id);
-                });
-            }
+        // Clear wishlist array
+        wishlist = [];
+        
+        // Save to localStorage
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        
+        // Update UI
+        updateWishlistCount();
+        updateWishlistUI();
+        
+        // Update all wishlist icons on product cards
+        document.querySelectorAll('.product-card .add-to-wishlist i.fas').forEach(icon => {
+            icon.classList.remove('fas');
+            icon.classList.add('far');
         });
+        
+        // Show notification
+        showNotification('Your wishlist has been cleared', 'info');
     }
     
-    // Show notification function
-    function showNotification(message, type = 'success') {
-        // Remove any existing notification
-        const existingNotification = document.querySelector('.notification');
-        if (existingNotification) {
-            existingNotification.remove();
-        }
-        
+    // Notification system
+    function showNotification(message, type = 'info') {
         // Create notification element
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
         
-        // Set icon based on type
-        let icon = 'fa-check-circle';
-        if (type === 'info') icon = 'fa-info-circle';
-        if (type === 'error') icon = 'fa-exclamation-circle';
-        
-        notification.innerHTML = `
-            <div class="notification-content">
-                <i class="fas ${icon}"></i>
-                <span>${message}</span>
-            </div>
-            <button class="notification-close" aria-label="Close notification"><i class="fas fa-times"></i></button>
-        `;
-        
-        // Add to document
-        document.body.appendChild(notification);
-        
-        // Add styles if they don't exist
-        if (!document.getElementById('notification-styles')) {
-            const style = document.createElement('style');
-            style.id = 'notification-styles';
-            style.textContent = `
-                .notification {
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    background-color: white;
-                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-                    border-radius: 10px;
-                    padding: 15px 20px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    z-index: 10000;
-                    min-width: 300px;
-                    transform: translateY(-20px);
-                    opacity: 0;
-                    animation: slideIn 0.3s forwards;
-                }
-                
-                @keyframes slideIn {
-                    to {
-                        transform: translateY(0);
-                        opacity: 1;
-                    }
-                }
-                
-                .notification-content {
-                    display: flex;
-                    align-items: center;
-                }
-                
-                .notification-content i {
-                    margin-right: 10px;
-                    font-size: 24px;
-                }
-                
-                .notification.success {
-                    border-left: 4px solid #2ecc71;
-                }
-                
-                .notification.info {
-                    border-left: 4px solid #3498db;
-                }
-                
-                .notification.error {
-                    border-left: 4px solid #e74c3c;
-                }
-                
-                .notification.success i {
-                    color: #2ecc71;
-                }
-                
-                .notification.info i {
-                    color: #3498db;
-                }
-                
-                .notification.error i {
-                    color: #e74c3c;
-                }
-                
-                .notification-close {
-                    background: none;
-                    border: none;
-                    color: #999;
-                    cursor: pointer;
-                    transition: color 0.3s;
-                    padding: 5px;
-                }
-                
-                .notification-close:hover {
-                    color: #333;
-                }
-                
-                @media (max-width: 576px) {
-                    .notification {
-                        left: 20px;
-                        right: 20px;
-                        min-width: auto;
-                    }
-                }
-                
-                @keyframes slideOut {
-                    to {
-                        transform: translateY(-20px);
-                        opacity: 0;
-                    }
-                }
-                
-                /* Animation for badge counts */
-                @keyframes bounce {
-                    0%, 20%, 50%, 80%, 100% {
-                        transform: translateY(0);
-                    }
-                    40% {
-                        transform: translateY(-5px);
-                    }
-                    60% {
-                        transform: translateY(-2px);
-                    }
-                }
-                
-                .bounce {
-                    animation: bounce 0.8s;
-                }
-            `;
-            document.head.appendChild(style);
+        // Set icon based on notification type
+        let icon = '';
+        switch (type) {
+            case 'success':
+                icon = '<i class="fas fa-check-circle"></i>';
+                break;
+            case 'error':
+                icon = '<i class="fas fa-exclamation-circle"></i>';
+                break;
+            case 'info':
+            default:
+                icon = '<i class="fas fa-info-circle"></i>';
+                break;
         }
         
-        // Add close button functionality
-        const closeButton = notification.querySelector('.notification-close');
-        closeButton.addEventListener('click', () => {
-            notification.style.animation = 'slideOut 0.3s forwards';
-            setTimeout(() => {
-                if (document.body.contains(notification)) {
-                    document.body.removeChild(notification);
-                }
-            }, 300);
-        });
+        // Set notification content
+        notification.innerHTML = `
+            <div class="notification-content">
+                ${icon}
+                <span>${message}</span>
+            </div>
+            <button class="notification-close">&times;</button>
+        `;
         
-        // Auto remove after 5 seconds
+        // Add to body
+        document.body.appendChild(notification);
+        
+        // Add close event
+        const closeBtn = notification.querySelector('.notification-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                notification.style.animation = 'notificationSlideOut 0.3s forwards';
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            });
+        }
+        
+        // Auto remove after 3 seconds
         setTimeout(() => {
             if (document.body.contains(notification)) {
-                notification.style.animation = 'slideOut 0.3s forwards';
+                notification.style.animation = 'notificationSlideOut 0.3s forwards';
                 setTimeout(() => {
                     if (document.body.contains(notification)) {
-                        document.body.removeChild(notification);
+                        notification.remove();
                     }
                 }, 300);
             }
-        }, 5000);
+        }, 3000);
     }
     
-    // Define category data object (in a real app, this would come from a database)
-    const categoryData = {
-        phones: {
-            name: 'Mobile Phones',
-            title: 'Premium Mobile Phones',
-            description: 'Browse our collection of cutting-edge smartphones',
-            longDescription: 'Experience the latest in mobile technology with our premium selection of smartphones. Our mobile phones feature advanced camera systems, powerful processors, stunning displays, and innovative features designed to enhance your digital life.',
-            image: 'images/iphone.png',
-            features: [
-                'Latest processor technology',
-                'Advanced camera systems',
-                'Premium build quality',
-                'Extended battery life',
-                'Enhanced security features'
-            ],
-            products: [
-                {
-                    id: '1',
-                    name: 'TechNest iPhone 16 Pro Max',
-                    price: 219999,
-                    oldPrice: 225999,
-                    image: 'images/iphone16W.png',
-                    badge: 'New',
-                    rating: 4.5,
-                    ratingCount: 120,
-                    description: 'The iPhone 16 Pro Max features a stunning 6.9" ProMotion XDR display, A17 Pro chip, 48MP main camera with 5x optical zoom, and all-day battery life.',
-                    colors: ['white', 'black', 'blue'],
-                    stock: 15
-                },
-                {
-                    id: '2',
-                    name: 'TechNest iPhone 16 Pro',
-                    price: 189999,
-                    oldPrice: 199999,
-                    image: 'images/iphone16W.png',
-                    badge: 'New',
-                    rating: 4.5,
-                    ratingCount: 89,
-                    description: 'The iPhone 16 Pro features a crisp 6.3" ProMotion XDR display, A17 Pro chip, 48MP main camera with 3x optical zoom, and exceptional battery life.',
-                    colors: ['white', 'black', 'blue'],
-                    stock: 12
-                },
-                {
-                    id: '3',
-                    name: 'TechNest iPhone 16',
-                    price: 149999, 
-                    oldPrice: 159999,
-                    image: 'images/iphone16W.png',
-                    badge: 'New',
-                    rating: 4.3,
-                    ratingCount: 67,
-                    description: 'The iPhone 16 features a vibrant 6.1" Super Retina XDR display, A17 chip, advanced dual-camera system, and all-day battery life.',
-                    colors: ['white', 'black', 'blue'],
-                    stock: 18
-                },
-                {
-                    id: '4',
-                    name: 'TechNest Samsung Galaxy S25 Ultra',
-                    price: 189999,
-                    oldPrice: 199999,
-                    image: 'images/iphone16W.png',
-                    badge: 'Bestseller',
-                    rating: 4.7,
-                    ratingCount: 154,
-                    description: 'The Galaxy S25 Ultra features a 6.8" Dynamic AMOLED 2X display, Snapdragon 8 Gen 3 processor, 200MP main camera, and 5000mAh battery.',
-                    colors: ['black', 'white', 'blue'],
-                    stock: 10
-                },
-                {
-                    id: '5',
-                    name: 'TechNest Google Pixel 9 Pro',
-                    price: 129999,
-                    oldPrice: 139999,
-                    image: 'images/iphone16W.png',
-                    badge: null,
-                    rating: 4.6,
-                    ratingCount: 87,
-                    description: 'The Pixel 9 Pro features a 6.7" QHD+ OLED display, Google Tensor G4 chip, incredible computational photography, and all-day battery life.',
-                    colors: ['black', 'white'],
-                    stock: 8
-                },
-                {
-                    id: '6',
-                    name: 'TechNest Samsung Galaxy Z Fold 6',
-                    price: 229999,
-                    oldPrice: 249999,
-                    image: 'images/iphone16W.png',
-                    badge: 'Sale',
-                    rating: 4.4,
-                    ratingCount: 62,
-                    description: 'The Galaxy Z Fold 6 features a foldable 7.6" Dynamic AMOLED 2X main display, Snapdragon 8 Gen 3 processor, and versatile camera system.',
-                    colors: ['black', 'blue'],
-                    stock: 5
-                }
-            ]
-        },
-        headphones: {
-            name: 'Headphones',
-            title: 'Premium Headphones',
-            description: 'Immerse yourself in superior sound quality',
-            longDescription: 'Our headphones deliver exceptional audio performance with deep bass, clear mids, and crisp highs. Designed for comfort during extended listening sessions, they feature premium materials and noise cancellation technology for an immersive experience.',
-            image: 'images/headphones.png',
-            features: [
-                'Active noise cancellation',
-                'Premium sound quality',
-                'Long battery life',
-                'Comfortable design for extended use',
-                'Bluetooth 5.2 technology'
-            ],
-            products: [
-                {
-                    id: '7',
-                    name: 'TechNest Bass Boost 2.0',
-                    price: 68000,
-                    oldPrice: 70000,
-                    image: 'images/headphone1.png',
-                    badge: 'Bestseller',
-                    rating: 5.0,
-                    ratingCount: 245,
-                    description: 'The Bass Boost 2.0 features premium noise cancellation, 40 hours of battery life, ultra-comfortable ear cups, and dynamic bass enhancement.',
-                    colors: ['black', 'white', 'blue'],
-                    stock: 20
-                },
-                {
-                    id: '8',
-                    name: 'TechNest Studio Pro',
-                    price: 85000,
-                    oldPrice: 89000,
-                    image: 'images/headphone1.png',
-                    badge: 'New',
-                    rating: 4.8,
-                    ratingCount: 128,
-                    description: 'The Studio Pro headphones deliver studio-quality sound with adaptive EQ, spatial audio, and premium materials for all-day comfort.',
-                    colors: ['black', 'white'],
-                    stock: 15
-                },
-                {
-                    id: '9',
-                    name: 'TechNest SoundWave Elite',
-                    price: 49999,
-                    oldPrice: 54999,
-                    image: 'images/headphone1.png',
-                    badge: 'Sale',
-                    rating: 4.6,
-                    ratingCount: 196,
-                    description: 'The SoundWave Elite features adaptive noise cancellation, transparency mode, 45 hours of battery life, and premium audio drivers.',
-                    colors: ['black', 'blue', 'red'],
-                    stock: 18
-                },
-                {
-                    id: '10',
-                    name: 'TechNest Gaming Master',
-                    price: 42999,
-                    oldPrice: 47999,
-                    image: 'images/headphone1.png',
-                    badge: null,
-                    rating: 4.7,
-                    ratingCount: 162,
-                    description: 'The Gaming Master headphones feature 3D spatial audio, ultra-low latency connection, customizable RGB lighting, and premium comfort.',
-                    colors: ['black', 'red'],
-                    stock: 22
-                }
-            ]
-        },
-        // Other category data remains the same...
-        // Create similar data for other categories (laptops, earbuds, tablets, smartwatches)
-    };
-    
-    // Related categories mapping
-    const relatedCategories = {
-        phones: ['tablets', 'accessories', 'earbuds'],
-        headphones: ['earbuds', 'accessories', 'laptops'],
-        laptops: ['accessories', 'tablets', 'gaming'],
-        earbuds: ['headphones', 'accessories', 'phones'],
-        tablets: ['accessories', 'laptops', 'phones'],
-        smartwatches: ['phones', 'accessories', 'earbuds'],
-        gaming: ['accessories', 'laptops', 'headphones'],
-        accessories: ['phones', 'headphones', 'tablets']
-    };
-    
-    // Add responsive functionality for smaller screens
-    function handleResponsiveLayout() {
-        // Mobile responsiveness for filters
-        const productsFilters = document.querySelector('.products-filters');
-        if (productsFilters && window.innerWidth <= 768) {
-            const filterGroups = productsFilters.querySelectorAll('.filter-group');
-            filterGroups.forEach(group => {
-                group.style.width = '100%';
-            });
-        }
+    // Handle Cart button in header
+    const cartBtn = document.getElementById('cartBtn');
+    if (cartBtn) {
+        cartBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (cartSidebar) {
+                cartSidebar.style.right = '0';
+                overlay.style.display = 'block';
+            }
+        });
     }
     
-    // Call responsive layout handler on load and resize
-    window.addEventListener('resize', handleResponsiveLayout);
-    handleResponsiveLayout();
+    // Handle Wishlist button in header
+    const wishlistBtn = document.getElementById('wishlistBtn');
+    if (wishlistBtn) {
+        wishlistBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (wishlistSidebar) {
+                wishlistSidebar.style.right = '0';
+                overlay.style.display = 'block';
+            }
+        });
+    }
 });
