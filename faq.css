@@ -1,4 +1,99 @@
 /* FAQ Page Styles */
+
+/* Enhanced Breadcrumb Styles */
+.breadcrumb {
+    background-color: #f5f5f5;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 0;
+}
+
+.breadcrumb .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.breadcrumb ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.breadcrumb ul li {
+    font-size: 14px;
+    color: #777;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb ul li:not(:last-child)::after {
+    content: "/";
+    margin: 0 10px;
+    color: #aaa;
+    font-weight: 300;
+}
+
+.breadcrumb ul li a {
+    color: #777;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.breadcrumb ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.breadcrumb ul li a:hover {
+    color: var(--primary-color);
+}
+
+.breadcrumb ul li a:hover::after {
+    width: 100%;
+}
+
+.breadcrumb ul li.active {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+@media (max-width: 576px) {
+    .breadcrumb {
+        padding: 10px 0;
+    }
+    
+    .breadcrumb ul li {
+        font-size: 13px;
+    }
+    
+    .breadcrumb ul li:not(:last-child)::after {
+        margin: 0 6px;
+    }
+}
+
+/* Animated breadcrumb indicator for current page */
+@keyframes breadcrumbPulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
+.breadcrumb ul li.active {
+    animation: breadcrumbPulse 2s infinite;
+}
+
+/* FAQ Hero Section */
 .faq-hero {
     background: linear-gradient(135deg, #f5f7fa 0%, #e6eef7 100%);
     padding: 70px 0;

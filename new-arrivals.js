@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize pagination
     initPagination();
+    
+    // Initialize buy now buttons
+    initBuyNowButtons();
 });
 
 // Set animation delay for product cards based on their position
@@ -130,11 +133,40 @@ function initProductSorting() {
 function initColorSelection() {
     const colorOptions = document.querySelectorAll('.colors .color');
     const selectedColorText = document.querySelector('.selected-color');
+    const featuredProductImage = document.querySelector('.featured-image img');
     
-    if (!colorOptions.length || !selectedColorText) return;
+    console.log('Color options found:', colorOptions.length);
+    console.log('Selected color text element:', selectedColorText);
+    console.log('Featured product image:', featuredProductImage);
+    
+    if (!colorOptions.length || !selectedColorText || !featuredProductImage) {
+        console.error('Missing elements for color selection functionality');
+        return;
+    }
+    
+    // Store the original image path to use as base
+    const baseImagePath = featuredProductImage.src;
+    console.log('Original image path:', baseImagePath);
+    
+    // Extract the path parts more precisely
+    const pathParts = baseImagePath.split('/');
+    const fileName = pathParts[pathParts.length - 1];
+    const basePath = featuredProductImage.src.substring(0, featuredProductImage.src.lastIndexOf('/') + 1);
+    
+    console.log('Base path:', basePath);
+    console.log('File name:', fileName);
+    
+    // Extract the base filename (remove color suffix and extension)
+    const fileNameBase = fileName.substring(0, fileName.length - 5); // Remove last letter (color) and extension (.png)
+    const fileExtension = '.png';
+    
+    console.log('File name base:', fileNameBase);
+    console.log('File extension:', fileExtension);
     
     colorOptions.forEach(color => {
         color.addEventListener('click', () => {
+            console.log('Color clicked:', color.getAttribute('data-color'));
+            
             // Update active color
             colorOptions.forEach(c => c.classList.remove('active'));
             color.classList.add('active');
@@ -142,6 +174,25 @@ function initColorSelection() {
             // Update selected color text
             const colorName = color.getAttribute('data-color');
             selectedColorText.textContent = `Selected: ${colorName}`;
+            
+            // Change product image based on color
+            let colorSuffix = '';
+            if (color.classList.contains('black')) colorSuffix = 'B';
+            else if (color.classList.contains('titanium')) colorSuffix = 'T';
+            else if (color.classList.contains('blue')) colorSuffix = 'BL';
+            else if (color.classList.contains('gold')) colorSuffix = 'G';
+            else colorSuffix = 'W'; // Default to white
+            
+            // Create new image path with color suffix
+            const newImagePath = basePath + fileNameBase + colorSuffix + fileExtension;
+            console.log('New image path:', newImagePath);
+            
+            // Apply fade effect and change image
+            featuredProductImage.style.opacity = '0';
+            setTimeout(() => {
+                featuredProductImage.src = newImagePath;
+                featuredProductImage.style.opacity = '1';
+            }, 300);
         });
     });
 }
@@ -430,6 +481,8 @@ function initAddToCart() {
     // Add to cart buttons in product cards
     const addToCartBtns = document.querySelectorAll('.product-btn, .featured-actions .primary-btn, .add-to-cart');
     
+    console.log('Add to cart buttons found:', addToCartBtns.length);
+    
     // Add to cart button in quick view modal
     const quickViewAddToCartBtn = document.querySelector('.add-to-cart-btn');
     
@@ -437,12 +490,14 @@ function initAddToCart() {
     addToCartBtns.forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
+            console.log('Add to cart button clicked:', this);
             
             // Get product data from closest product card
             const card = this.closest('.product-card') || this.closest('.featured-container');
+            console.log('Found container:', card);
             
             if (card) {
-                let productId, productName, productPrice, productImage;
+                let productId, productName, productPrice, productImage, productColor;
                 
                 // Check if it's a product card or featured product
                 if (card.classList.contains('product-card')) {
@@ -454,13 +509,27 @@ function initAddToCart() {
                     // It's the featured product
                     const nameElement = card.querySelector('h3');
                     const priceElement = card.querySelector('.price');
-                    const imageElement = card.querySelector('img');
+                    const imageElement = card.querySelector('.featured-image img');
                     
                     productId = 'featured-1';
                     productName = nameElement ? nameElement.textContent : 'Featured Product';
                     productPrice = priceElement ? parseFloat(priceElement.textContent.replace(/[৳,]/g, '')) : 0;
                     productImage = imageElement ? imageElement.src : '';
+                    
+                    // Get selected color if available
+                    const selectedColorElement = card.querySelector('.color.active');
+                    if (selectedColorElement) {
+                        productColor = selectedColorElement.getAttribute('data-color');
+                    }
                 }
+                
+                console.log('Product details:', {
+                    id: productId,
+                    name: productName,
+                    price: productPrice,
+                    image: productImage,
+                    color: productColor
+                });
                 
                 // Create product object
                 const product = {
@@ -468,7 +537,8 @@ function initAddToCart() {
                     name: productName,
                     price: productPrice,
                     image: productImage,
-                    quantity: 1
+                    quantity: 1,
+                    color: productColor || 'Default'
                 };
                 
                 // Add to cart
@@ -489,6 +559,8 @@ function initAddToCart() {
                 setTimeout(() => {
                     this.innerHTML = originalText;
                 }, 2000);
+            } else {
+                console.error('Could not find product container');
             }
         });
     });
@@ -734,340 +806,299 @@ function initAddToCart() {
             const cartItem = document.querySelector(`.cart-item[data-id="${itemId}"]`);
             if (cartItem) {
                 const priceElement = cartItem.querySelector('.cart-item-price');
-                const item = cart[itemIndex];
-                if (priceElement && item) {
-                    priceElement.textContent = `৳${(item.price * quantity).toLocaleString('en-IN')}`;
+                if (priceElement) {
+                    priceElement.textContent = `৳${(cart[itemIndex].price * quantity).toLocaleString('en-IN')}`;
                 }
             }
             
-            // Save cart to localStorage
+            // Update cart in localStorage
             localStorage.setItem('cart', JSON.stringify(cart));
             
-            // Update cart UI
+            // Update cart count and total
             updateCartUIElements(cart);
         }
     }
     
     // Remove cart item
     function removeCartItem(itemId, cart) {
-        // Find item in cart
-        const itemIndex = cart.findIndex(item => item.id === itemId);
+        // Filter out the item to be removed
+        const updatedCart = cart.filter(item => item.id !== itemId);
         
-        if (itemIndex !== -1) {
-            // Get item name for notification
-            const itemName = cart[itemIndex].name;
-            
-            // Remove item from cart
-            cart.splice(itemIndex, 1);
-            
-            // Save cart to localStorage
-            localStorage.setItem('cart', JSON.stringify(cart));
-            
-            // Update cart UI
-            updateCartUIElements(cart);
-            updateCartSidebar(cart);
-            
-            // Show notification
-            showNotification(`Removed ${itemName} from cart!`, 'info');
-        }
+        // Update cart in localStorage
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+        
+        // Update cart UI
+        updateCartUIElements(updatedCart);
+        
+        // Update cart sidebar
+        updateCartSidebar(updatedCart);
     }
+}
+
+// Initialize Buy Now buttons
+function initBuyNowButtons() {
+    const buyNowBtns = document.querySelectorAll('.buy-now, .featured-actions .secondary-btn');
+    
+    console.log('Buy now buttons found:', buyNowBtns.length);
+    
+    buyNowBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Buy now button clicked');
+            
+            // Get product data from closest product card
+            const card = this.closest('.product-card') || this.closest('.featured-container');
+            
+            if (card) {
+                let productId, productName, productPrice, productImage, productColor;
+                
+                // Check if it's a product card or featured product
+                if (card.classList.contains('product-card')) {
+                    productId = card.getAttribute('data-id');
+                    productName = card.getAttribute('data-name');
+                    productPrice = parseFloat(card.getAttribute('data-price'));
+                    productImage = card.getAttribute('data-image');
+                } else {
+                    // It's the featured product
+                    const nameElement = card.querySelector('h3');
+                    const priceElement = card.querySelector('.price');
+                    const imageElement = card.querySelector('.featured-image img');
+                    
+                    productId = 'featured-1';
+                    productName = nameElement ? nameElement.textContent : 'Featured Product';
+                    productPrice = priceElement ? parseFloat(priceElement.textContent.replace(/[৳,]/g, '')) : 0;
+                    productImage = imageElement ? imageElement.src : '';
+                    
+                    // Get selected color if available
+                    const selectedColorElement = card.querySelector('.color.active');
+                    if (selectedColorElement) {
+                        productColor = selectedColorElement.getAttribute('data-color');
+                    }
+                }
+                
+                // Create product object
+                const product = {
+                    id: productId,
+                    name: productName,
+                    price: productPrice,
+                    image: productImage,
+                    quantity: 1,
+                    color: productColor || 'Default'
+                };
+                
+                // Add to cart first
+                addToCartHandler(product);
+                
+                // Redirect to checkout page
+                window.location.href = 'checkout.html';
+            }
+        });
+    });
 }
 
 // Add to Wishlist Functionality
 function initAddToWishlist() {
-    const wishlistBtns = document.querySelectorAll('.add-to-wishlist, .featured-actions .tertiary-btn');
+    const wishlistBtns = document.querySelectorAll('.wishlist-btn, .featured-actions .wishlist-btn');
+    
+    console.log('Wishlist buttons found:', wishlistBtns.length);
     
     wishlistBtns.forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
+            console.log('Wishlist button clicked:', this);
             
-            // Get product data
-            let productId, productName, productPrice, productImage;
-            let isInWishlist = false;
+            // Get product data from closest product card or featured container
+            const card = this.closest('.product-card') || this.closest('.featured-container');
+            console.log('Found container:', card);
             
-            // Check if it's a product card button or featured product button
-            if (this.classList.contains('add-to-wishlist')) {
-                // It's a product card button
-                const card = this.closest('.product-card');
-                if (!card) return;
+            if (card) {
+                let productId, productName, productPrice, productImage, productColor;
                 
-                productId = card.getAttribute('data-id');
-                productName = card.getAttribute('data-name');
-                productPrice = parseFloat(card.getAttribute('data-price'));
-                productImage = card.getAttribute('data-image');
+                // Check if it's a product card or featured product
+                if (card.classList.contains('product-card')) {
+                    productId = card.getAttribute('data-id');
+                    productName = card.getAttribute('data-name');
+                    productPrice = parseFloat(card.getAttribute('data-price'));
+                    productImage = card.getAttribute('data-image');
+                } else {
+                    // It's the featured product
+                    const nameElement = card.querySelector('h3');
+                    const priceElement = card.querySelector('.price');
+                    const imageElement = card.querySelector('.featured-image img');
+                    
+                    productId = 'featured-1';
+                    productName = nameElement ? nameElement.textContent : 'Featured Product';
+                    productPrice = priceElement ? parseFloat(priceElement.textContent.replace(/[৳,]/g, '')) : 0;
+                    productImage = imageElement ? imageElement.src : '';
+                    
+                    // Get selected color if available
+                    const selectedColorElement = card.querySelector('.color.active');
+                    if (selectedColorElement) {
+                        productColor = selectedColorElement.getAttribute('data-color');
+                    }
+                }
                 
-                // Check if this product is already in wishlist
-                const heartIcon = this.querySelector('i');
-                isInWishlist = heartIcon && heartIcon.classList.contains('fas');
+                console.log('Adding to wishlist:', {
+                    id: productId,
+                    name: productName,
+                    price: productPrice,
+                    image: productImage,
+                    color: productColor
+                });
+                
+                // Create product object
+                const product = {
+                    id: productId,
+                    name: productName,
+                    price: productPrice,
+                    image: productImage,
+                    color: productColor || 'Default'
+                };
+                
+                // Add to wishlist
+                addToWishlist(product, this);
             } else {
-                // It's the featured product button
-                const container = this.closest('.featured-container');
-                if (!container) return;
-                
-                const nameElement = container.querySelector('h3');
-                const priceElement = container.querySelector('.price');
-                const imageElement = container.querySelector('img');
-                
-                productId = 'featured-1';
-                productName = nameElement ? nameElement.textContent : 'Featured Product';
-                productPrice = priceElement ? parseFloat(priceElement.textContent.replace(/[৳,]/g, '')) : 0;
-                productImage = imageElement ? imageElement.src : '';
-                
-                // Check if this product is already in wishlist
-                isInWishlist = this.innerHTML.includes('Remove from Wishlist');
+                console.error('Could not find product container');
             }
-            
-            // Toggle wishlist status
-            toggleWishlistItem({
-                id: productId,
-                name: productName,
-                price: productPrice,
-                image: productImage
-            }, isInWishlist, this);
         });
     });
     
-    // Toggle wishlist item function
-    function toggleWishlistItem(product, isInWishlist, button) {
-        // Try to use main site's wishlist functions
-        if (typeof window.toggleWishlist === 'function') {
-            // Create dummy product card
-            const dummyCard = document.createElement('div');
-            dummyCard.className = 'product-card';
-            dummyCard.dataset.id = product.id;
-            dummyCard.dataset.name = product.name;
-            dummyCard.dataset.price = product.price;
-            dummyCard.dataset.image = product.image;
-            
-            // Add wishlist button to dummy card
-            const wishlistBtn = document.createElement('a');
-            wishlistBtn.className = 'add-to-wishlist';
-            const icon = document.createElement('i');
-            icon.className = isInWishlist ? 'fas fa-heart' : 'far fa-heart';
-            wishlistBtn.appendChild(icon);
-            dummyCard.appendChild(wishlistBtn);
-            
-            window.toggleWishlist(dummyCard);
-            return;
-        }
-        
-        // Fallback wishlist functionality
-        toggleWishlistFallback(product, isInWishlist, button);
-    }
-    
-    // Fallback wishlist functionality
-    function toggleWishlistFallback(product, isInWishlist, button) {
+    // Add to wishlist functionality
+    function addToWishlist(product, button) {
         // Get wishlist from localStorage
         let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
         
-        if (isInWishlist) {
-            // Remove from wishlist
+        // Check if product is already in wishlist
+        const existingItemIndex = wishlist.findIndex(item => item.id === product.id);
+        
+        if (existingItemIndex !== -1) {
+            // Remove from wishlist if already there
             wishlist = wishlist.filter(item => item.id !== product.id);
-            
-            // Update button UI
-            if (button.classList.contains('add-to-wishlist')) {
-                const icon = button.querySelector('i');
-                if (icon) {
-                    icon.classList.remove('fas');
-                    icon.classList.add('far');
-                }
-            } else {
-                button.innerHTML = '<i class="far fa-heart"></i> Add to Wishlist';
-            }
-            
-            // Show notification
+            button.classList.remove('active');
             showNotification(`Removed ${product.name} from wishlist!`, 'info');
         } else {
             // Add to wishlist
             wishlist.push(product);
-            
-            // Update button UI
-            if (button.classList.contains('add-to-wishlist')) {
-                const icon = button.querySelector('i');
-                if (icon) {
-                    icon.classList.remove('far');
-                    icon.classList.add('fas');
-                }
-            } else {
-                button.innerHTML = '<i class="fas fa-heart"></i> Remove from Wishlist';
-            }
-            
-            // Show notification
+            button.classList.add('active');
             showNotification(`Added ${product.name} to wishlist!`, 'success');
         }
         
         // Save wishlist to localStorage
         localStorage.setItem('wishlist', JSON.stringify(wishlist));
         
-        // Update wishlist count
-        updateWishlistCount(wishlist);
+        // Update wishlist UI
+        updateWishlistUI();
+        
+        // Add heart animation
+        addHeartAnimation(button);
     }
     
-    // Update wishlist count
-    function updateWishlistCount(wishlist) {
+    // Update wishlist UI
+    function updateWishlistUI() {
+        // Get wishlist from localStorage
+        const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        
+        // Update wishlist count
         const wishlistCount = document.querySelector('.wishlist-count');
         if (wishlistCount) {
             wishlistCount.textContent = wishlist.length;
         }
         
-        // Try to use main site's update function
-        if (typeof window.updateWishlistCount === 'function') {
-            window.updateWishlistCount();
-        }
-    }
-}
-
-// Pagination Functionality
-function initPagination() {
-    const paginationButtons = document.querySelectorAll('.pagination-btn');
-    
-    paginationButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Update active button
-            paginationButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
+        // Update button states for all products on page
+        document.querySelectorAll('.wishlist-btn').forEach(btn => {
+            const card = btn.closest('.product-card') || btn.closest('.featured-container');
+            if (!card) return;
             
-            // In a real app, this would load the next page of products
-            // For this demo, we'll just scroll to the top of the products section
-            const productsSection = document.getElementById('latest-products');
-            if (productsSection) {
-                window.scrollTo({
-                    top: productsSection.offsetTop - 100,
-                    behavior: 'smooth'
-                });
+            let productId;
+            if (card.classList.contains('product-card')) {
+                productId = card.getAttribute('data-id');
+            } else {
+                productId = 'featured-1';
+            }
+            
+            // Check if this product is in the wishlist
+            const inWishlist = wishlist.some(item => item.id === productId);
+            
+            // Update button state
+            if (inWishlist) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
             }
         });
-    });
+    }
+    
+    // Add heart animation
+    function addHeartAnimation(button) {
+        const heart = document.createElement('div');
+        heart.className = 'heart-animation';
+        heart.innerHTML = '<i class="fas fa-heart"></i>';
+        
+        button.appendChild(heart);
+        
+        setTimeout(() => {
+            heart.remove();
+        }, 1000);
+    }
+    
+    // Initialize wishlist UI on page load
+    updateWishlistUI();
 }
 
-// Show notification function
-function showNotification(message, type = 'success') {
-    // Try to use main site's notification function
-    if (typeof window.showNotification === 'function') {
-        window.showNotification(message, type);
-        return;
-    }
-    
-    // Fallback notification function
-    const notificationElement = document.createElement('div');
-    notificationElement.className = `notification ${type}`;
-    
-    notificationElement.innerHTML = `
-        <div class="notification-content">
-            <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'info' ? 'fa-info-circle' : 'fa-exclamation-circle'}"></i>
-            <span>${message}</span>
+// Show notification
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <div class="notification-icon">
+            ${type === 'success' ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-info-circle"></i>'}
         </div>
-        <button class="notification-close"><i class="fas fa-times"></i></button>
+        <div class="notification-message">${message}</div>
+        <button class="close-notification"><i class="fas fa-times"></i></button>
     `;
     
-    document.body.appendChild(notificationElement);
+    document.body.appendChild(notification);
     
-    // Add notification styles if they don't exist
-    if (!document.getElementById('notification-styles')) {
-        const style = document.createElement('style');
-        style.id = 'notification-styles';
-        style.textContent = `
-            .notification {
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background-color: white;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-                border-radius: 5px;
-                padding: 15px 20px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                z-index: 10000;
-                min-width: 300px;
-                transform: translateY(-20px);
-                opacity: 0;
-                animation: slideIn 0.3s forwards;
-            }
-            
-            @keyframes slideIn {
-                to {
-                    transform: translateY(0);
-                    opacity: 1;
-                }
-            }
-            
-            .notification-content {
-                display: flex;
-                align-items: center;
-            }
-            
-            .notification-content i {
-                margin-right: 10px;
-                font-size: 18px;
-            }
-            
-            .notification.success {
-                border-left: 4px solid #2ecc71;
-            }
-            
-            .notification.info {
-                border-left: 4px solid #3498db;
-            }
-            
-            .notification.success i {
-                color: #2ecc71;
-            }
-            
-            .notification.info i {
-                color: #3498db;
-            }
-            
-            .notification-close {
-                background: none;
-                border: none;
-                color: #999;
-                cursor: pointer;
-                transition: color 0.3s;
-            }
-            
-            .notification-close:hover {
-                color: #333;
-            }
-            
-            @media (max-width: 576px) {
-                .notification {
-                    left: 20px;
-                    right: 20px;
-                    min-width: auto;
-                }
-            }
-            
-            @keyframes slideOut {
-                to {
-                    transform: translateY(-20px);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
+    // Animate notification
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 10);
+    
+    // Auto close after 3 seconds
+    const timeout = setTimeout(() => {
+        closeNotification(notification);
+    }, 3000);
+    
+    // Close button functionality
+    const closeBtn = notification.querySelector('.close-notification');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            clearTimeout(timeout);
+            closeNotification(notification);
+        });
     }
     
-    // Add close button functionality
-    const closeButton = notificationElement.querySelector('.notification-close');
-    closeButton.addEventListener('click', () => {
-        notificationElement.style.animation = 'slideOut 0.3s forwards';
+    // Helper function to close notification
+    function closeNotification(notif) {
+        notif.classList.remove('show');
         setTimeout(() => {
-            if (document.body.contains(notificationElement)) {
-                document.body.removeChild(notificationElement);
-            }
+            notif.remove();
         }, 300);
-    });
-    
-    // Auto remove after 5 seconds
-    setTimeout(() => {
-        if (document.body.contains(notificationElement)) {
-            notificationElement.style.animation = 'slideOut 0.3s forwards';
-            setTimeout(() => {
-                if (document.body.contains(notificationElement)) {
-                    document.body.removeChild(notificationElement);
-                }
-            }, 300);
-        }
-    }, 5000);
+    }
+}
+
+// Enhanced logging for wishlist buttons
+document.querySelectorAll('.wishlist-btn, .featured-actions .wishlist-btn').forEach((btn, index) => {
+    console.log(`Wishlist button ${index}:`, btn);
+    console.log('Parent container:', btn.closest('.product-card') || btn.closest('.featured-container'));
+});
+
+// Check featured container structure
+const featuredContainer = document.querySelector('.featured-container');
+if (featuredContainer) {
+    console.log('Featured container found:', featuredContainer);
+    console.log('Featured name:', featuredContainer.querySelector('h3')?.textContent);
+    console.log('Featured price:', featuredContainer.querySelector('.price')?.textContent);
+    console.log('Featured image:', featuredContainer.querySelector('.featured-image img')?.src);
+    console.log('Featured has wishlist button:', !!featuredContainer.querySelector('.wishlist-btn'));
 }
