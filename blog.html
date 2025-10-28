@@ -1,0 +1,657 @@
+<?php
+$active_page = 'blog';
+require_once 'includes/config.php';
+require_once 'includes/functions.php';
+
+// Set title
+$title = "Blog - TechNest";
+
+// Include header
+include 'includes/header.php';
+?>
+
+<!-- Hero Section -->
+<section class="page-header">
+    <div class="container">
+        <h1>TechNest Blog</h1>
+        <p>Latest news, tech insights, buying guides, and product reviews</p>
+    </div>
+</section>
+
+<!-- Blog Content -->
+<section class="blog-section">
+    <div class="container">
+        <div class="blog-layout">
+            <div class="blog-main">
+                <div class="blog-featured">
+                    <article class="featured-post">
+                        <div class="featured-image">
+                            <img src="<?php echo BASE_URL; ?>assets/images/blog/featured-post.jpg" alt="iPhone 16 Pro Review">
+                            <div class="post-category">Featured</div>
+                        </div>
+                        <div class="featured-content">
+                            <div class="post-meta">
+                                <span class="post-date"><i class="fas fa-calendar-alt"></i> July 3, 2025</span>
+                                <span class="post-author"><i class="fas fa-user"></i> Belayet Saimun</span>
+                            </div>
+                            <h2>iPhone 16 Pro Review: Is Apple's Latest Flagship Worth the Upgrade?</h2>
+                            <p>We've spent two weeks with the iPhone 16 Pro to determine if Apple's latest flagship deserves a place in your pocket. From camera improvements to battery life, here's our comprehensive review.</p>
+                            <a href="#" class="btn primary-btn">Read More</a>
+                        </div>
+                    </article>
+                </div>
+                
+                <div class="blog-grid">
+                    <article class="blog-card">
+                        <div class="card-image">
+                            <img src="<?php echo BASE_URL; ?>assets/images/blog/post-1.jpg" alt="Best Budget Laptops">
+                            <div class="post-category">Buying Guide</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="post-meta">
+                                <span class="post-date"><i class="fas fa-calendar-alt"></i> June 28, 2025</span>
+                            </div>
+                            <h3>The Best Budget Laptops for Students in 2025</h3>
+                            <p>Finding the perfect laptop for your studies doesn't have to break the bank. Here are our top picks for students on a budget.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    
+                    <article class="blog-card">
+                        <div class="card-image">
+                            <img src="<?php echo BASE_URL; ?>assets/images/blog/post-2.jpg" alt="Gaming Headphones">
+                            <div class="post-category">Reviews</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="post-meta">
+                                <span class="post-date"><i class="fas fa-calendar-alt"></i> June 25, 2025</span>
+                            </div>
+                            <h3>Top 5 Gaming Headphones for Immersive Gameplay</h3>
+                            <p>Level up your gaming experience with these premium headphones that offer superior sound quality and comfort for extended gaming sessions.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    
+                    <article class="blog-card">
+                        <div class="card-image">
+                            <img src="<?php echo BASE_URL; ?>assets/images/blog/post-3.jpg" alt="Smart Home Devices">
+                            <div class="post-category">Technology</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="post-meta">
+                                <span class="post-date"><i class="fas fa-calendar-alt"></i> June 20, 2025</span>
+                            </div>
+                            <h3>Smart Home Essentials: Building Your Connected Home</h3>
+                            <p>Transform your house into a modern smart home with these essential devices that offer convenience, security, and energy efficiency.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    
+                    <article class="blog-card">
+                        <div class="card-image">
+                            <img src="<?php echo BASE_URL; ?>assets/images/blog/post-4.jpg" alt="Samsung vs Apple">
+                            <div class="post-category">Comparison</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="post-meta">
+                                <span class="post-date"><i class="fas fa-calendar-alt"></i> June 15, 2025</span>
+                            </div>
+                            <h3>Samsung Galaxy S24 Ultra vs iPhone 16 Pro: The Ultimate Showdown</h3>
+                            <p>We compare the two flagship smartphones of 2025 to help you decide which premium device is the right choice for your needs and preferences.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    
+                    <article class="blog-card">
+                        <div class="card-image">
+                            <img src="<?php echo BASE_URL; ?>assets/images/blog/post-5.jpg" alt="Photography Tips">
+                            <div class="post-category">Tips & Tricks</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="post-meta">
+                                <span class="post-date"><i class="fas fa-calendar-alt"></i> June 10, 2025</span>
+                            </div>
+                            <h3>10 Smartphone Photography Tips to Capture Professional-Quality Photos</h3>
+                            <p>Learn how to make the most of your smartphone's camera with these expert tips that will help you take stunning photos wherever you go.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    
+                    <article class="blog-card">
+                        <div class="card-image">
+                            <img src="<?php echo BASE_URL; ?>assets/images/blog/post-6.jpg" alt="Tech Accessories">
+                            <div class="post-category">Accessories</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="post-meta">
+                                <span class="post-date"><i class="fas fa-calendar-alt"></i> June 5, 2025</span>
+                            </div>
+                            <h3>Must-Have Tech Accessories for Productivity in 2025</h3>
+                            <p>Boost your productivity with these essential tech accessories that will streamline your workflow and enhance your digital experience.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                </div>
+                
+                <div class="pagination">
+                    <span class="current">1</span>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#" class="next">Next <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+            
+            <aside class="blog-sidebar">
+                <div class="sidebar-widget search-widget">
+                    <h3>Search Blog</h3>
+                    <form class="search-form">
+                        <input type="text" placeholder="Search articles...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                
+                <div class="sidebar-widget category-widget">
+                    <h3>Categories</h3>
+                    <ul class="category-list">
+                        <li><a href="#">Reviews <span>(12)</span></a></li>
+                        <li><a href="#">Buying Guides <span>(8)</span></a></li>
+                        <li><a href="#">Technology <span>(15)</span></a></li>
+                        <li><a href="#">Tips & Tricks <span>(7)</span></a></li>
+                        <li><a href="#">Comparisons <span>(5)</span></a></li>
+                        <li><a href="#">Accessories <span>(4)</span></a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-widget popular-widget">
+                    <h3>Popular Posts</h3>
+                    <div class="popular-posts">
+                        <div class="popular-post">
+                            <div class="popular-image">
+                                <img src="<?php echo BASE_URL; ?>assets/images/blog/popular-1.jpg" alt="MacBook Pro Review">
+                            </div>
+                            <div class="popular-content">
+                                <h4><a href="#">MacBook Pro M3: A Performance Beast for Creatives</a></h4>
+                                <span class="post-date">May 28, 2025</span>
+                            </div>
+                        </div>
+                        
+                        <div class="popular-post">
+                            <div class="popular-image">
+                                <img src="<?php echo BASE_URL; ?>assets/images/blog/popular-2.jpg" alt="Wireless Earbuds">
+                            </div>
+                            <div class="popular-content">
+                                <h4><a href="#">Wireless Earbuds: Finding the Perfect Balance of Sound Quality and Comfort</a></h4>
+                                <span class="post-date">May 15, 2025</span>
+                            </div>
+                        </div>
+                        
+                        <div class="popular-post">
+                            <div class="popular-image">
+                                <img src="<?php echo BASE_URL; ?>assets/images/blog/popular-3.jpg" alt="AI in Smartphones">
+                            </div>
+                            <div class="popular-content">
+                                <h4><a href="#">The Rise of AI in Smartphones: What You Need to Know</a></h4>
+                                <span class="post-date">May 7, 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-widget tags-widget">
+                    <h3>Popular Tags</h3>
+                    <div class="tags-cloud">
+                        <a href="#" class="tag">iPhone</a>
+                        <a href="#" class="tag">Android</a>
+                        <a href="#" class="tag">Laptop</a>
+                        <a href="#" class="tag">Camera</a>
+                        <a href="#" class="tag">Headphones</a>
+                        <a href="#" class="tag">Gaming</a>
+                        <a href="#" class="tag">Smart Home</a>
+                        <a href="#" class="tag">Audio</a>
+                        <a href="#" class="tag">Accessories</a>
+                        <a href="#" class="tag">Budget</a>
+                        <a href="#" class="tag">Premium</a>
+                    </div>
+                </div>
+                
+                <div class="sidebar-widget newsletter-widget">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for the latest tech news and exclusive offers.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address">
+                        <button type="submit" class="btn primary-btn">Subscribe</button>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+
+<style>
+.page-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-header h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.page-header p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.blog-section {
+    padding: 0 0 80px;
+}
+
+/* Blog Layout */
+.blog-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+}
+
+/* Featured Post */
+.blog-featured {
+    margin-bottom: 40px;
+}
+
+.featured-post {
+    background: var(--card-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--border-color);
+}
+
+.featured-image {
+    position: relative;
+    height: 100%;
+}
+
+.featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-category {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--primary-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.featured-content {
+    padding: 30px;
+}
+
+.post-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: var(--text-light);
+}
+
+.post-meta i {
+    margin-right: 5px;
+    color: var(--primary-color);
+}
+
+.featured-content h2 {
+    font-size: 24px;
+    margin: 0 0 15px;
+    line-height: 1.4;
+}
+
+.featured-content p {
+    margin: 0 0 20px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Blog Grid */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.blog-card {
+    background: var(--card-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-image {
+    position: relative;
+    height: 200px;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-content h3 {
+    font-size: 18px;
+    margin: 0 0 10px;
+    line-height: 1.4;
+}
+
+.card-content p {
+    margin: 0 0 15px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.read-more {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.read-more i {
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.read-more:hover {
+    color: var(--accent-color);
+}
+
+.read-more:hover i {
+    transform: translateX(5px);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.pagination a, .pagination span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--card-color);
+    border: 1px solid var(--border-color);
+    margin: 0 5px;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.pagination a.next {
+    width: auto;
+    padding: 0 15px;
+}
+
+.pagination a:hover, .pagination span.current {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Sidebar */
+.blog-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.sidebar-widget {
+    background: var(--card-color);
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+}
+
+.sidebar-widget h3 {
+    font-size: 18px;
+    margin: 0 0 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.sidebar-widget h3:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--primary-color);
+}
+
+/* Search Widget */
+.search-form {
+    display: flex;
+    position: relative;
+}
+
+.search-form input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.search-form button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: var(--text-light);
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    color: var(--primary-color);
+}
+
+/* Category Widget */
+.category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.category-list li {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.category-list li:last-child {
+    border-bottom: none;
+}
+
+.category-list a {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    transition: all 0.3s ease;
+}
+
+.category-list a:hover {
+    color: var(--primary-color);
+    padding-left: 5px;
+}
+
+.category-list span {
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+/* Popular Posts Widget */
+.popular-posts {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.popular-post {
+    display: flex;
+    gap: 10px;
+}
+
+.popular-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.popular-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.popular-content {
+    flex: 1;
+}
+
+.popular-content h4 {
+    margin: 0 0 5px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.popular-content h4 a {
+    transition: color 0.3s ease;
+}
+
+.popular-content h4 a:hover {
+    color: var(--primary-color);
+}
+
+.popular-content .post-date {
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+/* Tags Widget */
+.tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tag {
+    padding: 5px 12px;
+    background: var(--background-color);
+    border-radius: 30px;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Newsletter Widget */
+.newsletter-widget p {
+    margin: 0 0 15px;
+    font-size: 14px;
+}
+
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.newsletter-form input {
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.newsletter-form .btn {
+    width: 100%;
+}
+
+@media (max-width: 992px) {
+    .blog-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .featured-post {
+        grid-template-columns: 1fr;
+    }
+    
+    .featured-image {
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-header {
+        padding: 40px 0;
+    }
+    
+    .page-header h1 {
+        font-size: 32px;
+    }
+    
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .featured-content h2 {
+        font-size: 22px;
+    }
+}
+</style>
+
+<?php include 'includes/footer.php'; ?>

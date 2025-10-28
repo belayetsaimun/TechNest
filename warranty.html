@@ -1,0 +1,881 @@
+<?php
+$active_page = 'warranty';
+require_once 'includes/config.php';
+require_once 'includes/functions.php';
+
+// Set title
+$title = "Warranty Information - TechNest";
+
+// Include header
+include 'includes/header.php';
+?>
+
+<!-- Hero Section -->
+<section class="page-header">
+    <div class="container">
+        <h1>Warranty Information</h1>
+        <p>Learn about our comprehensive warranty coverage and protection plans</p>
+    </div>
+</section>
+
+<!-- Main Content -->
+<section class="warranty-section">
+    <div class="container">
+        <div class="warranty-overview">
+            <div class="warranty-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="warranty-text">
+                <h2>TechNest Protection Promise</h2>
+                <p>At TechNest, we stand behind the quality of our products. Our warranty program is designed to give you peace of mind with every purchase. All products come with standard manufacturer warranties, and many include our extended TechNest Protection Plan at no additional cost.</p>
+            </div>
+        </div>
+        
+        <div class="warranty-types">
+            <div class="warranty-card standard">
+                <div class="warranty-badge">Included</div>
+                <div class="warranty-header">
+                    <h3>Standard Warranty</h3>
+                    <div class="warranty-duration">1 Year</div>
+                </div>
+                <div class="warranty-details">
+                    <p>Our standard warranty comes automatically with every product purchase and covers:</p>
+                    <ul>
+                        <li>Manufacturing defects and faulty parts</li>
+                        <li>Performance issues under normal use</li>
+                        <li>Free repair or replacement</li>
+                        <li>Technical support</li>
+                    </ul>
+                    <p class="warranty-note">*Terms and conditions apply. Cosmetic damage, unauthorized repairs, and accidental damage not covered.</p>
+                </div>
+            </div>
+            
+            <div class="warranty-card extended">
+                <div class="warranty-badge">Premium</div>
+                <div class="warranty-header">
+                    <h3>Extended Warranty</h3>
+                    <div class="warranty-duration">2 Years</div>
+                </div>
+                <div class="warranty-details">
+                    <p>Our extended warranty is included with premium products and provides additional coverage:</p>
+                    <ul>
+                        <li>All standard warranty benefits</li>
+                        <li>Priority repair service</li>
+                        <li>One-time accidental damage coverage</li>
+                        <li>Free maintenance check once a year</li>
+                        <li>24/7 premium technical support</li>
+                    </ul>
+                    <p class="warranty-note">*Available on select products or as a paid upgrade.</p>
+                </div>
+            </div>
+            
+            <div class="warranty-card premium">
+                <div class="warranty-badge">Ultimate</div>
+                <div class="warranty-header">
+                    <h3>Premium Protection Plan</h3>
+                    <div class="warranty-duration">3 Years</div>
+                </div>
+                <div class="warranty-details">
+                    <p>Our most comprehensive protection plan for complete peace of mind:</p>
+                    <ul>
+                        <li>All extended warranty benefits</li>
+                        <li>Multiple accidental damage repairs</li>
+                        <li>Next-day replacement service</li>
+                        <li>Data recovery assistance</li>
+                        <li>VIP technical support with dedicated line</li>
+                        <li>20% discount on accessories</li>
+                    </ul>
+                    <p class="warranty-note">*Available as a paid upgrade at the time of purchase.</p>
+                    <a href="#" class="btn primary-btn">Add Premium Protection</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="warranty-comparison">
+            <h2>Warranty Comparison</h2>
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Coverage Features</th>
+                            <th>Standard Warranty</th>
+                            <th>Extended Warranty</th>
+                            <th>Premium Protection</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Duration</td>
+                            <td>1 Year</td>
+                            <td>2 Years</td>
+                            <td>3 Years</td>
+                        </tr>
+                        <tr>
+                            <td>Manufacturing Defects</td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Technical Support</td>
+                            <td>Standard</td>
+                            <td>Priority</td>
+                            <td>24/7 VIP</td>
+                        </tr>
+                        <tr>
+                            <td>Repair Service</td>
+                            <td>Standard</td>
+                            <td>Priority</td>
+                            <td>Express</td>
+                        </tr>
+                        <tr>
+                            <td>Accidental Damage</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td>One-time</td>
+                            <td>Multiple</td>
+                        </tr>
+                        <tr>
+                            <td>Liquid Damage</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Replacement Option</td>
+                            <td>Case by case</td>
+                            <td>After 2 repairs</td>
+                            <td>Next-day service</td>
+                        </tr>
+                        <tr>
+                            <td>Maintenance Check</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td>Yearly</td>
+                            <td>Bi-annually</td>
+                        </tr>
+                        <tr>
+                            <td>Data Recovery</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="warranty-categories">
+            <h2>Product-Specific Warranty Information</h2>
+            <div class="category-cards">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Smartphones</h3>
+                        <ul>
+                            <li><strong>Apple iPhone:</strong> 1-year limited warranty + option for AppleCare+</li>
+                            <li><strong>Samsung Galaxy:</strong> 1-year warranty with 6 months additional for battery</li>
+                            <li><strong>Google Pixel:</strong> 2-year manufacturer warranty</li>
+                            <li><strong>Other Brands:</strong> 1-year standard warranty</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Laptops & Computers</h3>
+                        <ul>
+                            <li><strong>Apple MacBook:</strong> 1-year limited warranty + option for AppleCare+</li>
+                            <li><strong>Dell:</strong> 1-year standard or 3-year premium warranty</li>
+                            <li><strong>HP:</strong> 1-year warranty with option to extend</li>
+                            <li><strong>ASUS ROG:</strong> 2-year warranty including gaming components</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Audio Products</h3>
+                        <ul>
+                            <li><strong>Premium Headphones:</strong> 2-year warranty including ear cushions</li>
+                            <li><strong>Wireless Earbuds:</strong> 1-year warranty including battery</li>
+                            <li><strong>Speakers:</strong> 2-year warranty for electronic components</li>
+                            <li><strong>Professional Audio:</strong> 3-year extended warranty</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tablet-alt"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Tablets & E-Readers</h3>
+                        <ul>
+                            <li><strong>Apple iPad:</strong> 1-year limited warranty + option for AppleCare+</li>
+                            <li><strong>Samsung Galaxy Tab:</strong> 1-year standard warranty</li>
+                            <li><strong>Amazon Kindle:</strong> 1-year limited warranty</li>
+                            <li><strong>Drawing Tablets:</strong> 2-year warranty including stylus</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Cameras & Photography</h3>
+                        <ul>
+                            <li><strong>DSLR Cameras:</strong> 2-year warranty on body, 1-year on lenses</li>
+                            <li><strong>Mirrorless Cameras:</strong> 2-year warranty with registration</li>
+                            <li><strong>Action Cameras:</strong> 1-year standard warranty</li>
+                            <li><strong>Camera Accessories:</strong> 6-month to 1-year warranty</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Gaming Products</h3>
+                        <ul>
+                            <li><strong>Gaming Consoles:</strong> 1-year manufacturer warranty</li>
+                            <li><strong>Gaming Peripherals:</strong> 2-year warranty</li>
+                            <li><strong>VR Headsets:</strong> 1-year limited warranty</li>
+                            <li><strong>Gaming PCs:</strong> 2-year warranty with 3-year option</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="warranty-process">
+            <h2>How to Claim Warranty</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Register Your Product</h4>
+                        <p>Register your product on our website within 30 days of purchase to activate your warranty coverage.</p>
+                        <a href="#" class="btn secondary-btn">Register Product</a>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Contact Support</h4>
+                        <p>If you experience an issue with your product, contact our technical support team for troubleshooting assistance.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Submit Claim</h4>
+                        <p>If the issue cannot be resolved through troubleshooting, submit a warranty claim through your account dashboard.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Service Options</h4>
+                        <p>Depending on your warranty type and product, we'll provide repair, replacement, or in-store service options.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Resolution</h4>
+                        <p>Our service team will repair or replace your product according to warranty terms and return it to you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="warranty-faq">
+            <h2>Warranty FAQs</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Does the warranty cover accidental damage?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Standard warranties do not cover accidental damage such as drops, spills, or cracks. However, our Extended and Premium Protection Plans do include varying levels of accidental damage coverage. The Premium Protection Plan offers the most comprehensive coverage for multiple incidents.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>How do I check my warranty status?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can check your warranty status by logging into your TechNest account and viewing your registered products. Alternatively, you can enter your product's serial number on our warranty verification page or contact our customer support team with your proof of purchase.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Can I extend my warranty after purchase?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you can extend your warranty within 30 days of your original purchase date. After this period, warranty extensions may still be available but are subject to device inspection and additional terms. Visit your account dashboard or contact customer service to explore extension options.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>What documents do I need for a warranty claim?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>For warranty claims, you'll need your proof of purchase (receipt or order confirmation), the product's serial number, and your TechNest account information. For Premium Protection Plan claims, you may also need to provide details about the incident that caused the damage.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Will I get a replacement device during repair?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Premium Protection Plan members receive loaner devices during repair periods. Extended Warranty customers may request a loaner device subject to availability. Standard Warranty repairs do not typically include loaner devices, but expedited repair services are available.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="support-banner">
+            <div class="support-content">
+                <h3>Still Have Questions About Your Warranty?</h3>
+                <p>Our warranty specialists are available to help you understand your coverage and assist with any warranty-related inquiries.</p>
+                <div class="support-actions">
+                    <a href="contact.php" class="btn primary-btn">Contact Warranty Team</a>
+                    <a href="tel:+8801581448561" class="btn secondary-btn"><i class="fas fa-phone"></i> +88 01581-448561</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // FAQ Accordion functionality
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+            const answer = this.nextElementSibling;
+            const icon = this.querySelector('.faq-toggle i');
+            
+            // Toggle current FAQ
+            answer.style.maxHeight = answer.style.maxHeight ? null : answer.scrollHeight + 'px';
+            icon.classList.toggle('fa-plus');
+            icon.classList.toggle('fa-minus');
+            
+            // Close other FAQs (uncomment for accordion behavior)
+            /*
+            faqQuestions.forEach(q => {
+                if (q !== question) {
+                    q.nextElementSibling.style.maxHeight = null;
+                    q.querySelector('.faq-toggle i').className = 'fas fa-plus';
+                }
+            });
+            */
+        });
+    });
+});
+</script>
+
+<style>
+.page-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-header h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.page-header p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.warranty-section {
+    padding: 0 0 80px;
+}
+
+/* Warranty Overview */
+.warranty-overview {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    background: var(--card-color);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.warranty-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 36px;
+    margin-right: 30px;
+    flex-shrink: 0;
+}
+
+.warranty-text h2 {
+    margin: 0 0 15px;
+    color: var(--primary-color);
+    font-size: 28px;
+}
+
+.warranty-text p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Warranty Types */
+.warranty-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+.warranty-card {
+    background: var(--card-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.warranty-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.warranty-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--primary-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.warranty-card.extended .warranty-badge {
+    background: #4caf50;
+}
+
+.warranty-card.premium .warranty-badge {
+    background: #ff9800;
+}
+
+.warranty-header {
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(0, 82, 204, 0.05), rgba(0, 184, 212, 0.05));
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.warranty-card.extended .warranty-header {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.05), rgba(139, 195, 74, 0.05));
+}
+
+.warranty-card.premium .warranty-header {
+    background: linear-gradient(135deg, rgba(255, 152, 0, 0.05), rgba(255, 193, 7, 0.05));
+}
+
+.warranty-header h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    color: var(--dark-color);
+}
+
+.warranty-duration {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1;
+}
+
+.warranty-card.extended .warranty-duration {
+    color: #4caf50;
+}
+
+.warranty-card.premium .warranty-duration {
+    color: #ff9800;
+}
+
+.warranty-details {
+    padding: 25px;
+}
+
+.warranty-details p {
+    margin: 0 0 15px;
+}
+
+.warranty-details ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.warranty-details li {
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 5px;
+}
+
+.warranty-note {
+    font-size: 13px;
+    color: var(--text-light);
+    font-style: italic;
+    margin-top: 20px;
+}
+
+/* Comparison Table */
+.warranty-comparison {
+    margin-bottom: 50px;
+}
+
+.warranty-comparison h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--dark-color);
+}
+
+.comparison-table-wrapper {
+    overflow-x: auto;
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.comparison-table th, .comparison-table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.comparison-table th {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    font-weight: 600;
+}
+
+.comparison-table th:first-child {
+    text-align: left;
+    background: var(--primary-color);
+}
+
+.comparison-table td:first-child {
+    text-align: left;
+    font-weight: 500;
+    background: rgba(0, 82, 204, 0.05);
+}
+
+.comparison-table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.comparison-table .fa-check {
+    color: #4caf50;
+}
+
+.comparison-table .fa-times {
+    color: #f44336;
+}
+
+/* Product Categories */
+.warranty-categories {
+    margin-bottom: 50px;
+}
+
+.warranty-categories h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--dark-color);
+}
+
+.category-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.category-card {
+    background: var(--card-color);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    transition: transform 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+}
+
+.category-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 82, 204, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.category-info h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+}
+
+.category-info ul {
+    padding-left: 15px;
+    margin: 0;
+    list-style: none;
+}
+
+.category-info li {
+    margin-bottom: 6px;
+    font-size: 14px;
+    position: relative;
+    padding-left: 5px;
+}
+
+/* Warranty Process */
+.warranty-process {
+    margin-bottom: 50px;
+}
+
+.warranty-process h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--dark-color);
+}
+
+.process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.process-step {
+    display: flex;
+    gap: 20px;
+    background: var(--card-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.step-content h4 {
+    margin: 0 0 8px;
+    color: var(--primary-color);
+}
+
+.step-content p {
+    margin: 0 0 10px;
+}
+
+/* Warranty FAQs */
+.warranty-faq {
+    margin-bottom: 50px;
+}
+
+.warranty-faq h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--dark-color);
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.faq-question {
+    padding: 15px 20px;
+    background: var(--card-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.faq-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: var(--primary-color);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 20px;
+}
+
+.faq-answer p {
+    padding: 20px 0;
+    margin: 0;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Support Banner */
+.support-banner {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.support-content h3 {
+    margin: 0 0 10px;
+    font-size: 24px;
+}
+
+.support-content p {
+    margin: 0 0 20px;
+    opacity: 0.9;
+}
+
+.support-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+@media (max-width: 768px) {
+    .page-header {
+        padding: 40px 0;
+    }
+    
+    .page-header h1 {
+        font-size: 32px;
+    }
+    
+    .warranty-overview {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .warranty-icon {
+        margin: 0 auto 20px;
+    }
+    
+    .warranty-types {
+        grid-template-columns: 1fr;
+    }
+    
+    .category-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .category-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .process-step {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .support-actions {
+        flex-direction: column;
+    }
+}
+</style>
+
+<?php include 'includes/footer.php'; ?>

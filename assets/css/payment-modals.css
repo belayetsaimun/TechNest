@@ -1,0 +1,289 @@
+/* Payment Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1100;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.modal-open {
+    opacity: 1;
+}
+
+.modal-content {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    background-color: var(--card-color);
+    padding: 0;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.modal.modal-open .modal-content {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: var(--background-color);
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.close-modal:hover {
+    color: var(--danger-color);
+    transform: rotate(90deg);
+}
+
+.payment-wrapper {
+    padding: 30px;
+}
+
+.payment-wrapper h2 {
+    font-size: 22px;
+    color: var(--dark-color);
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.payment-logo {
+    height: 28px;
+    width: auto;
+}
+
+.payment-instructions {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.payment-instructions p {
+    color: var(--text-color);
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.payment-amount {
+    background-color: var(--background-color);
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.payment-amount .amount {
+    color: var(--primary-color);
+    font-size: 18px;
+    font-family: var(--monospace-font);
+}
+
+.payment-form .form-group {
+    margin-bottom: 20px;
+}
+
+.payment-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--dark-color);
+}
+
+.payment-form .input-group {
+    position: relative;
+}
+
+.payment-form .input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+}
+
+.payment-form input {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background-color: var(--card-color);
+    color: var(--text-color);
+}
+
+.payment-form input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
+    outline: none;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.form-actions button {
+    flex: 1;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 10px;
+}
+
+.payment-notes {
+    margin-top: 25px;
+    font-size: 13px;
+    color: var(--text-light);
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.payment-notes i,
+.demo-note i {
+    color: var(--primary-color);
+    margin-right: 5px;
+}
+
+.payment-security {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.security-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.security-icons i {
+    font-size: 20px;
+    color: var(--success-color);
+}
+
+.payment-security p {
+    font-size: 13px;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.demo-note {
+    color: var(--text-light);
+    font-style: italic;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.card-icons {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.card-icons i {
+    font-size: 20px;
+}
+
+.card-icons i.fa-cc-visa {
+    color: #1a1f71;
+}
+
+.card-icons i.fa-cc-mastercard {
+    color: #eb001b;
+}
+
+.error-message {
+    color: var(--danger-color);
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+input.error {
+    border-color: var(--danger-color);
+    background-color: rgba(231, 76, 60, 0.05);
+}
+
+/* Dark mode support */
+.dark-mode .modal-content,
+.dark-mode .payment-form input {
+    background-color: var(--card-color);
+    color: var(--text-color);
+}
+
+.dark-mode .payment-amount,
+.dark-mode .close-modal {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .payment-notes,
+.dark-mode .demo-note {
+    color: #adb5bd;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .payment-wrapper {
+        padding: 20px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+    }
+}
