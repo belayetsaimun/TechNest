@@ -47,43 +47,6 @@ TechNest/
 └── technest_db.sql     # Database schema
 ```
 
-## 🔧 Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/belayetsaimun/TechNest.git
-   cd TechNest
-   ```
-
-2. **Set up the database**
-   - Create a new MySQL database
-   - Import the `technest_db.sql` file into your database
-   ```bash
-   mysql -u your_username -p your_database_name < technest_db.sql
-   ```
-
-3. **Configure database connection**
-   - Update the database configuration in your PHP files (typically in `includes/` directory)
-   - Set your database credentials (host, username, password, database name)
-
-4. **Set up web server**
-   - Place the project in your web server's document root (e.g., `htdocs` for XAMPP, `www` for WAMP)
-   - Or configure a virtual host pointing to the project directory
-
-5. **Access the application**
-   - Open your browser and navigate to `http://localhost/TechNest` (or your configured URL)
-
-## 📝 Requirements
-
-- PHP 7.4 or higher
-- MySQL 5.7 or higher
-- Apache/Nginx web server
-- Modern web browser
-
-## 🔐 Admin Access
-
-After installation, you can access the admin panel at `/admin` directory. Default credentials should be configured during database setup.
-
 ## 📧 Contact
 
 For any inquiries or support, please use the contact form on the website or reach out through GitHub.
@@ -97,11 +60,3 @@ This project is open source and available under the [MIT License](LICENSE).
 **Belayet Saimun**
 - GitHub: [@belayetsaimun](https://github.com/belayetsaimun)
 
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/belayetsaimun/TechNest/issues).
-
-## ⭐ Show your support
-
-Give a ⭐️ if you like this project!
-```
